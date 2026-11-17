@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Gatekeeper - Amazon India</title>
+  <style>
+    :root {
+      --amazon-dark: #131921;
+      --amazon-nav: #232f3e;
+      --amazon-orange: #ff9900;
+      --amazon-orange-dark: #e47911;
+      --amazon-yellow: #ffd814;
+      --amazon-yellow-hover: #f7ca00;
+      --amazon-yellow-border: #fcd200;
+      --amazon-orange-btn: #ffa41c;
+      --amazon-orange-btn-hover: #fa8900;
+      --amazon-link: #007185;
+      --amazon-link-hover: #c7511f;
+      --bg-page: #eaeded;
+      --card-bg: #ffffff;
+      --text-dark: #0f1111;
+      --text-muted: #565959;
+      --border-color: #d5d9d9;
+      --success-green: #067d62;
+      --success-bg: #e7f4ee;
+      --warning-orange: #c45500;
+      --warning-bg: #fff4eb;
+      --danger-red: #ba0933;
+      --danger-bg: #fdf0f0;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Amazon Ember", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg-page);
+      color: var(--text-dark);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Amazon Header */
+    header.amazon-header {
+      background-color: var(--amazon-dark);
+      color: #ffffff;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .amazon-logo {
+      display: flex;
+      align-items: baseline;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .amazon-logo span.in-tag {
+      color: var(--amazon-orange);
+      font-size: 15px;
+      font-weight: 700;
+      margin-left: 2px;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 28px;
+      background-color: #3a4553;
+    }
+
+    .system-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .system-title h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.2px;
+    }
+
+    .system-title span {
+      font-size: 12px;
+      color: #cccccc;
+    }
+
+    /* Student / Enrolment Badge */
+    .user-enrolment-card {
+      background: linear-gradient(135deg, #232f3e 0%, #1e293b 100%);
+      border: 1px solid #37475a;
+      border-left: 4px solid var(--amazon-orange);
+      border-radius: 6px;
+      padding: 8px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .user-enrolment-card .author-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .user-enrolment-card .author-name .verified-badge {
+      background-color: var(--amazon-orange);
+      color: var(--amazon-dark);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .user-enrolment-card .enrolment-id {
+      font-size: 12.5px;
+      color: #ffb84d;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      font-family: monospace;
+    }
+
+    /* Sub-header / Status Bar */
+    .sub-bar {
+      background-color: var(--amazon-nav);
+      color: #ffffff;
+      padding: 8px 24px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .quick-stats {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .stat-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-chip .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .stat-chip.active-agents .dot { background-color: #2ed573; }
+    .stat-chip.revoked-agents .dot { background-color: #ff4757; }
+    .stat-chip.allowed .dot { background-color: #20bf6b; }
+    .stat-chip.asked .dot { background-color: #ffa502; }
+    .stat-chip.blocked .dot { background-color: #eb4d4b; }
+
+    .sub-bar-actions button {
+      background: none;
+      border: 1px solid #485769;
+      color: #ffffff;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .sub-bar-actions button:hover {
+      background-color: #37475a;
+      border-color: #ffffff;
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 1400px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    /* Grid Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Amazon Style Cards */
+    .amz-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .amz-card-header {
+      background-color: #f7f9f9;
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .amz-card-header h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .amz-card-header .badge-pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background-color: #e3e6e6;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .amz-card-body {
+      padding: 18px;
+      flex: 1;
+    }
+
+    /* Forms & Inputs */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-dark);
+    }
+
+    .form-group .form-hint {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 9px 12px;
+      font-size: 13.5px;
+      font-family: inherit;
+      border: 1px solid #888c8c;
+      border-radius: 4px;
+      background-color: #ffffff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: #e77600;
+      box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.4);
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Amazon Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--amazon-yellow);
+      border-color: var(--amazon-yellow-border);
+      color: #0f1111;
+      box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--amazon-yellow-hover);
+      border-color: #a88734 #9c7e31 #846a29;
+    }
+
+    .btn-orange {
+      background-color: var(--amazon-orange-btn);
+      border-color: #a88734 #9c7e31 #846a29;
+      color: #0f1111;
+      box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
+    }
+
+    .btn-orange:hover {
+      background-color: var(--amazon-orange-btn-hover);
+    }
+
+    .btn-secondary {
+      background-color: #ffffff;
+      border-color: #d5d9d9;
+      color: #0f1111;
+      box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+    }
+
+    .btn-secondary:hover {
+      background-color: #f7fafa;
+      border-color: #d5d9d9;
+    }
+
+    .btn-danger {
+      background-color: #ffffff;
+      border-color: #e07c7c;
+      color: var(--danger-red);
+    }
+
+    .btn-danger:hover {
+      background-color: #fff1f1;
+      border-color: var(--danger-red);
+    }
+
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 5px;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* Agent Table */
+    .agents-table-container {
+      margin-top: 14px;
+      max-height: 250px;
+      overflow-y: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+    }
+
+    .amz-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      text-align: left;
+    }
+
+    .amz-table th {
+      background-color: #f7f9f9;
+      color: var(--text-dark);
+      font-weight: 700;
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .amz-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e7e7e7;
+      vertical-align: middle;
+    }
+
+    .amz-table tr:hover {
+      background-color: #f9fbfb;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .status-badge.active {
+      background-color: var(--success-bg);
+      color: var(--success-green);
+      border: 1px solid #b8e2cd;
+    }
+
+    .status-badge.revoked {
+      background-color: var(--danger-bg);
+      color: var(--danger-red);
+      border: 1px solid #f2bcbc;
+    }
+
+    /* Rules Reference Box */
+    .rules-reference-card {
+      background-color: #fcfcfc;
+      border: 1px dashed #c0c4c4;
+      border-radius: 6px;
+      padding: 12px;
+      margin-top: 16px;
+    }
+
+    .rules-reference-card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--amazon-orange-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rules-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    .rule-item {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      background: #ffffff;
+      border: 1px solid #e7e7e7;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .rule-item .rule-num {
+      font-weight: 700;
+      color: #333333;
+      margin-right: 6px;
+    }
+
+    .rule-tag {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .rule-tag.allow { background: var(--success-bg); color: var(--success-green); }
+    .rule-tag.ask { background: var(--warning-bg); color: var(--warning-orange); }
+    .rule-tag.block { background: var(--danger-bg); color: var(--danger-red); }
+
+    /* Decision Display Card */
+    .decision-banner {
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: 2px solid transparent;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .decision-banner.allow {
+      background-color: var(--success-bg);
+      border-color: var(--success-green);
+      color: #034b3b;
+    }
+
+    .decision-banner.ask_customer {
+      background-color: var(--warning-bg);
+      border-color: var(--amazon-orange-dark);
+      color: #7a3100;
+    }
+
+    .decision-banner.block {
+      background-color: var(--danger-bg);
+      border-color: var(--danger-red);
+      color: #7d0622;
+    }
+
+    .decision-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .decision-badge-large {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 6px;
+    }
+
+    .decision-banner.allow .decision-badge-large {
+      background-color: var(--success-green);
+      color: #ffffff;
+    }
+
+    .decision-banner.ask_customer .decision-badge-large {
+      background-color: var(--amazon-orange-dark);
+      color: #ffffff;
+    }
+
+    .decision-banner.block .decision-badge-large {
+      background-color: var(--danger-red);
+      color: #ffffff;
+    }
+
+    .decision-rule-pill {
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .decision-details {
+      font-size: 13.5px;
+      line-height: 1.4;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 10px 14px;
+      border-radius: 6px;
+      border-left: 3px solid currentColor;
+    }
+
+    /* Quick Test Preset Buttons */
+    .quick-test-bar {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .quick-test-bar span {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .btn-test {
+      font-size: 11px;
+      padding: 4px 8px;
+      background: #f0f2f2;
+      border: 1px solid #d5d9d9;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #111;
+      transition: background 0.15s;
+    }
+
+    .btn-test:hover {
+      background: #e3e6e6;
+      border-color: #a6acac;
+    }
+
+    /* Audit Log Table Section */
+    .audit-section {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .audit-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .audit-filters {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .audit-filters select, .audit-filters input {
+      font-size: 12.5px;
+      padding: 6px 10px;
+      border: 1px solid #888c8c;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .audit-table-wrapper {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow-x: auto;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      max-height: 400px;
+    }
+
+    .decision-pill {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: inline-block;
+    }
+
+    .decision-pill.allow {
+      background-color: var(--success-bg);
+      color: var(--success-green);
+      border: 1px solid #a3d9bc;
+    }
+
+    .decision-pill.ask_customer {
+      background-color: var(--warning-bg);
+      color: var(--warning-orange);
+      border: 1px solid #fac29a;
+    }
+
+    .decision-pill.block {
+      background-color: var(--danger-bg);
+      color: var(--danger-red);
+      border: 1px solid #f5b5b5;
+    }
+
+    .empty-state {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .currency-tag {
+      font-family: monospace;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer.amazon-footer {
+      background-color: var(--amazon-dark);
+      color: #999999;
+      font-size: 12px;
+      text-align: center;
+      padding: 18px 24px;
+      margin-top: auto;
+      border-top: 1px solid #3a4553;
+    }
+
+    footer.amazon-footer a {
+      color: var(--amazon-orange);
+      text-decoration: none;
+    }
+
+    /* Modal / Alert toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: #232f3e;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 6px;
+      border-left: 4px solid var(--amazon-orange);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      font-size: 13px;
+      display: none;
+      z-index: 1000;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Amazon India Header -->
+  <header class="amazon-header">
+    <div class="brand-section">
+      <div class="amazon-logo">
+        amazon<span class="in-tag">.in</span>
+      </div>
+      <div class="brand-divider"></div>
+      <div class="system-title">
+        <h1>Agent Gatekeeper</h1>
+        <span>Amazon India Security & Policy Gateway</span>
+      </div>
+    </div>
+
+    <!-- Student Name & Enrolment ID Prominently displayed -->
+    <div class="user-enrolment-card">
+      <div class="author-name">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--amazon-orange);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        Aryan Thakur
+        <span class="verified-badge">Admin</span>
+      </div>
+      <div class="enrolment-id">ENROLMENT: PGD202566017</div>
+    </div>
+  </header>
+
+  <!-- Amazon Sub-bar with Live Metrics -->
+  <div class="sub-bar">
+    <div class="quick-stats">
+      <div class="stat-chip active-agents">
+        <span class="dot"></span>
+        <span id="statActiveAgents">0</span> Active Agents
+      </div>
+      <div class="stat-chip revoked-agents">
+        <span class="dot"></span>
+        <span id="statRevokedAgents">0</span> Revoked Agents
+      </div>
+      <div class="stat-chip allowed">
+        <span class="dot"></span>
+        <span id="statAllowed">0</span> ALLOW
+      </div>
+      <div class="stat-chip asked">
+        <span class="dot"></span>
+        <span id="statAsked">0</span> ASK CUSTOMER
+      </div>
+      <div class="stat-chip blocked">
+        <span class="dot"></span>
+        <span id="statBlocked">0</span> BLOCK
+      </div>
+    </div>
+    <div class="sub-bar-actions">
+      <button onclick="seedDemoData()">Load Sample Demo Data</button>
+      <button onclick="resetAllData()">Reset Everything</button>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <div class="dashboard-grid">
+
+      <!-- LEFT COLUMN: Agent Registration & Revocation + Rules Reference -->
+      <section class="left-col">
+
+        <!-- Card 1: Agent Registration & Management -->
+        <div class="amz-card">
+          <div class="amz-card-header">
+            <h2>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7.5" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+              Register & Revoke Agents
+            </h2>
+            <span class="badge-pill" id="agentTotalPill">0 Agents</span>
+          </div>
+
+          <div class="amz-card-body">
+            <!-- Register Agent Form -->
+            <form id="registerAgentForm" onsubmit="handleRegisterAgent(event)">
+              <div class="form-group">
+                <label for="newAgentName">Register New Agent</label>
+                <div class="input-group">
+                  <input type="text" id="newAgentName" class="form-control" placeholder="e.g. Agent-Kavita, Bot-Alpha" required autocomplete="off">
+                  <button type="submit" class="btn btn-primary">
+                    Register Agent
+                  </button>
+                </div>
+                <div class="form-hint">Enter an agent name or ID to authorize them in Amazon India Gatekeeper.</div>
+              </div>
+            </form>
+
+            <!-- Registered Agents Table with Revoke Button & Date-Time Saved -->
+            <label style="font-size: 13px; font-weight: 700; margin-top: 10px; display: block;">
+              Authorized & Revoked Agents List
+            </label>
+            <div class="agents-table-container">
+              <table class="amz-table">
+                <thead>
+                  <tr>
+                    <th>Agent Name</th>
+                    <th>Status</th>
+                    <th>Registered At</th>
+                    <th>Revocation Date & Time</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="agentsTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 7 Rules Summary Reference Box -->
+            <div class="rules-reference-card">
+              <h3>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Amazon India Gatekeeper 7 Security Rules
+              </h3>
+              <ul class="rules-list">
+                <li class="rule-item">
+                  <span><span class="rule-num">Rule 1:</span> Revoked agent</span>
+                  <span class="rule-tag block">BLOCK</span>
+                </li>
+                <li class="rule-item">
+                  <span><span class="rule-num">Rule 2:</span> Unknown agent</span>
+                  <span class="rule-tag block">BLOCK</span>
+                </li>
+                <li class="rule-item">
+                  <span><span class="rule-num">Rule 3:</span> view order</span>
+                  <span class="rule-tag allow">ALLOW</span>
+                </li>
+                <li class="rule-item">
+                  <span><span class="rule-num">Rule 4:</span> place order &le; Rs 5000</span>
+                  <span class="rule-tag allow">ALLOW</span>
+                </li>
+                <li class="rule-item">
+                  <span><span class="rule-num">Rule 5:</span> place order &gt; Rs 5000</span>
+                  <span class="rule-tag ask">ASK CUSTOMER</span>
+                </li>
+                <li class="rule-item">
+                  <span><span class="rule-num">Rule 6:</span> return or refund</span>
+                  <span class="rule-tag ask">ASK CUSTOMER</span>
+                </li>
+                <li class="rule-item">
+                  <span><span class="rule-num">Rule 7:</span> &gt; 3 money actions in a day</span>
+                  <span class="rule-tag ask">ASK CUSTOMER</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT COLUMN: Customer Request Simulator & Gatekeeper Decision -->
+      <section class="right-col">
+
+        <!-- Card 2: Request Form -->
+        <div class="amz-card">
+          <div class="amz-card-header">
+            <h2>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+              Process Action Request
+            </h2>
+            <span class="badge-pill">Real-time Policy Evaluation</span>
+          </div>
+
+          <div class="amz-card-body">
+            <form id="requestForm" onsubmit="handleEvaluateRequest(event)">
+              
+              <!-- Customer Name -->
+              <div class="form-group">
+                <label for="customerName">Customer Name</label>
+                <input type="text" id="customerName" class="form-control" placeholder="e.g. Rahul Sharma" required autocomplete="off" value="Rahul Sharma">
+              </div>
+
+              <!-- Agent Name: Dropdown or custom input -->
+              <div class="form-group">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+                  <label for="agentSelect" style="margin-bottom:0;">Agent Name</label>
+                  <label style="font-size: 11.5px; font-weight: normal; cursor: pointer; color: var(--amazon-link);">
+                    <input type="checkbox" id="customAgentToggle" onchange="toggleCustomAgent(this.checked)"> Type Unknown Agent
+                  </label>
+                </div>
+
+                <div id="agentSelectContainer">
+                  <select id="agentSelect" class="form-control" onchange="syncAgentStatusDisplay()">
+                    <option value="">-- Select an Authorized / Registered Agent --</option>
+                  </select>
+                </div>
+                
+                <div id="agentCustomContainer" style="display: none;">
+                  <input type="text" id="agentCustomInput" class="form-control" placeholder="Type unknown/unregistered agent name (e.g. RogueAgent_99)">
+                </div>
+
+                <div id="agentStatusNotice" class="form-hint" style="font-weight: 600;"></div>
+              </div>
+
+              <!-- Action Dropdown -->
+              <div class="form-group">
+                <label for="actionType">Action Type</label>
+                <select id="actionType" class="form-control" onchange="handleActionChange()" required>
+                  <option value="view order">view order</option>
+                  <option value="place order" selected>place order</option>
+                  <option value="return">return</option>
+                  <option value="refund">refund</option>
+                </select>
+                <div class="form-hint">Money actions: place order, return, refund. Inquiries: view order.</div>
+              </div>
+
+              <!-- Amount Input (in Rs) -->
+              <div class="form-group" id="amountGroup">
+                <label for="requestAmount">Amount (in &#8377; INR)</label>
+                <div style="position: relative;">
+                  <span style="position: absolute; left: 12px; top: 9px; font-weight: 700; color: #555;">&#8377;</span>
+                  <input type="number" id="requestAmount" class="form-control" style="padding-left: 28px;" placeholder="e.g. 4500" min="0" step="1" value="4500">
+                </div>
+                <div class="form-hint" id="amountHint">Rule threshold: &#8377;5,000 for 'place order'.</div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-orange btn-block" style="font-size: 14.5px; padding: 11px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Evaluate &amp; Authorize Request
+              </button>
+            </form>
+
+            <!-- Quick Rule Scenario Testing Buttons -->
+            <div class="quick-test-bar">
+              <span>Quick Test:</span>
+              <button class="btn-test" onclick="runPresetScenario(1)" title="Test Rule 1: Revoked agent = BLOCK">Rule 1 (Revoked)</button>
+              <button class="btn-test" onclick="runPresetScenario(2)" title="Test Rule 2: Unknown agent = BLOCK">Rule 2 (Unknown)</button>
+              <button class="btn-test" onclick="runPresetScenario(3)" title="Test Rule 3: view order = ALLOW">Rule 3 (View Order)</button>
+              <button class="btn-test" onclick="runPresetScenario(4)" title="Test Rule 4: place order <= 5000 = ALLOW">Rule 4 (Order &le; 5k)</button>
+              <button class="btn-test" onclick="runPresetScenario(5)" title="Test Rule 5: place order > 5000 = ASK CUSTOMER">Rule 5 (Order &gt; 5k)</button>
+              <button class="btn-test" onclick="runPresetScenario(6)" title="Test Rule 6: return/refund = ASK CUSTOMER">Rule 6 (Return/Refund)</button>
+              <button class="btn-test" onclick="runPresetScenario(7)" title="Test Rule 7: > 3 money actions in a day = ASK CUSTOMER">Rule 7 (&gt;3 Daily Actions)</button>
+            </div>
+
+            <!-- GATEKEEPER DECISION BANNER (Result Box) -->
+            <div id="decisionBanner" class="decision-banner allow" style="display: none;">
+              <div class="decision-header">
+                <div class="decision-badge-large" id="decisionBadge">
+                  ALLOW
+                </div>
+                <div class="decision-rule-pill" id="decisionRulePill">
+                  Rule 4: place order Rs 5000 or less
+                </div>
+              </div>
+              <div class="decision-details" id="decisionDetails">
+                Request evaluated successfully.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- AUDIT LOG TABLE (PERSISTED IN LOCALSTORAGE) -->
+    <section class="audit-section">
+      <div class="amz-card">
+        <div class="amz-card-header">
+          <h2>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Gatekeeper Audit Log
+          </h2>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-secondary btn-sm" onclick="exportAuditLogCSV()">Export CSV</button>
+            <button class="btn btn-danger btn-sm" onclick="clearAuditLog()">Clear Audit Log</button>
+          </div>
+        </div>
+
+        <div class="amz-card-body">
+          <div class="audit-controls">
+            <div class="audit-filters">
+              <label for="filterDecision" style="font-size: 12px; font-weight: bold;">Filter Decision:</label>
+              <select id="filterDecision" onchange="renderAuditLog()">
+                <option value="ALL">All Decisions</option>
+                <option value="ALLOW">ALLOW</option>
+                <option value="ASK CUSTOMER">ASK CUSTOMER</option>
+                <option value="BLOCK">BLOCK</option>
+              </select>
+
+              <label for="searchLog" style="font-size: 12px; font-weight: bold; margin-left: 8px;">Search:</label>
+              <input type="text" id="searchLog" placeholder="Search customer, agent, or rule..." oninput="renderAuditLog()">
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted);" id="logCountLabel">
+              0 log records saved in localStorage
+            </div>
+          </div>
+
+          <div class="audit-table-wrapper">
+            <table class="amz-table">
+              <thead>
+                <tr>
+                  <th style="width: 175px;">Date &amp; Time</th>
+                  <th>Customer Name</th>
+                  <th>Agent Name</th>
+                  <th>Action</th>
+                  <th>Amount</th>
+                  <th>Decision</th>
+                  <th>Rule Triggered</th>
+                  <th>Explanation / Context</th>
+                </tr>
+              </thead>
+              <tbody id="auditTableBody">
+                <!-- Log rows rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Amazon Footer -->
+  <footer class="amazon-footer">
+    <p><strong>Agent Gatekeeper for Amazon India</strong> &bull; Developed by <strong>Aryan Thakur</strong> (Enrolment: <strong>PGD202566017</strong>)</p>
+    <p style="margin-top: 4px; font-size: 11px;">Amazon India Security &amp; Compliance Policy Engine &bull; Storage: LocalStorage Active &bull; All 7 Security Rules Enforced</p>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-msg"></div>
+
+  <!-- APPLICATION JAVASCRIPT LOGIC -->
+  <script>
+    // LocalStorage Keys
+    const STORAGE_KEY_AGENTS = 'amazon_gatekeeper_agents_v2';
+    const STORAGE_KEY_AUDIT = 'amazon_gatekeeper_audit_log_v2';
+
+    // Application State
+    let agents = [];
+    let auditLogs = [];
+
+    // Format Date & Time cleanly
+    function formatDateTime(isoString) {
+      if (!isoString) return '-';
+      const d = new Date(isoString);
+      if (isNaN(d.getTime())) return '-';
+      return d.toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+      }) + ', ' + d.toLocaleTimeString('en-IN', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+    }
+
+    // Toast feedback
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.innerText = message;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3500);
+    }
+
+    // Initialize from LocalStorage
+    function initApp() {
+      const savedAgents = localStorage.getItem(STORAGE_KEY_AGENTS);
+      const savedLogs = localStorage.getItem(STORAGE_KEY_AUDIT);
+
+      if (savedAgents) {
+        try {
+          agents = JSON.parse(savedAgents);
+        } catch (e) {
+          agents = [];
+        }
+      }
+
+      if (savedLogs) {
+        try {
+          auditLogs = JSON.parse(savedLogs);
+        } catch (e) {
+          auditLogs = [];
+        }
+      }
+
+      // If brand new or empty, pre-populate default agents
+      if (!agents || agents.length === 0) {
+        seedDemoData(false);
+      } else {
+        renderAgents();
+        renderAuditLog();
+        updateHeaderStats();
+      }
+    }
+
+    // Save to LocalStorage
+    function persistData() {
+      localStorage.setItem(STORAGE_KEY_AGENTS, JSON.stringify(agents));
+      localStorage.setItem(STORAGE_KEY_AUDIT, JSON.stringify(auditLogs));
+      updateHeaderStats();
+    }
+
+    // Seed Initial / Demo Data
+    function seedDemoData(notify = true) {
+      const now = new Date();
+      const past1 = new Date(now.getTime() - 2 * 60 * 60 * 1000);
+      const past2 = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+      agents = [
+        {
+          id: 'ag-1',
+          name: 'Agent-Kavita',
+          status: 'ACTIVE',
+          registeredAt: past2.toISOString(),
+          revokedAt: null
+        },
+        {
+          id: 'ag-2',
+          name: 'Agent-Vikram',
+          status: 'ACTIVE',
+          registeredAt: past1.toISOString(),
+          revokedAt: null
+        },
+        {
+          id: 'ag-3',
+          name: 'Agent-Suresh',
+          status: 'REVOKED',
+          registeredAt: new Date(now.getTime() - 48 * 60 * 60 * 1000).toISOString(),
+          revokedAt: new Date(now.getTime() - 4 * 60 * 60 * 1000).toISOString()
+        }
+      ];
+
+      // If no audit logs exist, provide 2 sample records
+      if (!auditLogs || auditLogs.length === 0) {
+        auditLogs = [
+          {
+            id: 'log-1',
+            timestamp: new Date(now.getTime() - 60 * 60 * 1000).toISOString(),
+            customerName: 'Pooja Verma',
+            agentName: 'Agent-Kavita',
+            action: 'view order',
+            amount: 0,
+            decision: 'ALLOW',
+            ruleNumber: 'Rule 3',
+            ruleTitle: 'view order = ALLOW',
+            reason: 'Inquiry action: customer order details viewed safely.'
+          },
+          {
+            id: 'log-2',
+            timestamp: new Date(now.getTime() - 30 * 60 * 1000).toISOString(),
+            customerName: 'Amit Saxena',
+            agentName: 'Agent-Vikram',
+            action: 'place order',
+            amount: 3299,
+            decision: 'ALLOW',
+            ruleNumber: 'Rule 4',
+            ruleTitle: 'place order Rs 5000 or less = ALLOW',
+            reason: 'Order amount Rs 3299 is within the Rs 5000 threshold.'
+          }
+        ];
+      }
+
+      persistData();
+      renderAgents();
+      renderAuditLog();
+
+      if (notify) {
+        showToast('Demo agents and sample audit records loaded successfully!');
+      }
+    }
+
+    // Reset All Data
+    function resetAllData() {
+      if (confirm('Are you sure you want to reset all agents and audit logs?')) {
+        localStorage.removeItem(STORAGE_KEY_AGENTS);
+        localStorage.removeItem(STORAGE_KEY_AUDIT);
+        agents = [];
+        auditLogs = [];
+        renderAgents();
+        renderAuditLog();
+        updateHeaderStats();
+        document.getElementById('decisionBanner').style.display = 'none';
+        showToast('All local storage data has been cleared.');
+      }
+    }
+
+    // Update Header Status Bar
+    function updateHeaderStats() {
+      const activeCount = agents.filter(a => a.status === 'ACTIVE').length;
+      const revokedCount = agents.filter(a => a.status === 'REVOKED').length;
+      const allowedCount = auditLogs.filter(l => l.decision === 'ALLOW').length;
+      const askedCount = auditLogs.filter(l => l.decision === 'ASK CUSTOMER').length;
+      const blockedCount = auditLogs.filter(l => l.decision === 'BLOCK').length;
+
+      document.getElementById('statActiveAgents').innerText = activeCount;
+      document.getElementById('statRevokedAgents').innerText = revokedCount;
+      document.getElementById('statAllowed').innerText = allowedCount;
+      document.getElementById('statAsked').innerText = askedCount;
+      document.getElementById('statBlocked').innerText = blockedCount;
+
+      document.getElementById('agentTotalPill').innerText = `${agents.length} Registered`;
+      document.getElementById('logCountLabel').innerText = `${auditLogs.length} log records saved in localStorage`;
+    }
+
+    // Render Registered Agents Table & Dropdown
+    function renderAgents() {
+      const tbody = document.getElementById('agentsTableBody');
+      const select = document.getElementById('agentSelect');
+
+      // Preserve currently selected agent if any
+      const currentSelected = select.value;
+
+      tbody.innerHTML = '';
+      select.innerHTML = '<option value="">-- Select an Authorized / Registered Agent --</option>';
+
+      if (agents.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px; color:#888;">No agents registered yet. Use the form above to add an agent.</td></tr>`;
+        return;
+      }
+
+      agents.forEach(agent => {
+        const tr = document.createElement('tr');
+        const isActive = agent.status === 'ACTIVE';
+
+        tr.innerHTML = `
+          <td><strong>${escapeHtml(agent.name)}</strong></td>
+          <td>
+            <span class="status-badge ${isActive ? 'active' : 'revoked'}">
+              ${isActive ? 'Active' : 'Revoked'}
+            </span>
+          </td>
+          <td style="color:#555;">${formatDateTime(agent.registeredAt)}</td>
+          <td style="color:#555;">
+            ${agent.revokedAt ? `<span style="color:var(--danger-red); font-weight:600;">${formatDateTime(agent.revokedAt)}</span>` : '<span style="color:#999;">Not Revoked</span>'}
+          </td>
+          <td>
+            ${isActive ? 
+              `<button class="btn btn-danger btn-sm" onclick="revokeAgent('${agent.id}')" title="Revoke access immediately with timestamp">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg>
+                Revoke Agent
+              </button>` : 
+              `<button class="btn btn-secondary btn-sm" onclick="reactivateAgent('${agent.id}')" title="Reactivate this agent">
+                Reactivate
+              </button>`
+            }
+          </td>
+        `;
+        tbody.appendChild(tr);
+
+        // Populate dropdown
+        const opt = document.createElement('option');
+        opt.value = agent.name;
+        opt.innerText = `${agent.name} (${isActive ? 'Active' : 'Revoked'})`;
+        select.appendChild(opt);
+      });
+
+      if (currentSelected && [...select.options].some(o => o.value === currentSelected)) {
+        select.value = currentSelected;
+      } else if (agents.length > 0) {
+        // default to first active agent if available
+        const firstActive = agents.find(a => a.status === 'ACTIVE');
+        if (firstActive) select.value = firstActive.name;
+      }
+
+      syncAgentStatusDisplay();
+    }
+
+    // Register Agent Action
+    function handleRegisterAgent(e) {
+      e.preventDefault();
+      const input = document.getElementById('newAgentName');
+      const name = input.value.trim();
+
+      if (!name) return;
+
+      // Check duplicates
+      const exists = agents.some(a => a.name.toLowerCase() === name.toLowerCase());
+      if (exists) {
+        alert(`An agent with the name "${name}" already exists!`);
+        return;
+      }
+
+      const newAgent = {
+        id: 'ag-' + Date.now(),
+        name: name,
+        status: 'ACTIVE',
+        registeredAt: new Date().toISOString(),
+        revokedAt: null
+      };
+
+      agents.unshift(newAgent);
+      persistData();
+      renderAgents();
+      input.value = '';
+      showToast(`Agent "${name}" registered successfully with status Active!`);
+      
+      // Auto select in request form
+      document.getElementById('agentSelect').value = name;
+      syncAgentStatusDisplay();
+    }
+
+    // Revoke Agent Action (Saves exact Date & Time)
+    function revokeAgent(agentId) {
+      const agent = agents.find(a => a.id === agentId);
+      if (!agent) return;
+
+      const now = new Date();
+      agent.status = 'REVOKED';
+      agent.revokedAt = now.toISOString();
+
+      persistData();
+      renderAgents();
+      showToast(`Agent "${agent.name}" has been REVOKED on ${formatDateTime(agent.revokedAt)}.`);
+    }
+
+    // Reactivate Agent Action
+    function reactivateAgent(agentId) {
+      const agent = agents.find(a => a.id === agentId);
+      if (!agent) return;
+
+      agent.status = 'ACTIVE';
+      agent.revokedAt = null;
+
+      persistData();
+      renderAgents();
+      showToast(`Agent "${agent.name}" has been restored to Active status.`);
+    }
+
+    // Toggle Custom (Unknown) Agent
+    function toggleCustomAgent(isCustom) {
+      const selectContainer = document.getElementById('agentSelectContainer');
+      const customContainer = document.getElementById('agentCustomContainer');
+      const customInput = document.getElementById('agentCustomInput');
+
+      if (isCustom) {
+        selectContainer.style.display = 'none';
+        customContainer.style.display = 'block';
+        if (!customInput.value) customInput.value = 'RogueBot_X';
+        customInput.focus();
+      } else {
+        selectContainer.style.display = 'block';
+        customContainer.style.display = 'none';
+      }
+      syncAgentStatusDisplay();
+    }
+
+    // Sync helper status notice below agent input
+    function syncAgentStatusDisplay() {
+      const notice = document.getElementById('agentStatusNotice');
+      const isCustom = document.getElementById('customAgentToggle').checked;
+
+      if (isCustom) {
+        const val = document.getElementById('agentCustomInput').value.trim();
+        const matched = agents.find(a => a.name.toLowerCase() === val.toLowerCase());
+        if (!matched) {
+          notice.innerHTML = `<span style="color:var(--danger-red);">&#9888; Unknown / Unregistered Agent (Triggers Rule 2: BLOCK)</span>`;
+        } else if (matched.status === 'REVOKED') {
+          notice.innerHTML = `<span style="color:var(--danger-red);">&#9888; Revoked Agent on ${formatDateTime(matched.revokedAt)} (Triggers Rule 1: BLOCK)</span>`;
+        } else {
+          notice.innerHTML = `<span style="color:var(--success-green);">&#10003; Registered & Active Agent</span>`;
+        }
+        return;
+      }
+
+      const selectVal = document.getElementById('agentSelect').value;
+      if (!selectVal) {
+        notice.innerHTML = `<span style="color:var(--text-muted);">Please select an agent</span>`;
+        return;
+      }
+
+      const agent = agents.find(a => a.name === selectVal);
+      if (agent) {
+        if (agent.status === 'REVOKED') {
+          notice.innerHTML = `<span style="color:var(--danger-red);">&#9888; Status: REVOKED on ${formatDateTime(agent.revokedAt)} (Will trigger Rule 1: BLOCK)</span>`;
+        } else {
+          notice.innerHTML = `<span style="color:var(--success-green);">&#10003; Status: ACTIVE (Registered on ${formatDateTime(agent.registeredAt)})</span>`;
+        }
+      }
+    }
+
+    // Action Type selection handler (hides amount for 'view order')
+    function handleActionChange() {
+      const action = document.getElementById('actionType').value;
+      const amountGroup = document.getElementById('amountGroup');
+      const amountInput = document.getElementById('requestAmount');
+      const amountHint = document.getElementById('amountHint');
+
+      if (action === 'view order') {
+        amountGroup.style.opacity = '0.4';
+        amountInput.disabled = true;
+        amountInput.value = '0';
+        amountHint.innerText = 'Not applicable for view order (Inquiry action, triggers Rule 3: ALLOW).';
+      } else {
+        amountGroup.style.opacity = '1';
+        amountInput.disabled = false;
+        if (amountInput.value === '0') amountInput.value = '4500';
+
+        if (action === 'place order') {
+          amountHint.innerHTML = 'Policy: &le; &#8377;5,000 triggers <strong>Rule 4 (ALLOW)</strong>; &gt; &#8377;5,000 triggers <strong>Rule 5 (ASK CUSTOMER)</strong>.';
+        } else {
+          amountHint.innerHTML = `Policy: Action <strong>${action.toUpperCase()}</strong> triggers <strong>Rule 6 (ASK CUSTOMER)</strong>.`;
+        }
+      }
+    }
+
+    // Count today's money actions for an agent
+    function getTodayMoneyActionsCount(agentName) {
+      if (!agentName) return 0;
+      const todayStr = new Date().toDateString(); // compares date part
+      const moneyActions = ['place order', 'return', 'refund'];
+
+      let count = 0;
+      auditLogs.forEach(log => {
+        if (log.agentName && log.agentName.toLowerCase() === agentName.toLowerCase()) {
+          const logDate = new Date(log.timestamp).toDateString();
+          if (logDate === todayStr && moneyActions.includes(log.action)) {
+            count++;
+          }
+        }
+      });
+      return count;
+    }
+
+    // ========================================================
+    // GATEKEEPER POLICY ENGINE (THE 7 RULES)
+    // ========================================================
+    function evaluatePolicy(agentName, action, amount) {
+      const moneyActions = ['place order', 'return', 'refund'];
+      const numAmount = Number(amount) || 0;
+
+      // Lookup agent in registered list
+      const matchedAgent = agents.find(a => a.name.toLowerCase() === agentName.trim().toLowerCase());
+
+      // Rule 1: Revoked agent = BLOCK
+      if (matchedAgent && matchedAgent.status === 'REVOKED') {
+        return {
+          decision: 'BLOCK',
+          ruleNumber: 'Rule 1',
+          ruleTitle: 'Revoked agent = BLOCK',
+          reason: `Agent "${matchedAgent.name}" was revoked on ${formatDateTime(matchedAgent.revokedAt)}. All actions are strictly BLOCKED.`
+        };
+      }
+
+      // Rule 2: Unknown agent = BLOCK
+      if (!matchedAgent) {
+        return {
+          decision: 'BLOCK',
+          ruleNumber: 'Rule 2',
+          ruleTitle: 'Unknown agent = BLOCK',
+          reason: `Agent "${agentName}" is not registered in Amazon India Gatekeeper. Unverified agents are strictly BLOCKED.`
+        };
+      }
+
+      // Rule 3: view order = ALLOW
+      if (action === 'view order') {
+        return {
+          decision: 'ALLOW',
+          ruleNumber: 'Rule 3',
+          ruleTitle: 'view order = ALLOW',
+          reason: `Non-financial inquiry: Viewing customer order details is permitted for verified active agent "${matchedAgent.name}".`
+        };
+      }
+
+      // Money Actions Evaluation: ['place order', 'return', 'refund']
+      if (moneyActions.includes(action)) {
+        // Calculate prior money actions for this agent today
+        const priorCountToday = getTodayMoneyActionsCount(matchedAgent.name);
+
+        // Rule 7: More than 3 money actions in a day = ASK CUSTOMER
+        // If priorCountToday is 3 or more, this attempt is the 4th (or higher) money action today
+        if (priorCountToday >= 3) {
+          return {
+            decision: 'ASK CUSTOMER',
+            ruleNumber: 'Rule 7',
+            ruleTitle: 'More than 3 money actions in a day = ASK CUSTOMER',
+            reason: `Velocity Limit Triggered: Agent "${matchedAgent.name}" has already performed ${priorCountToday} money actions today. This transaction requires explicit customer OTP/approval.`
+          };
+        }
+
+        // Action is 'place order'
+        if (action === 'place order') {
+          // Rule 4: place order Rs 5000 or less = ALLOW
+          if (numAmount <= 5000) {
+            return {
+              decision: 'ALLOW',
+              ruleNumber: 'Rule 4',
+              ruleTitle: 'place order Rs 5000 or less = ALLOW',
+              reason: `Order value (₹${numAmount.toLocaleString('en-IN')}) is within the allowable automated threshold of ₹5,000. Daily money action #${priorCountToday + 1}.`
+            };
+          }
+          // Rule 5: place order more than Rs 5000 = ASK CUSTOMER
+          else {
+            return {
+              decision: 'ASK CUSTOMER',
+              ruleNumber: 'Rule 5',
+              ruleTitle: 'place order more than Rs 5000 = ASK CUSTOMER',
+              reason: `High-value order (₹${numAmount.toLocaleString('en-IN')}) exceeds the ₹5,000 automated ceiling. Customer confirmation required before charging.`
+            };
+          }
+        }
+
+        // Rule 6: return or refund = ASK CUSTOMER
+        if (action === 'return' || action === 'refund') {
+          return {
+            decision: 'ASK CUSTOMER',
+            ruleNumber: 'Rule 6',
+            ruleTitle: 'return or refund = ASK CUSTOMER',
+            reason: `Financial reversal: Action "${action.toUpperCase()}" of ₹${numAmount.toLocaleString('en-IN')} requires customer consent and signature verification.`
+          };
+        }
+      }
+
+      // Fallback safeguard
+      return {
+        decision: 'ASK CUSTOMER',
+        ruleNumber: 'Rule Policy',
+        ruleTitle: 'Standard Safeguard',
+        reason: 'Unspecified condition reached. Request escalated for customer confirmation.'
+      };
+    }
+
+    // Submit & Evaluate Request
+    function handleEvaluateRequest(e) {
+      if (e) e.preventDefault();
+
+      const customerName = document.getElementById('customerName').value.trim();
+      const isCustom = document.getElementById('customAgentToggle').checked;
+      const agentName = isCustom ? 
+        document.getElementById('agentCustomInput').value.trim() : 
+        document.getElementById('agentSelect').value;
+
+      const action = document.getElementById('actionType').value;
+      const amountInput = document.getElementById('requestAmount');
+      const amount = (action === 'view order') ? 0 : (Number(amountInput.value) || 0);
+
+      if (!customerName) {
+        alert('Please enter a Customer Name.');
+        return;
+      }
+
+      if (!agentName) {
+        alert('Please select or specify an Agent Name.');
+        return;
+      }
+
+      // Run Gatekeeper Policy Engine
+      const result = evaluatePolicy(agentName, action, amount);
+      const nowIso = new Date().toISOString();
+
+      // Display Decision Banner
+      displayDecisionResult(result, agentName, customerName, action, amount);
+
+      // Create Audit Log Record
+      const auditRecord = {
+        id: 'log-' + Date.now(),
+        timestamp: nowIso,
+        customerName: customerName,
+        agentName: agentName,
+        action: action,
+        amount: amount,
+        decision: result.decision,
+        ruleNumber: result.ruleNumber,
+        ruleTitle: result.ruleTitle,
+        reason: result.reason
+      };
+
+      // Add to front of audit list & persist in localStorage
+      auditLogs.unshift(auditRecord);
+      persistData();
+      renderAuditLog();
+
+      showToast(`Gatekeeper Decision: ${result.decision} applied under ${result.ruleNumber}`);
+    }
+
+    // Display Decision Banner
+    function displayDecisionResult(result, agentName, customerName, action, amount) {
+      const banner = document.getElementById('decisionBanner');
+      const badge = document.getElementById('decisionBadge');
+      const rulePill = document.getElementById('decisionRulePill');
+      const details = document.getElementById('decisionDetails');
+
+      banner.className = 'decision-banner';
+      if (result.decision === 'ALLOW') {
+        banner.classList.add('allow');
+      } else if (result.decision === 'ASK CUSTOMER') {
+        banner.classList.add('ask_customer');
+      } else {
+        banner.classList.add('block');
+      }
+
+      badge.innerText = result.decision;
+      rulePill.innerText = `${result.ruleNumber}: ${result.ruleTitle}`;
+
+      const amountFormatted = action === 'view order' ? 'N/A' : `&#8377;${amount.toLocaleString('en-IN')}`;
+
+      details.innerHTML = `
+        <strong>Policy Outcome:</strong> ${escapeHtml(result.reason)}<br>
+        <span style="font-size: 12px; color: #444; margin-top: 4px; display:inline-block;">
+          <strong>Request:</strong> Customer: <em>${escapeHtml(customerName)}</em> | Agent: <em>${escapeHtml(agentName)}</em> | Action: <strong>${escapeHtml(action)}</strong> | Amount: <strong>${amountFormatted}</strong>
+        </span>
+      `;
+
+      banner.style.display = 'flex';
+      banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Render Audit Log Table with Filters
+    function renderAuditLog() {
+      const tbody = document.getElementById('auditTableBody');
+      const filterDecision = document.getElementById('filterDecision').value;
+      const search = document.getElementById('searchLog').value.toLowerCase().trim();
+
+      tbody.innerHTML = '';
+
+      let filtered = auditLogs.filter(log => {
+        if (filterDecision !== 'ALL' && log.decision !== filterDecision) return false;
+        if (search) {
+          const matchTarget = `${log.customerName} ${log.agentName} ${log.action} ${log.ruleNumber} ${log.ruleTitle} ${log.reason}`.toLowerCase();
+          if (!matchTarget.includes(search)) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="empty-state">
+              ${auditLogs.length === 0 ? 'No audit logs recorded yet. Submit a request above to generate the first log.' : 'No audit records match the current filter or search criteria.'}
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      filtered.forEach(log => {
+        const tr = document.createElement('tr');
+        const pillClass = log.decision === 'ALLOW' ? 'allow' : (log.decision === 'ASK CUSTOMER' ? 'ask_customer' : 'block');
+        const amountDisplay = (log.action === 'view order' || log.amount === 0) ? '-' : `&#8377;${Number(log.amount).toLocaleString('en-IN')}`;
+
+        tr.innerHTML = `
+          <td style="font-size: 11.5px; color:#555; white-space:nowrap;">${formatDateTime(log.timestamp)}</td>
+          <td><strong>${escapeHtml(log.customerName)}</strong></td>
+          <td>${escapeHtml(log.agentName)}</td>
+          <td><span style="background:#edf2f7; padding:2px 6px; border-radius:4px; font-weight:600;">${escapeHtml(log.action)}</span></td>
+          <td class="currency-tag">${amountDisplay}</td>
+          <td><span class="decision-pill ${pillClass}">${escapeHtml(log.decision)}</span></td>
+          <td><strong>${escapeHtml(log.ruleNumber)}</strong></td>
+          <td style="font-size: 11.5px; color:#444; max-width: 320px;">${escapeHtml(log.reason)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('logCountLabel').innerText = `${auditLogs.length} records saved (showing ${filtered.length})`;
+    }
+
+    // Clear Audit Log
+    function clearAuditLog() {
+      if (auditLogs.length === 0) {
+        alert('Audit log is already empty.');
+        return;
+      }
+      if (confirm('Clear the entire audit log from localStorage?')) {
+        auditLogs = [];
+        persistData();
+        renderAuditLog();
+        showToast('Audit log has been cleared.');
+      }
+    }
+
+    // Export to CSV
+    function exportAuditLogCSV() {
+      if (auditLogs.length === 0) {
+        alert('No audit log entries to export.');
+        return;
+      }
+
+      let csv = 'Timestamp,Customer,Agent,Action,Amount,Decision,Rule,Reason\n';
+      auditLogs.forEach(l => {
+        const row = [
+          `"${formatDateTime(l.timestamp)}"`,
+          `"${l.customerName.replace(/"/g, '""')}"`,
+          `"${l.agentName.replace(/"/g, '""')}"`,
+          `"${l.action}"`,
+          l.amount,
+          `"${l.decision}"`,
+          `"${l.ruleNumber}"`,
+          `"${(l.reason || '').replace(/"/g, '""')}"`
+        ];
+        csv += row.join(',') + '\n';
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Amazon_Gatekeeper_AuditLog_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Quick Test Scenarios for Demonstrating all 7 Rules
+    function runPresetScenario(ruleNum) {
+      const customerInput = document.getElementById('customerName');
+      const actionSelect = document.getElementById('actionType');
+      const amountInput = document.getElementById('requestAmount');
+      const customToggle = document.getElementById('customAgentToggle');
+      const agentSelect = document.getElementById('agentSelect');
+      const customInput = document.getElementById('agentCustomInput');
+
+      // Ensure we have active and revoked agents
+      let activeAgent = agents.find(a => a.status === 'ACTIVE');
+      let revokedAgent = agents.find(a => a.status === 'REVOKED');
+
+      if (!activeAgent) {
+        // Register one on the fly
+        activeAgent = { id: 'ag-' + Date.now(), name: 'Agent-DemoActive', status: 'ACTIVE', registeredAt: new Date().toISOString(), revokedAt: null };
+        agents.push(activeAgent);
+        persistData();
+        renderAgents();
+      }
+
+      if (!revokedAgent && ruleNum === 1) {
+        revokedAgent = { id: 'ag-rev-' + Date.now(), name: 'Agent-RevokedDemo', status: 'REVOKED', registeredAt: new Date().toISOString(), revokedAt: new Date().toISOString() };
+        agents.push(revokedAgent);
+        persistData();
+        renderAgents();
+      }
+
+      switch (ruleNum) {
+        case 1:
+          // Rule 1: Revoked agent = BLOCK
+          customToggle.checked = false;
+          toggleCustomAgent(false);
+          agentSelect.value = revokedAgent.name;
+          customerInput.value = 'Rohan Mehra';
+          actionSelect.value = 'place order';
+          handleActionChange();
+          amountInput.value = '2500';
+          syncAgentStatusDisplay();
+          handleEvaluateRequest();
+          break;
+
+        case 2:
+          // Rule 2: Unknown agent = BLOCK
+          customToggle.checked = true;
+          toggleCustomAgent(true);
+          customInput.value = 'UntrustedBot_77';
+          customerInput.value = 'Sneha Reddy';
+          actionSelect.value = 'place order';
+          handleActionChange();
+          amountInput.value = '1500';
+          syncAgentStatusDisplay();
+          handleEvaluateRequest();
+          break;
+
+        case 3:
+          // Rule 3: view order = ALLOW
+          customToggle.checked = false;
+          toggleCustomAgent(false);
+          agentSelect.value = activeAgent.name;
+          customerInput.value = 'Deepak Kumar';
+          actionSelect.value = 'view order';
+          handleActionChange();
+          syncAgentStatusDisplay();
+          handleEvaluateRequest();
+          break;
+
+        case 4:
+          // Rule 4: place order Rs 5000 or less = ALLOW
+          customToggle.checked = false;
+          toggleCustomAgent(false);
+          // Pick or use an agent with < 3 money actions today
+          let freshAgent = agents.find(a => a.status === 'ACTIVE' && getTodayMoneyActionsCount(a.name) < 3);
+          if (!freshAgent) {
+            freshAgent = { id: 'ag-f-' + Date.now(), name: 'Agent-Fresh' + Math.floor(Math.random() * 900 + 100), status: 'ACTIVE', registeredAt: new Date().toISOString(), revokedAt: null };
+            agents.push(freshAgent);
+            persistData();
+            renderAgents();
+          }
+          agentSelect.value = freshAgent.name;
+          customerInput.value = 'Ananya Sen';
+          actionSelect.value = 'place order';
+          handleActionChange();
+          amountInput.value = '3499';
+          syncAgentStatusDisplay();
+          handleEvaluateRequest();
+          break;
+
+        case 5:
+          // Rule 5: place order more than Rs 5000 = ASK CUSTOMER
+          customToggle.checked = false;
+          toggleCustomAgent(false);
+          let agentForR5 = agents.find(a => a.status === 'ACTIVE' && getTodayMoneyActionsCount(a.name) < 3) || activeAgent;
+          agentSelect.value = agentForR5.name;
+          customerInput.value = 'Karan Kapoor';
+          actionSelect.value = 'place order';
+          handleActionChange();
+          amountInput.value = '18999';
+          syncAgentStatusDisplay();
+          handleEvaluateRequest();
+          break;
+
+        case 6:
+          // Rule 6: return or refund = ASK CUSTOMER
+          customToggle.checked = false;
+          toggleCustomAgent(false);
+          let agentForR6 = agents.find(a => a.status === 'ACTIVE' && getTodayMoneyActionsCount(a.name) < 3) || activeAgent;
+          agentSelect.value = agentForR6.name;
+          customerInput.value = 'Priya Patel';
+          actionSelect.value = 'refund';
+          handleActionChange();
+          amountInput.value = '2100';
+          syncAgentStatusDisplay();
+          handleEvaluateRequest();
+          break;
+
+        case 7:
+          // Rule 7: More than 3 money actions in a day = ASK CUSTOMER
+          customToggle.checked = false;
+          toggleCustomAgent(false);
+          // Create or select an agent and ensure they have 3 money actions logged today
+          const rule7AgentName = 'Agent-VelocityTester';
+          let testAgent = agents.find(a => a.name === rule7AgentName);
+          if (!testAgent) {
+            testAgent = { id: 'ag-r7-' + Date.now(), name: rule7AgentName, status: 'ACTIVE', registeredAt: new Date().toISOString(), revokedAt: null };
+            agents.push(testAgent);
+          } else {
+            testAgent.status = 'ACTIVE';
+            testAgent.revokedAt = null;
+          }
+
+          // Inject 3 prior money actions today for this agent so count is >= 3
+          const nowTime = Date.now();
+          const todayISO = new Date().toISOString();
+          
+          // Count existing money actions today for this agent
+          let curCount = getTodayMoneyActionsCount(rule7AgentName);
+          while (curCount < 3) {
+            curCount++;
+            auditLogs.unshift({
+              id: 'log-seed-' + nowTime + '-' + curCount,
+              timestamp: new Date(nowTime - (4 - curCount) * 15 * 60 * 1000).toISOString(),
+              customerName: 'Customer-' + curCount,
+              agentName: rule7AgentName,
+              action: 'place order',
+              amount: 1000 * curCount,
+              decision: 'ALLOW',
+              ruleNumber: 'Rule 4',
+              ruleTitle: 'place order Rs 5000 or less = ALLOW',
+              reason: `Simulated prior daily money action #${curCount} for velocity testing.`
+            });
+          }
+
+          persistData();
+          renderAgents();
+          agentSelect.value = rule7AgentName;
+          customerInput.value = 'Ravi Shankar';
+          actionSelect.value = 'place order';
+          handleActionChange();
+          amountInput.value = '1200'; // Even Rs 1200 (<= 5000) will be ASK CUSTOMER due to Rule 7!
+          syncAgentStatusDisplay();
+          handleEvaluateRequest();
+          break;
+      }
+    }
+
+    // Helper: Escape HTML
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Initialize application on load
+    window.addEventListener('DOMContentLoaded', () => {
+      initApp();
+      handleActionChange();
+    });
+  </script>
+</body>
+</html>

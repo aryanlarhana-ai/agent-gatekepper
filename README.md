@@ -6,6 +6,7 @@
 **Program:** Post Graduate Diploma (PGD) / MBA  
 **Web Application:** Streamlit dashboard at [app.py](app.py)  
 **GitHub Repository:** https://github.com/aryanlarhana-ai/agent-gatekepper
+**GitHub Pages Demo:** https://aryanlarhana-ai.github.io/agent-gatekepper/
 
 ---
 
@@ -85,6 +86,8 @@ py -m streamlit run app.py
 ```
 
 Open `http://localhost:8501`.
+
+The static browser demo is published with GitHub Pages at the URL above. GitHub Pages serves `index.html`; the Python/Streamlit dashboard still needs a Python-capable host.
 
 Copy `.env.example` to `.env` if Gemini narratives are required. The application runs without a key.
 

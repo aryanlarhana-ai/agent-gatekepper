@@ -87,7 +87,15 @@ py -m streamlit run app.py
 
 Open `http://localhost:8501`.
 
-The static browser demo is published with GitHub Pages at the URL above. GitHub Pages serves `index.html`; the Python/Streamlit dashboard still needs a Python-capable host.
+## Publish on GitHub Pages
+
+The browser demo is live at:
+
+https://aryanlarhana-ai.github.io/agent-gatekepper/
+
+The GitHub Actions workflow deploys the static `index.html` after every push to `main`. To update it, edit or upload `index.html` to this repository and commit the change to `main`; the live URL stays the same. Check the **Actions** tab for deployment status.
+
+GitHub Pages only serves static files. It cannot run `app.py`, the Python agents, or the SQLite backend. The full Streamlit dashboard needs a Python-capable host.
 
 Copy `.env.example` to `.env` if Gemini narratives are required. The application runs without a key.
 

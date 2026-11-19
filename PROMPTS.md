@@ -1,6 +1,6 @@
-# PROMPTS & AI INTERACTION LOG
+# PROMPTS & AI INTERACTION LOG (MBA EDITION)
 
-**Project Title:** Agent Gatekeeper for Amazon India  
+**Project Title:** Agent Gatekeeper for Amazon India (MBA Edition)  
 **Student / Developer:** Aryan Thakur  
 **Enrolment Number:** PGD202566017  
 **Organization / Domain:** Amazon India  
@@ -8,160 +8,70 @@
 
 ---
 
-## 1. Overview & Prompt Engineering Methodology
+## 1. Phase 1: Base Gatekeeper System Prompts
 
-This document details the complete prompt engineering lifecycle employed to design, develop, test, and document the **Agent Gatekeeper for Amazon India** single-page web application. 
-
-The prompt engineering approach followed the **C-R-E-A-T-E** framework:
-- **Context:** Establishing the operational domain (Amazon India autonomous agent governance).
-- **Role:** Directing the model as an enterprise software architect and security engineer.
-- **Explicit Constraints:** Mandating zero external dependencies, strict client-side `localStorage` persistence, Amazon India brand identity (`#FF9900`, `#131921`, `#FFD814`), and specific rule definitions.
-- **Actionable Steps:** Step-by-step modular specification (registration, revocation with timestamp, evaluation form, decision banner, audit log).
-- **Testability:** Requiring 1-click test scenarios for all 7 rules.
-- **Evaluation:** Strict verification of edge cases (e.g., Rule 7 daily velocity limits vs. Rule 4 amount limits).
+*(Archived from initial release)*
+- Specification of the 7 initial security rules: Revocation, Unknown Agent, View Order, Low-value limits, High-value ceilings, Reversals, and Velocity limits.
+- Implementation of client-side `localStorage` persistence and Amazon India branding.
 
 ---
 
-## 2. Core Prompt Trajectory
+## 2. Phase 2: MBA Guide Upgrade Prompts
 
-### Phase 1: Initial Specification & Core System Requirements
-
-#### Prompt 1.1: Master Requirement Prompt
+### Prompt 2.1: Master MBA Requirements Prompt
 ```text
-Create a single page web app called Agent Gatekeeper for Amazon India.
-Show my name Aryan Thakur and enrolment PGD202566017 on top.
-It should have:
-- Register Agent form
-- Revoke Agent button with date and time saved
-- Request form: customer name, agent name, action dropdown - view order, place order, return, refund, amount
-- Show decision ALLOW, ASK CUSTOMER or BLOCK with rule number
-- Audit log table with date-time, request, decision, rule
-Use these 7 rules:
-- Rule 1 Revoked agent = BLOCK
-- Rule 2 Unknown agent = BLOCK
-- Rule 3 view order = ALLOW
-- Rule 4 place order Rs 5000 or less = ALLOW
-- Rule 5 place order more than Rs 5000 = ASK CUSTOMER
-- Rule 6 return or refund = ASK CUSTOMER
-- Rule 7 More than 3 money actions in a day = ASK CUSTOMER
-Make it simple, in orange and white Amazon style. Save everything in localStorage so audit log does not disappear on refresh.
+Modify this existing Amazon India Agent Gatekeeper project to match my MBA Guide 100%:
+
+Keep same 7 agents and same rules - ID missing = BLOCK, Amount >5000 = ASK CUSTOMER.
+
+Now add:
+1. Create data/generate_data.py that creates 200 synthetic Amazon orders in data/synthetic_amazon_orders.csv with columns: order_id, customer_id, product, order_amount, has_id_proof, refund_requested, previous_refunds, stock_available. Label it SYNTHETIC DEMONSTRATION DATA.
+Inject these problems: ORD 1-20 = ID missing + high amount = BLOCK, ORD 21-40 = ID present + >5000 = ASK CUSTOMER, ORD 41-60 = CUST_007 repeat refunds = Fraud.
+2. Add SYNTHETIC DEMONSTRATION DATA banner on every page.
+3. Add Approval Centre - Approve / Reject / Reset saved in SQLite. App must NEVER do real refund/payment.
+4. Python does all calculations, Gemini only interprets.
+5. Add tests with 3 hand-calculated cases - ID missing = BLOCK, 6500 + ID = ASK, 2000 + ID = APPROVE.
+
+First give me plan only, no code yet. Wait for my approval.
 ```
 
-**Intent & Rationale:**  
-Establishes the foundational scope, UI aesthetics, governance rules, and persistence constraints.
-
----
-
-### Phase 2: Architectural & Policy Engine Design Prompts
-
-#### Prompt 2.1: Policy Precedence & Rule Engine Formulation
+### Prompt 2.2: Approval and Build Order Instruction
 ```text
-Design the decision pipeline for the 7 gatekeeper rules ensuring mathematical and logical rigor:
-1. Revocation check (Rule 1) must take absolute precedence over any registered action.
-2. Unregistered identity check (Rule 2) must execute before action classification.
-3. Non-financial inquiry action 'view order' (Rule 3) must immediately resolve to ALLOW without requiring transaction amount.
-4. For financial actions ('place order', 'return', 'refund'):
-   - Define a velocity counter that computes how many money actions the specific agent has logged on the current calendar date (today).
-   - If previous count >= 3, the current transaction is the 4th+ action of the day, triggering Rule 7 (ASK CUSTOMER).
-   - If velocity limit (< 3) is intact:
-     * 'place order' <= Rs 5000 -> Rule 4 (ALLOW)
-     * 'place order' > Rs 5000 -> Rule 5 (ASK CUSTOMER)
-     * 'return' or 'refund' -> Rule 6 (ASK CUSTOMER)
-Document this hierarchy clearly in code comments and UI tooltips.
-```
-
-**Outcome:**  
-Eliminates ambiguity between Rule 4 and Rule 7. For example, if an agent places four orders of ₹1,000 on the same day, orders 1–3 are `ALLOW` (Rule 4), while order 4 is escalated to `ASK CUSTOMER` (Rule 7).
-
----
-
-### Phase 3: UI/UX & Amazon India Brand Identity Prompts
-
-#### Prompt 3.1: Visual Hierarchy and Design System Prompt
-```text
-Implement an Amazon India (Amazon.in) design system in clean, responsive CSS:
-- Primary Navbar: Amazon Dark Slate (#131921) with Amazon logo and orange '.in' superscript.
-- Sub-navbar: Amazon Navy (#232F3E) with live telemetry metric chips.
-- Accent Colors: Amazon Smile Orange (#FF9900), Action Orange (#E47911), Primary Button Yellow (#FFD814), Hover (#F7CA00).
-- Student Header: Prominently display 'Aryan Thakur' and 'PGD202566017' with an administrative badge.
-- Cards: Crisp white containers (#FFFFFF) with subtle border (#D5D9D9) and soft box shadows.
-- Badges:
-  * ALLOW: Forest Green (#067D62) with soft green background (#E7F4EE)
-  * ASK CUSTOMER: Warm Amber (#C45500) with soft amber background (#FFF4EB)
-  * BLOCK: Crimson Red (#BA0933) with soft red background (#FDF0F0)
-- Currency: Format all monetary amounts in Indian Rupees (₹ / INR).
-```
-
-**Outcome:**  
-Provides an authentic corporate dashboard aesthetic consistent with Amazon India's internal developer tooling.
-
----
-
-### Phase 4: State Management & Persistence Prompts
-
-#### Prompt 4.1: Robust LocalStorage & Data Schema Prompt
-```text
-Design the client-side persistence schema using localStorage:
-1. Keys:
-   - 'amazon_gatekeeper_agents_v2': Array of Agent objects { id, name, status: 'ACTIVE'|'REVOKED', registeredAt, revokedAt }
-   - 'amazon_gatekeeper_audit_log_v2': Array of AuditRecord objects { id, timestamp, customerName, agentName, action, amount, decision, ruleNumber, ruleTitle, reason }
-2. Requirement:
-   - On initial launch or empty state, auto-seed realistic sample data (2 active agents, 1 revoked agent, 2 audit logs) so the instructor can test immediately without setup.
-   - Provide a 'Reset Everything' button and a 'Clear Audit Log' button with confirmation dialogs.
-   - Provide an 'Export CSV' button to export the audit trail.
-```
-
-**Outcome:**  
-Guarantees zero data loss upon page refresh, while providing clear reset and export workflows.
-
----
-
-### Phase 5: Test Automation & Demonstration Presets
-
-#### Prompt 5.1: 1-Click Verification Presets
-```text
-Add a quick-test toolbar with 7 preset buttons corresponding to Rules 1 through 7:
-- Button 'Rule 1 (Revoked)': Selects a revoked agent, action 'place order', amount 2500 -> Expects BLOCK (Rule 1).
-- Button 'Rule 2 (Unknown)': Selects custom agent 'UntrustedBot_77', action 'place order', amount 1500 -> Expects BLOCK (Rule 2).
-- Button 'Rule 3 (View Order)': Selects active agent, action 'view order' -> Expects ALLOW (Rule 3).
-- Button 'Rule 4 (Order <= 5k)': Selects active agent with < 3 actions today, action 'place order', amount 3499 -> Expects ALLOW (Rule 4).
-- Button 'Rule 5 (Order > 5k)': Selects active agent, action 'place order', amount 18999 -> Expects ASK CUSTOMER (Rule 5).
-- Button 'Rule 6 (Return/Refund)': Selects active agent, action 'refund', amount 2100 -> Expects ASK CUSTOMER (Rule 6).
-- Button 'Rule 7 (>3 Daily Actions)': Injects 3 prior money actions for 'Agent-VelocityTester' today, then submits a 4th order of 1200 -> Expects ASK CUSTOMER (Rule 7).
-Each button must auto-populate the form, execute the policy engine, display the result banner, and log to the audit table.
-```
-
-**Outcome:**  
-Enables instant, repeatable demonstration of all seven policies without manual data entry.
-
----
-
-### Phase 6: Documentation & Reporting Prompts
-
-#### Prompt 6.1: Project Report Generation Prompt
-```text
-Create PROMPTS.md and REPORT.md for my project.
-Name: Aryan Thakur
-Enrolment: PGD202566017
-Company: Amazon India
-Project: Agent Gatekeeper for Amazon India
-Requirements for REPORT.md:
-- Executive Summary and Industrial Motivation in E-commerce Agent Governance
-- Problem Statement & Objectives
-- Architecture (Frontend, State Management, Policy Engine)
-- Complete Specification and Logical Hierarchy of the 7 Rules
-- Test Verification Matrix (Inputs, Expected, Actual Results)
-- Security, Compliance (RBI / Customer Protection), and Ethical AI Alignment
-- Conclusion & Future Enhancements
+APPROVED. Start coding now. Build in this order: 1. data/generate_data.py, 2. engine, 3. UI + Approval Centre, 4. tests. Go.
 ```
 
 ---
 
-## 3. Summary of Key Decisions & Lessons Learned
+## 3. Engineering Decisions & Code Architecture
 
-| Topic | Design Consideration | Prompt Solution |
-|---|---|---|
-| **Rule Collision** | Conflict between Rule 4 ($\le$ ₹5,000) and Rule 7 ($> 3$ daily actions). | Evaluated Rule 7 before Rule 4 in the financial pipeline. A 4th transaction of ₹500 is safely flagged as `ASK CUSTOMER`. |
-| **Revocation Tracking** | Requirement to save date and time upon revocation. | Added `revokedAt: new Date().toISOString()` to the Agent schema and displayed formatted timestamp in both the table and decision banners. |
-| **Testing Unknown Agents** | HTML select dropdowns cannot normally accept unlisted names. | Implemented a checkbox toggle: "Type Unknown Agent" swapping select with an input field to cleanly test Rule 2. |
-| **Browser Compatibility** | Standalone single-page web app without Node/npm runtime overhead. | Single-file architecture (`index.html`) containing embedded CSS and modular Vanilla JavaScript that runs directly via `file:///` in any browser. |
+### 1. Data Pipeline (`data/generate_data.py`)
+- Generated exactly 200 synthetic orders in `data/synthetic_amazon_orders.csv`.
+- Injected specific distributions:
+  * ORD 1–20: `has_id_proof = False`, `order_amount > 5000` $\rightarrow$ `BLOCK`.
+  * ORD 21–40: `has_id_proof = True`, `order_amount > 5000` $\rightarrow$ `ASK CUSTOMER`.
+  * ORD 41–60: `customer_id = 'CUST_007'`, `previous_refunds >= 4`, `refund_requested = True` $\rightarrow$ `BLOCK (FRAUD)`.
+  * ORD 61–200: Baseline clean distribution ($\le 5000$ with ID, low-value refunds, stock edge cases).
+- Prepended CSV with `# SYNTHETIC DEMONSTRATION DATA - FOR MBA ACADEMIC EVALUATION ONLY`.
+
+### 2. Separation of Concerns Architecture
+- **`engine/gatekeeper_engine.py`:** Pure Python deterministic evaluation. Computes all boolean identity verification, amount comparisons, stock checks, and fraud scoring.
+- **`engine/gemini_interpreter.py`:** Interprets Python's calculated output into natural language audit notes and customer SMS drafts. Zero arithmetic or policy decisions performed by the AI.
+
+### 3. Approval Centre & Hard Safety Invariant
+- **`engine/db.py`:** SQLite database storing `approval_queue` and `audit_logs`.
+- Hardcoded safety check:
+  ```python
+  SIMULATION_MODE = True
+  NEVER_DO_REAL_PAYMENT_OR_REFUND = True
+  ```
+  Approve / Reject / Reset workflows mutate SQLite rows only and never call external payment endpoints.
+
+### 4. Test Suite Execution (`tests/test_gatekeeper.py`)
+Tested against 7 unit tests:
+1. `test_hand_case_1_id_missing_blocks` $\rightarrow$ **PASS** (`BLOCK`)
+2. `test_hand_case_2_amount_6500_with_id_asks_customer` $\rightarrow$ **PASS** (`ASK CUSTOMER`)
+3. `test_hand_case_3_amount_2000_with_id_approves` $\rightarrow$ **PASS** (`ALLOW`)
+4. `test_fraud_cust_007` $\rightarrow$ **PASS** (`BLOCK (FRAUD)`)
+5. `test_revoked_agent` $\rightarrow$ **PASS** (`BLOCK`)
+6. `test_unknown_agent` $\rightarrow$ **PASS** (`BLOCK`)
+7. `test_safety_protocol` $\rightarrow$ **PASS** (`NEVER_DO_REAL_PAYMENT == True`)

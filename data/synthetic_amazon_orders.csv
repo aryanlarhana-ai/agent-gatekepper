@@ -1,0 +1,201 @@
+order_id,customer_id,product,order_amount,has_id_proof,refund_requested,previous_refunds,stock_available,expected_decision,injection_note
+ORD_001,CUST_002,Echo Dot (5th Gen),18705.48,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_002,CUST_003,Fire TV Stick 4K,21619.3,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_003,CUST_004,Kindle Paperwhite,10063.08,False,False,1,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_004,CUST_005,boAt Rockerz 450,11791.6,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_005,CUST_006,OnePlus Nord CE 3 Lite,10397.05,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_006,CUST_007,Samsung Galaxy M34,16848.57,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_007,CUST_008,Prestige Iris Mixer Grinder,17591.71,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_008,CUST_009,Puma Men Running Shoes,15701.61,False,False,1,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_009,CUST_010,Noise ColorFit Pulse 2,10793.16,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_010,CUST_011,Milton Thermosteel Flask,6936.89,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_011,CUST_012,Sony WH-1000XM5,9612.44,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_012,CUST_013,Apple iPad 10th Gen,20872.75,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_013,CUST_014,HP 15s Ryzen 5,11057.37,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_014,CUST_015,Philips Air Fryer,17120.14,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_015,CUST_001,Wildcraft Backpack,8232.0,False,False,1,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_016,CUST_002,Echo Dot (5th Gen),9386.85,False,False,1,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_017,CUST_003,Fire TV Stick 4K,7410.16,False,False,1,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_018,CUST_004,Kindle Paperwhite,19578.73,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_019,CUST_005,boAt Rockerz 450,14384.44,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_020,CUST_006,OnePlus Nord CE 3 Lite,17643.99,False,False,0,True,BLOCK,ORD 1-20: ID missing + high amount = BLOCK
+ORD_021,CUST_002,Samsung Galaxy M34,13226.88,True,False,0,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_022,CUST_003,Prestige Iris Mixer Grinder,7154.53,True,False,0,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_023,CUST_004,Puma Men Running Shoes,15886.37,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_024,CUST_005,Noise ColorFit Pulse 2,19634.36,True,False,0,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_025,CUST_006,Milton Thermosteel Flask,16280.91,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_026,CUST_007,Sony WH-1000XM5,6878.39,True,False,0,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_027,CUST_008,Apple iPad 10th Gen,18758.29,True,False,0,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_028,CUST_009,HP 15s Ryzen 5,20566.3,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_029,CUST_010,Philips Air Fryer,15808.83,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_030,CUST_011,Wildcraft Backpack,10306.85,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_031,CUST_012,Echo Dot (5th Gen),8851.24,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_032,CUST_013,Fire TV Stick 4K,5499.65,True,False,0,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_033,CUST_014,Kindle Paperwhite,21938.46,True,False,0,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_034,CUST_015,boAt Rockerz 450,20960.44,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_035,CUST_016,OnePlus Nord CE 3 Lite,8745.83,True,False,0,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_036,CUST_017,Samsung Galaxy M34,17028.91,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_037,CUST_018,Prestige Iris Mixer Grinder,25392.44,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_038,CUST_019,Puma Men Running Shoes,14559.19,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_039,CUST_020,Noise ColorFit Pulse 2,16112.6,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_040,CUST_001,Milton Thermosteel Flask,12264.83,True,False,1,True,ASK CUSTOMER,ORD 21-40: ID present + >5000 = ASK CUSTOMER
+ORD_041,CUST_007,Sony WH-1000XM5,3196.4,True,True,8,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_042,CUST_007,Apple iPad 10th Gen,6724.63,True,True,5,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_043,CUST_007,HP 15s Ryzen 5,5971.67,True,True,7,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_044,CUST_007,Philips Air Fryer,3281.6,True,True,8,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_045,CUST_007,Wildcraft Backpack,7067.69,True,True,6,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_046,CUST_007,Echo Dot (5th Gen),1568.24,True,True,7,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_047,CUST_007,Fire TV Stick 4K,3153.65,True,True,6,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_048,CUST_007,Kindle Paperwhite,5121.85,True,True,8,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_049,CUST_007,boAt Rockerz 450,6217.76,True,True,9,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_050,CUST_007,OnePlus Nord CE 3 Lite,1575.1,True,True,8,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_051,CUST_007,Samsung Galaxy M34,4054.38,True,True,5,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_052,CUST_007,Prestige Iris Mixer Grinder,1789.05,True,True,7,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_053,CUST_007,Puma Men Running Shoes,4420.03,True,True,5,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_054,CUST_007,Noise ColorFit Pulse 2,7156.44,True,True,8,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_055,CUST_007,Milton Thermosteel Flask,4193.7,True,True,6,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_056,CUST_007,Sony WH-1000XM5,3599.66,True,True,4,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_057,CUST_007,Apple iPad 10th Gen,2697.05,True,True,4,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_058,CUST_007,HP 15s Ryzen 5,4075.22,True,True,8,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_059,CUST_007,Philips Air Fryer,4291.04,True,True,9,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_060,CUST_007,Wildcraft Backpack,2294.76,True,True,7,True,BLOCK (FRAUD),ORD 41-60: CUST_007 repeat refunds = Fraud
+ORD_061,CUST_017,Echo Dot (5th Gen),2749.97,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_062,CUST_018,Fire TV Stick 4K,854.99,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_063,CUST_019,Kindle Paperwhite,4296.02,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_064,CUST_020,boAt Rockerz 450,4675.46,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_065,CUST_021,OnePlus Nord CE 3 Lite,761.67,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_066,CUST_022,Samsung Galaxy M34,4290.48,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_067,CUST_023,Prestige Iris Mixer Grinder,4326.67,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_068,CUST_024,Puma Men Running Shoes,2570.51,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_069,CUST_025,Noise ColorFit Pulse 2,2767.88,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_070,CUST_026,Milton Thermosteel Flask,4826.85,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_071,CUST_027,Sony WH-1000XM5,421.59,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_072,CUST_028,Apple iPad 10th Gen,3191.6,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_073,CUST_029,HP 15s Ryzen 5,1412.7,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_074,CUST_030,Philips Air Fryer,4526.84,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_075,CUST_031,Wildcraft Backpack,3888.62,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_076,CUST_032,Echo Dot (5th Gen),4373.97,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_077,CUST_033,Fire TV Stick 4K,1336.08,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_078,CUST_034,Kindle Paperwhite,4166.21,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_079,CUST_035,boAt Rockerz 450,1725.6,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_080,CUST_036,OnePlus Nord CE 3 Lite,3810.4,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_081,CUST_037,Samsung Galaxy M34,3311.09,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_082,CUST_038,Prestige Iris Mixer Grinder,1678.88,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_083,CUST_039,Puma Men Running Shoes,3386.64,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_084,CUST_040,Noise ColorFit Pulse 2,2128.72,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_085,CUST_041,Milton Thermosteel Flask,931.33,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_086,CUST_042,Sony WH-1000XM5,1443.34,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_087,CUST_043,Apple iPad 10th Gen,3196.58,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_088,CUST_044,HP 15s Ryzen 5,1248.21,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_089,CUST_045,Philips Air Fryer,4399.37,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_090,CUST_001,Wildcraft Backpack,1051.34,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_091,CUST_002,Echo Dot (5th Gen),3033.57,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_092,CUST_003,Fire TV Stick 4K,3699.54,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_093,CUST_004,Kindle Paperwhite,1456.6,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_094,CUST_005,boAt Rockerz 450,1260.29,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_095,CUST_006,OnePlus Nord CE 3 Lite,1441.67,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_096,CUST_007,Samsung Galaxy M34,2070.7,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_097,CUST_008,Prestige Iris Mixer Grinder,876.2,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_098,CUST_009,Puma Men Running Shoes,3252.94,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_099,CUST_010,Noise ColorFit Pulse 2,1408.07,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_100,CUST_011,Milton Thermosteel Flask,902.31,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_101,CUST_012,Sony WH-1000XM5,1846.42,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_102,CUST_013,Apple iPad 10th Gen,1423.46,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_103,CUST_014,HP 15s Ryzen 5,646.52,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_104,CUST_015,Philips Air Fryer,1492.44,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_105,CUST_016,Wildcraft Backpack,2727.88,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_106,CUST_017,Echo Dot (5th Gen),2555.27,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_107,CUST_018,Fire TV Stick 4K,4591.63,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_108,CUST_019,Kindle Paperwhite,3947.64,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_109,CUST_020,boAt Rockerz 450,1671.86,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_110,CUST_021,OnePlus Nord CE 3 Lite,4672.89,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_111,CUST_022,Samsung Galaxy M34,3461.37,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_112,CUST_023,Prestige Iris Mixer Grinder,4834.08,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_113,CUST_024,Puma Men Running Shoes,4995.47,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_114,CUST_025,Noise ColorFit Pulse 2,585.25,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_115,CUST_026,Milton Thermosteel Flask,2457.88,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_116,CUST_027,Sony WH-1000XM5,595.11,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_117,CUST_028,Apple iPad 10th Gen,3146.48,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_118,CUST_029,HP 15s Ryzen 5,4537.66,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_119,CUST_030,Philips Air Fryer,2382.69,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_120,CUST_031,Wildcraft Backpack,2639.05,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_121,CUST_032,Echo Dot (5th Gen),3285.9,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_122,CUST_033,Fire TV Stick 4K,3191.29,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_123,CUST_034,Kindle Paperwhite,3810.35,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_124,CUST_035,boAt Rockerz 450,2975.93,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_125,CUST_036,OnePlus Nord CE 3 Lite,4040.39,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_126,CUST_037,Samsung Galaxy M34,1533.3,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_127,CUST_038,Prestige Iris Mixer Grinder,2497.66,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_128,CUST_039,Puma Men Running Shoes,1147.46,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_129,CUST_040,Noise ColorFit Pulse 2,1021.47,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_130,CUST_041,Milton Thermosteel Flask,3131.76,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_131,CUST_042,Sony WH-1000XM5,2886.11,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_132,CUST_043,Apple iPad 10th Gen,804.06,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_133,CUST_044,HP 15s Ryzen 5,3234.88,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_134,CUST_045,Philips Air Fryer,2392.44,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_135,CUST_001,Wildcraft Backpack,4708.46,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_136,CUST_002,Echo Dot (5th Gen),2876.59,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_137,CUST_003,Fire TV Stick 4K,1417.07,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_138,CUST_004,Kindle Paperwhite,4491.98,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_139,CUST_005,boAt Rockerz 450,3750.09,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_140,CUST_006,OnePlus Nord CE 3 Lite,3471.37,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_141,CUST_007,Samsung Galaxy M34,3300.85,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_142,CUST_008,Prestige Iris Mixer Grinder,1118.11,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_143,CUST_009,Puma Men Running Shoes,1220.71,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_144,CUST_010,Noise ColorFit Pulse 2,2957.81,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_145,CUST_011,Milton Thermosteel Flask,3775.43,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_146,CUST_012,Sony WH-1000XM5,1176.34,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_147,CUST_013,Apple iPad 10th Gen,1346.08,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_148,CUST_014,HP 15s Ryzen 5,1990.65,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_149,CUST_015,Philips Air Fryer,4833.65,True,False,1,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_150,CUST_016,Wildcraft Backpack,3865.65,True,False,0,True,APPROVE,Standard order <= 5000 with valid ID
+ORD_151,CUST_017,Echo Dot (5th Gen),522.4,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_152,CUST_018,Fire TV Stick 4K,2778.3,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_153,CUST_019,Kindle Paperwhite,3248.55,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_154,CUST_020,boAt Rockerz 450,2004.68,True,True,0,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_155,CUST_021,OnePlus Nord CE 3 Lite,1233.53,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_156,CUST_022,Samsung Galaxy M34,916.32,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_157,CUST_023,Prestige Iris Mixer Grinder,2494.98,True,True,0,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_158,CUST_024,Puma Men Running Shoes,3266.33,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_159,CUST_025,Noise ColorFit Pulse 2,932.28,True,True,0,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_160,CUST_026,Milton Thermosteel Flask,1445.34,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_161,CUST_027,Sony WH-1000XM5,1111.91,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_162,CUST_028,Apple iPad 10th Gen,756.89,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_163,CUST_029,HP 15s Ryzen 5,3360.5,True,True,0,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_164,CUST_030,Philips Air Fryer,3110.55,True,True,0,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_165,CUST_031,Wildcraft Backpack,2787.58,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_166,CUST_032,Echo Dot (5th Gen),764.66,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_167,CUST_033,Fire TV Stick 4K,943.93,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_168,CUST_034,Kindle Paperwhite,1345.94,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_169,CUST_035,boAt Rockerz 450,2391.77,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_170,CUST_036,OnePlus Nord CE 3 Lite,1851.78,True,True,1,True,ASK CUSTOMER,Standard refund request (Rule 6)
+ORD_171,CUST_037,Samsung Galaxy M34,8269.74,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_172,CUST_038,Prestige Iris Mixer Grinder,13657.86,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_173,CUST_039,Puma Men Running Shoes,9821.03,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_174,CUST_040,Noise ColorFit Pulse 2,14870.52,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_175,CUST_041,Milton Thermosteel Flask,13681.77,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_176,CUST_042,Sony WH-1000XM5,9745.99,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_177,CUST_043,Apple iPad 10th Gen,11554.39,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_178,CUST_044,HP 15s Ryzen 5,12250.43,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_179,CUST_045,Philips Air Fryer,14995.29,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_180,CUST_001,Wildcraft Backpack,12767.97,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_181,CUST_002,Echo Dot (5th Gen),6549.64,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_182,CUST_003,Fire TV Stick 4K,14687.37,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_183,CUST_004,Kindle Paperwhite,9282.94,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_184,CUST_005,boAt Rockerz 450,6409.28,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_185,CUST_006,OnePlus Nord CE 3 Lite,10339.47,True,False,0,True,ASK CUSTOMER,High amount > 5000 (Rule 5)
+ORD_186,CUST_007,Samsung Galaxy M34,899.92,True,False,0,False,BLOCK (OUT OF STOCK),Edge case distribution
+ORD_187,CUST_008,Prestige Iris Mixer Grinder,3248.63,False,False,0,True,BLOCK,Edge case distribution
+ORD_188,CUST_009,Puma Men Running Shoes,1560.43,True,False,0,True,APPROVE,Edge case distribution
+ORD_189,CUST_010,Noise ColorFit Pulse 2,1513.41,False,False,0,False,BLOCK,Edge case distribution
+ORD_190,CUST_011,Milton Thermosteel Flask,3228.77,True,False,0,True,APPROVE,Edge case distribution
+ORD_191,CUST_012,Sony WH-1000XM5,3022.38,False,False,0,True,BLOCK,Edge case distribution
+ORD_192,CUST_013,Apple iPad 10th Gen,1993.46,True,False,0,False,BLOCK (OUT OF STOCK),Edge case distribution
+ORD_193,CUST_014,HP 15s Ryzen 5,2041.48,False,False,0,True,BLOCK,Edge case distribution
+ORD_194,CUST_015,Philips Air Fryer,3096.55,True,False,0,True,APPROVE,Edge case distribution
+ORD_195,CUST_016,Wildcraft Backpack,3717.44,False,False,0,False,BLOCK,Edge case distribution
+ORD_196,CUST_017,Echo Dot (5th Gen),804.69,True,False,0,True,APPROVE,Edge case distribution
+ORD_197,CUST_018,Fire TV Stick 4K,583.6,False,False,0,True,BLOCK,Edge case distribution
+ORD_198,CUST_019,Kindle Paperwhite,1356.15,True,False,0,False,BLOCK (OUT OF STOCK),Edge case distribution
+ORD_199,CUST_020,boAt Rockerz 450,801.3,False,False,0,True,BLOCK,Edge case distribution
+ORD_200,CUST_021,OnePlus Nord CE 3 Lite,694.93,True,False,0,True,APPROVE,Edge case distribution

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agent Gatekeeper - Amazon India</title>
+  <title>Agent Gatekeeper - Amazon India (MBA Edition)</title>
   <style>
     :root {
       --amazon-dark: #131921;
@@ -28,15 +28,12 @@
       --warning-bg: #fff4eb;
       --danger-red: #ba0933;
       --danger-bg: #fdf0f0;
+      --info-blue: #007185;
+      --info-bg: #f0f8ff;
       --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Amazon Ember", Arial, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: var(--font-stack);
       background-color: var(--bg-page);
@@ -47,7 +44,37 @@
       flex-direction: column;
     }
 
-    /* Top Amazon Header */
+    /* MANDATORY MBA SYNTHETIC DEMONSTRATION DATA BANNER */
+    .synthetic-banner-top {
+      background: linear-gradient(90deg, #b12704 0%, #d4380d 50%, #b12704 100%);
+      color: #ffffff;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-bottom: 2px solid #871400;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .synthetic-banner-top .pulse-badge {
+      background-color: #ffffff;
+      color: #b12704;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      box-shadow: 0 0 6px rgba(255,255,255,0.8);
+    }
+
+    /* Header */
     header.amazon-header {
       background-color: var(--amazon-dark);
       color: #ffffff;
@@ -57,15 +84,8 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-
-    .brand-section {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
+    .brand-section { display: flex; align-items: center; gap: 14px; }
     .amazon-logo {
       display: flex;
       align-items: baseline;
@@ -75,619 +95,322 @@
       color: #ffffff;
       text-decoration: none;
     }
-
     .amazon-logo span.in-tag {
       color: var(--amazon-orange);
       font-size: 15px;
       font-weight: 700;
       margin-left: 2px;
     }
+    .brand-divider { width: 1px; height: 28px; background-color: #3a4553; }
+    .system-title h1 { font-size: 18px; font-weight: 700; color: #ffffff; }
+    .system-title span { font-size: 11.5px; color: #ffb84d; font-weight: 600; }
 
-    .brand-divider {
-      width: 1px;
-      height: 28px;
-      background-color: #3a4553;
-    }
-
-    .system-title {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .system-title h1 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.2px;
-    }
-
-    .system-title span {
-      font-size: 12px;
-      color: #cccccc;
-    }
-
-    /* Student / Enrolment Badge */
+    /* Student Badge */
     .user-enrolment-card {
       background: linear-gradient(135deg, #232f3e 0%, #1e293b 100%);
       border: 1px solid #37475a;
       border-left: 4px solid var(--amazon-orange);
       border-radius: 6px;
       padding: 8px 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
+      text-align: right;
     }
-
     .user-enrolment-card .author-name {
       font-size: 15px;
       font-weight: 700;
       color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
-
-    .user-enrolment-card .author-name .verified-badge {
-      background-color: var(--amazon-orange);
-      color: var(--amazon-dark);
-      font-size: 10px;
-      font-weight: 800;
-      padding: 1px 5px;
-      border-radius: 3px;
-      text-transform: uppercase;
-    }
-
     .user-enrolment-card .enrolment-id {
-      font-size: 12.5px;
+      font-size: 12px;
       color: #ffb84d;
       font-weight: 600;
-      letter-spacing: 0.5px;
       font-family: monospace;
     }
 
-    /* Sub-header / Status Bar */
+    /* Sub-bar / Tabs Bar */
     .sub-bar {
       background-color: var(--amazon-nav);
       color: #ffffff;
-      padding: 8px 24px;
-      font-size: 13px;
+      padding: 6px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
-
-    .quick-stats {
+    .nav-tabs {
       display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .stat-chip {
-      display: inline-flex;
-      align-items: center;
       gap: 6px;
     }
-
-    .stat-chip .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .stat-chip.active-agents .dot { background-color: #2ed573; }
-    .stat-chip.revoked-agents .dot { background-color: #ff4757; }
-    .stat-chip.allowed .dot { background-color: #20bf6b; }
-    .stat-chip.asked .dot { background-color: #ffa502; }
-    .stat-chip.blocked .dot { background-color: #eb4d4b; }
-
-    .sub-bar-actions button {
-      background: none;
-      border: 1px solid #485769;
+    .nav-tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
       color: #ffffff;
-      font-size: 12px;
-      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 14px;
       border-radius: 4px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
-
-    .sub-bar-actions button:hover {
+    .nav-tab-btn:hover {
       background-color: #37475a;
+    }
+    .nav-tab-btn.active {
+      background-color: #ffffff;
+      color: var(--amazon-dark);
       border-color: #ffffff;
+    }
+    .sub-bar-right {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-size: 12.5px;
     }
 
     /* Main Container */
     .main-container {
-      max-width: 1400px;
+      max-width: 1440px;
       width: 100%;
-      margin: 20px auto;
+      margin: 18px auto;
       padding: 0 20px;
       flex: 1;
     }
 
-    /* Grid Layout */
-    .dashboard-grid {
+    /* Tab Content Panes */
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* Grid Layouts */
+    .grid-2col {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.1fr 1fr;
       gap: 20px;
-      margin-bottom: 24px;
     }
-
     @media (max-width: 1024px) {
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
+      .grid-2col { grid-template-columns: 1fr; }
     }
 
-    /* Amazon Style Cards */
+    /* Amazon Cards */
     .amz-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
-
     .amz-card-header {
       background-color: #f7f9f9;
       border-bottom: 1px solid var(--border-color);
-      padding: 14px 18px;
+      padding: 12px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
     .amz-card-header h2 {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--text-dark);
       display: flex;
       align-items: center;
       gap: 8px;
     }
+    .amz-card-body { padding: 18px; }
 
-    .amz-card-header .badge-pill {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 12px;
-      background-color: #e3e6e6;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .amz-card-body {
-      padding: 18px;
-      flex: 1;
-    }
-
-    /* Forms & Inputs */
-    .form-group {
-      margin-bottom: 16px;
-    }
-
+    /* Forms */
+    .form-group { margin-bottom: 14px; }
     .form-group label {
       display: block;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--text-dark);
+      margin-bottom: 5px;
     }
-
-    .form-group .form-hint {
-      font-size: 11.5px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
     .form-control {
       width: 100%;
-      padding: 9px 12px;
+      padding: 8px 12px;
       font-size: 13.5px;
       font-family: inherit;
       border: 1px solid #888c8c;
       border-radius: 4px;
-      background-color: #ffffff;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
     }
-
     .form-control:focus {
       border-color: #e77600;
       box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.4);
     }
+    .form-hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
 
-    .input-group {
-      display: flex;
-      gap: 10px;
-    }
-
-    /* Amazon Buttons */
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      font-family: inherit;
       font-size: 13px;
       font-weight: 600;
-      padding: 9px 18px;
+      padding: 8px 16px;
       border-radius: 8px;
       cursor: pointer;
-      text-decoration: none;
-      transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
       border: 1px solid;
-      white-space: nowrap;
+      text-decoration: none;
+      transition: background-color 0.15s;
     }
-
     .btn-primary {
       background-color: var(--amazon-yellow);
       border-color: var(--amazon-yellow-border);
       color: #0f1111;
-      box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
     }
-
-    .btn-primary:hover {
-      background-color: var(--amazon-yellow-hover);
-      border-color: #a88734 #9c7e31 #846a29;
-    }
-
+    .btn-primary:hover { background-color: var(--amazon-yellow-hover); }
     .btn-orange {
       background-color: var(--amazon-orange-btn);
       border-color: #a88734 #9c7e31 #846a29;
       color: #0f1111;
-      box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
     }
-
-    .btn-orange:hover {
-      background-color: var(--amazon-orange-btn-hover);
-    }
-
+    .btn-orange:hover { background-color: var(--amazon-orange-btn-hover); }
     .btn-secondary {
       background-color: #ffffff;
       border-color: #d5d9d9;
       color: #0f1111;
-      box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
     }
-
-    .btn-secondary:hover {
-      background-color: #f7fafa;
-      border-color: #d5d9d9;
-    }
-
+    .btn-secondary:hover { background-color: #f7fafa; }
     .btn-danger {
       background-color: #ffffff;
       border-color: #e07c7c;
       color: var(--danger-red);
     }
+    .btn-danger:hover { background-color: #fff1f1; }
+    .btn-sm { padding: 4px 10px; font-size: 11.5px; border-radius: 5px; }
+    .btn-block { width: 100%; }
 
-    .btn-danger:hover {
-      background-color: #fff1f1;
-      border-color: var(--danger-red);
-    }
-
-    .btn-sm {
-      padding: 5px 10px;
-      font-size: 12px;
-      border-radius: 5px;
-    }
-
-    .btn-block {
-      width: 100%;
-    }
-
-    /* Agent Table */
-    .agents-table-container {
-      margin-top: 14px;
-      max-height: 250px;
-      overflow-y: auto;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-    }
-
-    .amz-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12.5px;
-      text-align: left;
-    }
-
-    .amz-table th {
-      background-color: #f7f9f9;
-      color: var(--text-dark);
-      font-weight: 700;
-      padding: 9px 12px;
-      border-bottom: 1px solid var(--border-color);
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-
-    .amz-table td {
-      padding: 8px 12px;
-      border-bottom: 1px solid #e7e7e7;
-      vertical-align: middle;
-    }
-
-    .amz-table tr:hover {
-      background-color: #f9fbfb;
-    }
-
-    .status-badge {
+    /* Badges */
+    .badge {
       display: inline-block;
       padding: 2px 8px;
       border-radius: 12px;
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
     }
+    .badge-allow { background-color: var(--success-bg); color: var(--success-green); border: 1px solid #b8e2cd; }
+    .badge-ask { background-color: var(--warning-bg); color: var(--warning-orange); border: 1px solid #f9cba7; }
+    .badge-block { background-color: var(--danger-bg); color: var(--danger-red); border: 1px solid #f2bcbc; }
 
-    .status-badge.active {
-      background-color: var(--success-bg);
-      color: var(--success-green);
-      border: 1px solid #b8e2cd;
-    }
-
-    .status-badge.revoked {
-      background-color: var(--danger-bg);
-      color: var(--danger-red);
-      border: 1px solid #f2bcbc;
-    }
-
-    /* Rules Reference Box */
-    .rules-reference-card {
-      background-color: #fcfcfc;
-      border: 1px dashed #c0c4c4;
+    /* Tables */
+    .amz-table-wrap {
+      border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 12px;
-      margin-top: 16px;
+      overflow-x: auto;
+      max-height: 480px;
     }
-
-    .rules-reference-card h3 {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--amazon-orange-dark);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .rules-list {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 6px;
-    }
-
-    .rule-item {
+    .amz-table {
+      width: 100%;
+      border-collapse: collapse;
       font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 4px;
-      background: #ffffff;
-      border: 1px solid #e7e7e7;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      text-align: left;
     }
-
-    .rule-item .rule-num {
+    .amz-table th {
+      background-color: #f7f9f9;
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 2;
       font-weight: 700;
-      color: #333333;
-      margin-right: 6px;
     }
-
-    .rule-tag {
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 3px;
+    .amz-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e7e7e7;
+      vertical-align: middle;
     }
+    .amz-table tr:hover { background-color: #f9fbfb; }
 
-    .rule-tag.allow { background: var(--success-bg); color: var(--success-green); }
-    .rule-tag.ask { background: var(--warning-bg); color: var(--warning-orange); }
-    .rule-tag.block { background: var(--danger-bg); color: var(--danger-red); }
-
-    /* Decision Display Card */
+    /* Decision Result Box */
     .decision-banner {
       border-radius: 8px;
-      padding: 18px;
-      margin-top: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      padding: 16px;
+      margin-top: 16px;
       border: 2px solid transparent;
       animation: fadeIn 0.3s ease-in-out;
     }
+    .decision-banner.allow { background-color: var(--success-bg); border-color: var(--success-green); color: #034b3b; }
+    .decision-banner.ask_customer { background-color: var(--warning-bg); border-color: var(--amazon-orange-dark); color: #7a3100; }
+    .decision-banner.block { background-color: var(--danger-bg); border-color: var(--danger-red); color: #7d0622; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
+    .decision-large-badge {
+      font-size: 18px;
+      font-weight: 900;
+      padding: 4px 14px;
+      border-radius: 6px;
+      color: #ffffff;
+      display: inline-block;
     }
+    .decision-banner.allow .decision-large-badge { background-color: var(--success-green); }
+    .decision-banner.ask_customer .decision-large-badge { background-color: var(--amazon-orange-dark); }
+    .decision-banner.block .decision-large-badge { background-color: var(--danger-red); }
 
-    .decision-banner.allow {
-      background-color: var(--success-bg);
-      border-color: var(--success-green);
-      color: #034b3b;
+    /* Python / Gemini Architecture Cards */
+    .dual-engine-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
     }
-
-    .decision-banner.ask_customer {
-      background-color: var(--warning-bg);
-      border-color: var(--amazon-orange-dark);
-      color: #7a3100;
+    .engine-box {
+      background: #ffffff;
+      border: 1px solid #d5d9d9;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 12px;
     }
-
-    .decision-banner.block {
-      background-color: var(--danger-bg);
-      border-color: var(--danger-red);
-      color: #7d0622;
-    }
-
-    .decision-header {
+    .engine-box h4 {
+      font-size: 12.5px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
+      gap: 6px;
     }
-
-    .decision-badge-large {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 0.8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: 6px;
-    }
-
-    .decision-banner.allow .decision-badge-large {
-      background-color: var(--success-green);
-      color: #ffffff;
-    }
-
-    .decision-banner.ask_customer .decision-badge-large {
-      background-color: var(--amazon-orange-dark);
-      color: #ffffff;
-    }
-
-    .decision-banner.block .decision-badge-large {
-      background-color: var(--danger-red);
-      color: #ffffff;
-    }
-
-    .decision-rule-pill {
-      font-size: 13px;
-      font-weight: 700;
-      background: rgba(255, 255, 255, 0.85);
-      padding: 5px 12px;
-      border-radius: 20px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-    }
-
-    .decision-details {
-      font-size: 13.5px;
-      line-height: 1.4;
-      background: rgba(255, 255, 255, 0.6);
-      padding: 10px 14px;
-      border-radius: 6px;
-      border-left: 3px solid currentColor;
-    }
+    .engine-box.python h4 { color: #0284c7; }
+    .engine-box.gemini h4 { color: #7c3aed; }
 
     /* Quick Test Preset Buttons */
     .quick-test-bar {
-      margin-top: 14px;
+      margin-top: 12px;
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 5px;
       align-items: center;
     }
-
-    .quick-test-bar span {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
+    .quick-test-bar span { font-size: 11.5px; font-weight: 700; color: #555; }
     .btn-test {
       font-size: 11px;
-      padding: 4px 8px;
+      padding: 3px 8px;
       background: #f0f2f2;
       border: 1px solid #d5d9d9;
       border-radius: 4px;
       cursor: pointer;
       font-weight: 600;
-      color: #111;
-      transition: background 0.15s;
+    }
+    .btn-test:hover { background: #e3e6e6; }
+    .btn-test.hand-case {
+      background: #fff8e1;
+      border-color: #ffd54f;
+      color: #b78103;
+      font-weight: 700;
     }
 
-    .btn-test:hover {
-      background: #e3e6e6;
-      border-color: #a6acac;
-    }
-
-    /* Audit Log Table Section */
-    .audit-section {
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    .audit-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .audit-filters {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .audit-filters select, .audit-filters input {
+    /* Safety Notice Box in Approval Centre */
+    .safety-notice-box {
+      background-color: #fff9e6;
+      border: 1px solid #ffe082;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 16px;
+      border-radius: 4px;
       font-size: 12.5px;
-      padding: 6px 10px;
-      border: 1px solid #888c8c;
-      border-radius: 4px;
-      outline: none;
-    }
-
-    .audit-table-wrapper {
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      overflow-x: auto;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-      max-height: 400px;
-    }
-
-    .decision-pill {
-      font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      display: inline-block;
-    }
-
-    .decision-pill.allow {
-      background-color: var(--success-bg);
-      color: var(--success-green);
-      border: 1px solid #a3d9bc;
-    }
-
-    .decision-pill.ask_customer {
-      background-color: var(--warning-bg);
-      color: var(--warning-orange);
-      border: 1px solid #fac29a;
-    }
-
-    .decision-pill.block {
-      background-color: var(--danger-bg);
-      color: var(--danger-red);
-      border: 1px solid #f5b5b5;
-    }
-
-    .empty-state {
-      padding: 40px 20px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-
-    .currency-tag {
-      font-family: monospace;
-      font-weight: 600;
+      color: #92400e;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     /* Footer */
@@ -700,13 +423,9 @@
       margin-top: auto;
       border-top: 1px solid #3a4553;
     }
+    footer.amazon-footer strong { color: #ffffff; }
 
-    footer.amazon-footer a {
-      color: var(--amazon-orange);
-      text-decoration: none;
-    }
-
-    /* Modal / Alert toast */
+    /* Toast */
     .toast-msg {
       position: fixed;
       bottom: 24px;
@@ -716,22 +435,30 @@
       padding: 12px 20px;
       border-radius: 6px;
       border-left: 4px solid var(--amazon-orange);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       font-size: 13px;
       display: none;
-      z-index: 1000;
-      animation: slideUp 0.3s ease-out;
+      z-index: 2000;
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Amazon India Header -->
+  <!-- MANDATORY SYNTHETIC DEMONSTRATION DATA BANNER ON EVERY VIEW -->
+  <div class="synthetic-banner-top">
+    <span class="pulse-badge">ACADEMIC DEMO</span>
+    <span>
+      &#9888; <strong>SYNTHETIC DEMONSTRATION DATA</strong> — MBA Evaluation System. 
+      This application operates in a closed simulation sandbox. Real payments or refunds are <u>NEVER</u> executed.
+    </span>
+  </div>
+
+  <!-- Header -->
   <header class="amazon-header">
     <div class="brand-section">
       <div class="amazon-logo">
@@ -739,986 +466,1230 @@
       </div>
       <div class="brand-divider"></div>
       <div class="system-title">
-        <h1>Agent Gatekeeper</h1>
-        <span>Amazon India Security & Policy Gateway</span>
+        <h1>Agent Gatekeeper (MBA Edition)</h1>
+        <span>Amazon India Autonomous Agent Governance</span>
       </div>
     </div>
 
-    <!-- Student Name & Enrolment ID Prominently displayed -->
     <div class="user-enrolment-card">
-      <div class="author-name">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--amazon-orange);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-        Aryan Thakur
-        <span class="verified-badge">Admin</span>
-      </div>
+      <div class="author-name">Aryan Thakur <span style="font-size:11px; background:var(--amazon-orange); color:#111; padding:1px 5px; border-radius:3px;">MBA</span></div>
       <div class="enrolment-id">ENROLMENT: PGD202566017</div>
+      <div style="font-size:11px; color:#cccccc;">Company: Amazon India</div>
     </div>
   </header>
 
-  <!-- Amazon Sub-bar with Live Metrics -->
+  <!-- Sub-bar with Navigation Tabs & Metric Chips -->
   <div class="sub-bar">
-    <div class="quick-stats">
-      <div class="stat-chip active-agents">
-        <span class="dot"></span>
-        <span id="statActiveAgents">0</span> Active Agents
-      </div>
-      <div class="stat-chip revoked-agents">
-        <span class="dot"></span>
-        <span id="statRevokedAgents">0</span> Revoked Agents
-      </div>
-      <div class="stat-chip allowed">
-        <span class="dot"></span>
-        <span id="statAllowed">0</span> ALLOW
-      </div>
-      <div class="stat-chip asked">
-        <span class="dot"></span>
-        <span id="statAsked">0</span> ASK CUSTOMER
-      </div>
-      <div class="stat-chip blocked">
-        <span class="dot"></span>
-        <span id="statBlocked">0</span> BLOCK
-      </div>
+    <div class="nav-tabs">
+      <button class="nav-tab-btn active" onclick="switchTab('simulator')">Request Simulator &amp; Policy Engine</button>
+      <button class="nav-tab-btn" onclick="switchTab('approval-centre')">Approval Centre (SQLite)</button>
+      <button class="nav-tab-btn" onclick="switchTab('synthetic-orders')">Synthetic Orders (200 Records)</button>
+      <button class="nav-tab-btn" onclick="switchTab('agents-registry')">7 Authorized Agents</button>
+      <button class="nav-tab-btn" onclick="switchTab('audit-log')">Audit Log</button>
     </div>
-    <div class="sub-bar-actions">
-      <button onclick="seedDemoData()">Load Sample Demo Data</button>
-      <button onclick="resetAllData()">Reset Everything</button>
+    <div class="sub-bar-right">
+      <span id="statActiveAgentsPill" style="background:#232f3e; padding:3px 8px; border-radius:12px; border:1px solid #485769;">6 Active Agents</span>
+      <span id="statPendingReviewsPill" style="background:#ffa41c; color:#111; font-weight:700; padding:3px 8px; border-radius:12px;">0 Pending Approvals</span>
     </div>
   </div>
 
   <!-- Main Container -->
   <main class="main-container">
 
-    <div class="dashboard-grid">
-
-      <!-- LEFT COLUMN: Agent Registration & Revocation + Rules Reference -->
-      <section class="left-col">
-
-        <!-- Card 1: Agent Registration & Management -->
-        <div class="amz-card">
-          <div class="amz-card-header">
-            <h2>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7.5" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-              Register & Revoke Agents
-            </h2>
-            <span class="badge-pill" id="agentTotalPill">0 Agents</span>
-          </div>
-
-          <div class="amz-card-body">
-            <!-- Register Agent Form -->
-            <form id="registerAgentForm" onsubmit="handleRegisterAgent(event)">
-              <div class="form-group">
-                <label for="newAgentName">Register New Agent</label>
-                <div class="input-group">
-                  <input type="text" id="newAgentName" class="form-control" placeholder="e.g. Agent-Kavita, Bot-Alpha" required autocomplete="off">
-                  <button type="submit" class="btn btn-primary">
-                    Register Agent
-                  </button>
-                </div>
-                <div class="form-hint">Enter an agent name or ID to authorize them in Amazon India Gatekeeper.</div>
-              </div>
-            </form>
-
-            <!-- Registered Agents Table with Revoke Button & Date-Time Saved -->
-            <label style="font-size: 13px; font-weight: 700; margin-top: 10px; display: block;">
-              Authorized & Revoked Agents List
-            </label>
-            <div class="agents-table-container">
-              <table class="amz-table">
-                <thead>
-                  <tr>
-                    <th>Agent Name</th>
-                    <th>Status</th>
-                    <th>Registered At</th>
-                    <th>Revocation Date & Time</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="agentsTableBody">
-                  <!-- Populated by JS -->
-                </tbody>
-              </table>
-            </div>
-
-            <!-- 7 Rules Summary Reference Box -->
-            <div class="rules-reference-card">
-              <h3>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                Amazon India Gatekeeper 7 Security Rules
-              </h3>
-              <ul class="rules-list">
-                <li class="rule-item">
-                  <span><span class="rule-num">Rule 1:</span> Revoked agent</span>
-                  <span class="rule-tag block">BLOCK</span>
-                </li>
-                <li class="rule-item">
-                  <span><span class="rule-num">Rule 2:</span> Unknown agent</span>
-                  <span class="rule-tag block">BLOCK</span>
-                </li>
-                <li class="rule-item">
-                  <span><span class="rule-num">Rule 3:</span> view order</span>
-                  <span class="rule-tag allow">ALLOW</span>
-                </li>
-                <li class="rule-item">
-                  <span><span class="rule-num">Rule 4:</span> place order &le; Rs 5000</span>
-                  <span class="rule-tag allow">ALLOW</span>
-                </li>
-                <li class="rule-item">
-                  <span><span class="rule-num">Rule 5:</span> place order &gt; Rs 5000</span>
-                  <span class="rule-tag ask">ASK CUSTOMER</span>
-                </li>
-                <li class="rule-item">
-                  <span><span class="rule-num">Rule 6:</span> return or refund</span>
-                  <span class="rule-tag ask">ASK CUSTOMER</span>
-                </li>
-                <li class="rule-item">
-                  <span><span class="rule-num">Rule 7:</span> &gt; 3 money actions in a day</span>
-                  <span class="rule-tag ask">ASK CUSTOMER</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      <!-- RIGHT COLUMN: Customer Request Simulator & Gatekeeper Decision -->
-      <section class="right-col">
-
-        <!-- Card 2: Request Form -->
+    <!-- TAB 1: REQUEST SIMULATOR & POLICY ENGINE -->
+    <div id="tab-simulator" class="tab-pane active">
+      <div class="grid-2col">
+        
+        <!-- Left: Simulator Input Form -->
         <div class="amz-card">
           <div class="amz-card-header">
             <h2>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-              Process Action Request
+              Transaction Policy Simulator
             </h2>
-            <span class="badge-pill">Real-time Policy Evaluation</span>
+            <span style="font-size:11px; background:#e3e6e6; padding:2px 8px; border-radius:10px;">Deterministic Engine</span>
           </div>
-
           <div class="amz-card-body">
-            <form id="requestForm" onsubmit="handleEvaluateRequest(event)">
+            
+            <form id="simulatorForm" onsubmit="handleSimulatorSubmit(event)">
               
-              <!-- Customer Name -->
-              <div class="form-group">
-                <label for="customerName">Customer Name</label>
-                <input type="text" id="customerName" class="form-control" placeholder="e.g. Rahul Sharma" required autocomplete="off" value="Rahul Sharma">
+              <!-- Customer ID & Name -->
+              <div class="form-group" style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                  <label for="customerId">Customer ID</label>
+                  <input type="text" id="customerId" class="form-control" value="CUST_001" placeholder="e.g. CUST_001, CUST_007" required>
+                  <div class="form-hint">Tip: Enter <code>CUST_007</code> to test repeat refund fraud!</div>
+                </div>
+                <div style="flex:1.5;">
+                  <label for="customerName">Customer Name</label>
+                  <input type="text" id="customerName" class="form-control" value="Rahul Sharma" required>
+                </div>
               </div>
 
-              <!-- Agent Name: Dropdown or custom input -->
+              <!-- Agent Selection -->
               <div class="form-group">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
-                  <label for="agentSelect" style="margin-bottom:0;">Agent Name</label>
-                  <label style="font-size: 11.5px; font-weight: normal; cursor: pointer; color: var(--amazon-link);">
-                    <input type="checkbox" id="customAgentToggle" onchange="toggleCustomAgent(this.checked)"> Type Unknown Agent
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                  <label for="agentSelect" style="margin:0;">Executing Agent (7 Authorized)</label>
+                  <label style="font-size:11px; cursor:pointer; color:var(--amazon-link);">
+                    <input type="checkbox" id="customAgentToggle" onchange="toggleCustomAgent(this.checked)"> Test Unknown Agent
                   </label>
                 </div>
-
-                <div id="agentSelectContainer">
-                  <select id="agentSelect" class="form-control" onchange="syncAgentStatusDisplay()">
-                    <option value="">-- Select an Authorized / Registered Agent --</option>
+                <div id="agentSelectBox">
+                  <select id="agentSelect" class="form-control" onchange="syncAgentNotice()">
+                    <option value="Agent-Kavita">Agent-Kavita (Order Processing - Active)</option>
+                    <option value="Agent-Vikram">Agent-Vikram (Replenishment Automation - Active)</option>
+                    <option value="Agent-Suresh">Agent-Suresh (Customer Support - REVOKED)</option>
+                    <option value="Agent-Priya">Agent-Priya (Refund Processing - Active)</option>
+                    <option value="Agent-Aarav">Agent-Aarav (Returns &amp; Logistics - Active)</option>
+                    <option value="Agent-Rahul">Agent-Rahul (Inquiry &amp; Tracking - Active)</option>
+                    <option value="Agent-Ananya">Agent-Ananya (Dispute Management - Active)</option>
                   </select>
                 </div>
-                
-                <div id="agentCustomContainer" style="display: none;">
-                  <input type="text" id="agentCustomInput" class="form-control" placeholder="Type unknown/unregistered agent name (e.g. RogueAgent_99)">
+                <div id="agentCustomBox" style="display:none;">
+                  <input type="text" id="customAgentInput" class="form-control" placeholder="Type unknown agent name (e.g. UntrustedBot_77)">
                 </div>
-
-                <div id="agentStatusNotice" class="form-hint" style="font-weight: 600;"></div>
+                <div id="agentStatusAlert" class="form-hint" style="font-weight:600;"></div>
               </div>
 
-              <!-- Action Dropdown -->
-              <div class="form-group">
-                <label for="actionType">Action Type</label>
-                <select id="actionType" class="form-control" onchange="handleActionChange()" required>
-                  <option value="view order">view order</option>
-                  <option value="place order" selected>place order</option>
-                  <option value="return">return</option>
-                  <option value="refund">refund</option>
-                </select>
-                <div class="form-hint">Money actions: place order, return, refund. Inquiries: view order.</div>
+              <!-- Action Type & ID Proof Checkbox -->
+              <div class="form-group" style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                  <label for="actionType">Action Type</label>
+                  <select id="actionType" class="form-control" onchange="handleActionChange()">
+                    <option value="place order" selected>place order</option>
+                    <option value="view order">view order</option>
+                    <option value="return">return</option>
+                    <option value="refund">refund</option>
+                  </select>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; justify-content:center; background:#f9f9f9; padding:8px 12px; border:1px solid #d5d9d9; border-radius:4px;">
+                  <label style="margin:0; font-size:12px; display:flex; align-items:center; gap:6px; cursor:pointer;">
+                    <input type="checkbox" id="hasIdProof" checked onchange="syncIdNotice()">
+                    <strong>Govt ID / KYC Present</strong>
+                  </label>
+                  <span id="idNoticeText" style="font-size:10.5px; color:#067d62;">ID Verified &#10003;</span>
+                </div>
               </div>
 
-              <!-- Amount Input (in Rs) -->
-              <div class="form-group" id="amountGroup">
-                <label for="requestAmount">Amount (in &#8377; INR)</label>
-                <div style="position: relative;">
-                  <span style="position: absolute; left: 12px; top: 9px; font-weight: 700; color: #555;">&#8377;</span>
-                  <input type="number" id="requestAmount" class="form-control" style="padding-left: 28px;" placeholder="e.g. 4500" min="0" step="1" value="4500">
+              <!-- Amount & Previous Refunds -->
+              <div class="form-group" style="display:flex; gap:10px;">
+                <div style="flex:1.2;" id="amountContainer">
+                  <label for="orderAmount">Order Amount (in &#8377; INR)</label>
+                  <div style="position:relative;">
+                    <span style="position:absolute; left:10px; top:8px; font-weight:700; color:#555;">&#8377;</span>
+                    <input type="number" id="orderAmount" class="form-control" style="padding-left:26px;" value="4500" min="0" step="1">
+                  </div>
+                  <div class="form-hint" id="amountPolicyHint">Threshold: &#8804; &#8377;5,000 is ALLOW, &gt; &#8377;5,000 is ASK CUSTOMER.</div>
                 </div>
-                <div class="form-hint" id="amountHint">Rule threshold: &#8377;5,000 for 'place order'.</div>
+                <div style="flex:0.8;">
+                  <label for="prevRefunds">Previous Refunds</label>
+                  <input type="number" id="prevRefunds" class="form-control" value="0" min="0" max="20">
+                  <div class="form-hint">&ge; 3 triggers Fraud Flag</div>
+                </div>
               </div>
 
               <!-- Submit Button -->
-              <button type="submit" class="btn btn-orange btn-block" style="font-size: 14.5px; padding: 11px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                Evaluate &amp; Authorize Request
+              <button type="submit" class="btn btn-orange btn-block" style="padding:11px; font-size:14px;">
+                Evaluate Gatekeeper Policy
               </button>
             </form>
 
-            <!-- Quick Rule Scenario Testing Buttons -->
+            <!-- MBA Quick Test Buttons -->
             <div class="quick-test-bar">
-              <span>Quick Test:</span>
-              <button class="btn-test" onclick="runPresetScenario(1)" title="Test Rule 1: Revoked agent = BLOCK">Rule 1 (Revoked)</button>
-              <button class="btn-test" onclick="runPresetScenario(2)" title="Test Rule 2: Unknown agent = BLOCK">Rule 2 (Unknown)</button>
-              <button class="btn-test" onclick="runPresetScenario(3)" title="Test Rule 3: view order = ALLOW">Rule 3 (View Order)</button>
-              <button class="btn-test" onclick="runPresetScenario(4)" title="Test Rule 4: place order <= 5000 = ALLOW">Rule 4 (Order &le; 5k)</button>
-              <button class="btn-test" onclick="runPresetScenario(5)" title="Test Rule 5: place order > 5000 = ASK CUSTOMER">Rule 5 (Order &gt; 5k)</button>
-              <button class="btn-test" onclick="runPresetScenario(6)" title="Test Rule 6: return/refund = ASK CUSTOMER">Rule 6 (Return/Refund)</button>
-              <button class="btn-test" onclick="runPresetScenario(7)" title="Test Rule 7: > 3 money actions in a day = ASK CUSTOMER">Rule 7 (&gt;3 Daily Actions)</button>
-            </div>
-
-            <!-- GATEKEEPER DECISION BANNER (Result Box) -->
-            <div id="decisionBanner" class="decision-banner allow" style="display: none;">
-              <div class="decision-header">
-                <div class="decision-badge-large" id="decisionBadge">
-                  ALLOW
-                </div>
-                <div class="decision-rule-pill" id="decisionRulePill">
-                  Rule 4: place order Rs 5000 or less
-                </div>
-              </div>
-              <div class="decision-details" id="decisionDetails">
-                Request evaluated successfully.
-              </div>
+              <span>MBA Test Cases:</span>
+              <button class="btn-test hand-case" onclick="runPresetScenario('HAND_1')" title="Hand Case 1: ID missing = BLOCK">1. ID Missing = BLOCK</button>
+              <button class="btn-test hand-case" onclick="runPresetScenario('HAND_2')" title="Hand Case 2: 6500 + ID = ASK">2. 6500 + ID = ASK</button>
+              <button class="btn-test hand-case" onclick="runPresetScenario('HAND_3')" title="Hand Case 3: 2000 + ID = APPROVE">3. 2000 + ID = APPROVE</button>
+              <button class="btn-test" onclick="runPresetScenario('CUST_007')" title="Injected Case: CUST_007 Repeat Refunds = FRAUD">CUST_007 Fraud</button>
+              <button class="btn-test" onclick="runPresetScenario('REVOKED')" title="Rule 1: Revoked Agent">Revoked Agent</button>
+              <button class="btn-test" onclick="runPresetScenario('UNKNOWN')" title="Rule 2: Unknown Agent">Unknown Agent</button>
+              <button class="btn-test" onclick="runPresetScenario('VIEW_ORDER')" title="Rule 3: View Order">View Order</button>
+              <button class="btn-test" onclick="runPresetScenario('VELOCITY')" title="Rule 7: >3 Daily Actions">>3 Daily Actions</button>
             </div>
 
           </div>
         </div>
 
-      </section>
+        <!-- Right: Live Decision Banner & Dual-Engine Architecture Display -->
+        <div>
+          <!-- Decision Banner -->
+          <div id="liveDecisionBanner" class="decision-banner allow">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="decision-large-badge" id="decisionBadgeText">APPROVE</span>
+              <span style="font-size:12px; font-weight:700; background:rgba(255,255,255,0.85); padding:4px 10px; border-radius:12px;" id="ruleCodeBadge">
+                RULE 4: Place Order &le; Rs 5000 = ALLOW
+              </span>
+            </div>
+            <div style="margin-top:10px; font-size:13px; line-height:1.4;" id="decisionReasonText">
+              Order amount of &#8377;4,500.00 is within allowable automated threshold of &#8377;5,000 and customer ID proof is verified.
+            </div>
+          </div>
 
+          <!-- Dual Engine Separation Boxes: Python calculates, Gemini interprets -->
+          <div class="dual-engine-grid">
+            
+            <!-- Python Calculation Box -->
+            <div class="engine-box python">
+              <h4>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h2v2h-2v-2zm0-10h2v8h-2V6z"/></svg>
+                Python Engine (Calculations)
+              </h4>
+              <ul style="list-style:none; line-height:1.7; color:#333; font-size:11.5px;" id="pythonCalcDetails">
+                <li>&bull; <strong>Amount:</strong> &#8377;4,500.00</li>
+                <li>&bull; <strong>Threshold Comparison:</strong> &#8377;4,500 &le; &#8377;5,000 (True)</li>
+                <li>&bull; <strong>ID Proof Check:</strong> Present (True)</li>
+                <li>&bull; <strong>Fraud Risk Score:</strong> 0.00 (Safe)</li>
+                <li>&bull; <strong>Daily Velocity:</strong> 1 of 3 transactions</li>
+              </ul>
+              <div style="margin-top:8px; font-size:10px; color:#555; background:#f0f8ff; padding:4px 6px; border-radius:3px;">
+                &#10003; 100% Deterministic Python math.
+              </div>
+            </div>
+
+            <!-- Gemini Interpretation Box -->
+            <div class="engine-box gemini">
+              <h4>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 4l7.53 13H4.47L12 6z"/></svg>
+                Gemini AI (Interpretation Only)
+              </h4>
+              <div style="font-size:11.5px; color:#444; line-height:1.4;" id="geminiInterpretationText">
+                <em>"Autonomous Policy Match: Low-risk purchase approved within authorized limits for customer Rahul Sharma. Confirmation SMS dispatched."</em>
+              </div>
+              <div style="margin-top:8px; font-size:10px; color:#555; background:#fbf7ff; padding:4px 6px; border-radius:3px;">
+                &#9888; Zero math performed. Narrative interpretation only.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Policy Rules Reference -->
+          <div class="amz-card" style="margin-top:14px;">
+            <div class="amz-card-header" style="padding:8px 14px;">
+              <h2 style="font-size:13px;">MBA Gatekeeper 7 Security Rules</h2>
+            </div>
+            <div class="amz-card-body" style="padding:10px 14px; font-size:11.5px;">
+              <ul style="list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                <li><strong>Rule 1:</strong> Revoked agent = <span class="badge badge-block">BLOCK</span></li>
+                <li><strong>Rule 2:</strong> Unknown agent = <span class="badge badge-block">BLOCK</span></li>
+                <li><strong>Rule 3:</strong> ID missing = <span class="badge badge-block">BLOCK</span></li>
+                <li><strong>Rule 4:</strong> Place order &le; 5000 = <span class="badge badge-allow">ALLOW</span></li>
+                <li><strong>Rule 5:</strong> Place order &gt; 5000 = <span class="badge badge-ask">ASK</span></li>
+                <li><strong>Rule 6:</strong> Return or refund = <span class="badge badge-ask">ASK</span></li>
+                <li><strong>Rule 7:</strong> &gt; 3 money actions = <span class="badge badge-ask">ASK</span></li>
+                <li><strong>Fraud Rule:</strong> CUST_007 refunds = <span class="badge badge-block">FRAUD</span></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
-    <!-- AUDIT LOG TABLE (PERSISTED IN LOCALSTORAGE) -->
-    <section class="audit-section">
+    <!-- TAB 2: APPROVAL CENTRE (SQLITE PERSISTENCE) -->
+    <div id="tab-approval-centre" class="tab-pane">
       <div class="amz-card">
         <div class="amz-card-header">
           <h2>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            Gatekeeper Audit Log
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            Human-in-the-Loop Approval Centre (SQLite Backed)
           </h2>
-          <div style="display: flex; gap: 8px;">
-            <button class="btn btn-secondary btn-sm" onclick="exportAuditLogCSV()">Export CSV</button>
-            <button class="btn btn-danger btn-sm" onclick="clearAuditLog()">Clear Audit Log</button>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary btn-sm" onclick="reloadApprovalQueue()">Refresh Queue</button>
+            <button class="btn btn-danger btn-sm" onclick="resetAllApprovalData()">Reset Entire Queue</button>
           </div>
         </div>
 
         <div class="amz-card-body">
-          <div class="audit-controls">
-            <div class="audit-filters">
-              <label for="filterDecision" style="font-size: 12px; font-weight: bold;">Filter Decision:</label>
-              <select id="filterDecision" onchange="renderAuditLog()">
-                <option value="ALL">All Decisions</option>
-                <option value="ALLOW">ALLOW</option>
-                <option value="ASK CUSTOMER">ASK CUSTOMER</option>
-                <option value="BLOCK">BLOCK</option>
-              </select>
-
-              <label for="searchLog" style="font-size: 12px; font-weight: bold; margin-left: 8px;">Search:</label>
-              <input type="text" id="searchLog" placeholder="Search customer, agent, or rule..." oninput="renderAuditLog()">
-            </div>
-            <div style="font-size: 12px; color: var(--text-muted);" id="logCountLabel">
-              0 log records saved in localStorage
+          
+          <!-- Mandatory Safety Hardening Notice -->
+          <div class="safety-notice-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            <div>
+              <strong>HARD SAFETY PROTOCOL ACTIVE:</strong>
+              This application operates in a non-financial demonstration mode. Approving or rejecting requests updates local SQLite records only.
+              <strong>The system is architecturally incapable of processing live payments or bank refunds.</strong>
             </div>
           </div>
 
-          <div class="audit-table-wrapper">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <div style="font-size:12.5px; font-weight:700;">
+              Filter Queue: 
+              <select id="approvalFilter" onchange="renderApprovalTable()" style="padding:4px 8px; font-size:12px;">
+                <option value="ALL">All Orders (200)</option>
+                <option value="PENDING_REVIEW" selected>Pending Customer / Admin Review</option>
+                <option value="APPROVED_BY_ADMIN">Approved by Admin</option>
+                <option value="REJECTED_BY_ADMIN">Rejected by Admin</option>
+                <option value="BLOCKED">System Blocked</option>
+              </select>
+            </div>
+            <div style="font-size:12px; color:var(--text-muted);" id="approvalCountLabel">
+              Loading SQLite queue...
+            </div>
+          </div>
+
+          <div class="amz-table-wrap">
             <table class="amz-table">
               <thead>
                 <tr>
-                  <th style="width: 175px;">Date &amp; Time</th>
-                  <th>Customer Name</th>
-                  <th>Agent Name</th>
-                  <th>Action</th>
+                  <th>Order ID</th>
+                  <th>Customer ID</th>
+                  <th>Product</th>
                   <th>Amount</th>
-                  <th>Decision</th>
-                  <th>Rule Triggered</th>
-                  <th>Explanation / Context</th>
+                  <th>ID Proof</th>
+                  <th>Policy Decision</th>
+                  <th>Approval Status</th>
+                  <th>Reviewed At</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-              <tbody id="auditTableBody">
-                <!-- Log rows rendered here -->
+              <tbody id="approvalTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: SYNTHETIC ORDERS (200 RECORDS) -->
+    <div id="tab-synthetic-orders" class="tab-pane">
+      <div class="amz-card">
+        <div class="amz-card-header">
+          <h2>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Synthetic Demonstration Dataset (200 Amazon Orders)
+          </h2>
+          <span style="font-size:11px; background:#fff3cd; color:#856404; padding:2px 8px; border-radius:10px; font-weight:700;">
+            data/synthetic_amazon_orders.csv
+          </span>
+        </div>
+
+        <div class="amz-card-body">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="filterSyntheticDataset('ALL')">All (200)</button>
+              <button class="btn btn-secondary btn-sm" onclick="filterSyntheticDataset('ORD_1_20')" style="border-color:#f5b5b5; color:var(--danger-red);">ORD 1-20 (No ID / BLOCK)</button>
+              <button class="btn btn-secondary btn-sm" onclick="filterSyntheticDataset('ORD_21_40')" style="border-color:#fac29a; color:var(--warning-orange);">ORD 21-40 (&gt;5k / ASK)</button>
+              <button class="btn btn-secondary btn-sm" onclick="filterSyntheticDataset('ORD_41_60')" style="border-color:#f5b5b5; color:var(--danger-red);">ORD 41-60 (CUST_007 Fraud)</button>
+              <button class="btn btn-secondary btn-sm" onclick="filterSyntheticDataset('ORD_61_200')" style="border-color:#a3d9bc; color:var(--success-green);">ORD 61-200 (Baseline)</button>
+            </div>
+            <input type="text" id="searchOrdersInput" placeholder="Search orders..." oninput="filterSyntheticDataset('SEARCH')" style="padding:4px 8px; font-size:12px; border:1px solid #888; border-radius:4px;">
+          </div>
+
+          <div class="amz-table-wrap">
+            <table class="amz-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer ID</th>
+                  <th>Product</th>
+                  <th>Amount</th>
+                  <th>ID Proof</th>
+                  <th>Refund Req</th>
+                  <th>Prev Refunds</th>
+                  <th>Stock</th>
+                  <th>Injected Problem / Note</th>
+                  <th>Simulator</th>
+                </tr>
+              </thead>
+              <tbody id="syntheticOrdersTableBody">
+                <!-- Populated by JS -->
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- TAB 4: 7 AUTHORIZED AGENTS REGISTRY -->
+    <div id="tab-agents-registry" class="tab-pane">
+      <div class="amz-card">
+        <div class="amz-card-header">
+          <h2>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            7 Authorized Agents Registry
+          </h2>
+          <span style="font-size:11px; color:#555;">Managed Access Control</span>
+        </div>
+        <div class="amz-card-body">
+          <p style="font-size:12.5px; color:#555; margin-bottom:12px;">
+            The 7 agents below represent autonomous worker personas. Revoking an agent records the exact date and time, immediately triggering <strong>Rule 1 (BLOCK)</strong>.
+          </p>
+          <div class="amz-table-wrap">
+            <table class="amz-table">
+              <thead>
+                <tr>
+                  <th>Agent Name</th>
+                  <th>Assigned Role</th>
+                  <th>Status</th>
+                  <th>Revocation Date &amp; Time</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="agentsRegistryTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: AUDIT LOG -->
+    <div id="tab-audit-log" class="tab-pane">
+      <div class="amz-card">
+        <div class="amz-card-header">
+          <h2>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Gatekeeper Immutable Audit Trail
+          </h2>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary btn-sm" onclick="exportAuditLogCSV()">Export CSV</button>
+            <button class="btn btn-danger btn-sm" onclick="clearAuditLog()">Clear Audit Log</button>
+          </div>
+        </div>
+        <div class="amz-card-body">
+          <div class="amz-table-wrap">
+            <table class="amz-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Customer ID</th>
+                  <th>Agent Name</th>
+                  <th>Action</th>
+                  <th>Amount</th>
+                  <th>Decision</th>
+                  <th>Rule Triggered</th>
+                  <th>Reason / Interpretation</th>
+                </tr>
+              </thead>
+              <tbody id="auditLogTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
 
   <!-- Amazon Footer -->
   <footer class="amazon-footer">
-    <p><strong>Agent Gatekeeper for Amazon India</strong> &bull; Developed by <strong>Aryan Thakur</strong> (Enrolment: <strong>PGD202566017</strong>)</p>
-    <p style="margin-top: 4px; font-size: 11px;">Amazon India Security &amp; Compliance Policy Engine &bull; Storage: LocalStorage Active &bull; All 7 Security Rules Enforced</p>
+    <p><strong>Agent Gatekeeper for Amazon India (MBA Edition)</strong> &bull; Developed by <strong>Aryan Thakur</strong> (Enrolment: <strong>PGD202566017</strong>)</p>
+    <p style="margin-top: 4px; font-size: 11px;">
+      Amazon India Autonomous Agent Governance &bull; Python Deterministic Engine + Gemini Interpretation &bull; SQLite Approval Centre
+    </p>
   </footer>
 
-  <!-- Toast Notification -->
+  <!-- Toast -->
   <div id="toast" class="toast-msg"></div>
 
-  <!-- APPLICATION JAVASCRIPT LOGIC -->
+  <!-- APPLICATION LOGIC SCRIPT (DUAL-MODE: BACKEND API + LOCAL SQLITE MOCK) -->
   <script>
-    // LocalStorage Keys
-    const STORAGE_KEY_AGENTS = 'amazon_gatekeeper_agents_v2';
-    const STORAGE_KEY_AUDIT = 'amazon_gatekeeper_audit_log_v2';
+    // Storage Keys
+    const STORAGE_KEY_ORDERS = 'amazon_gatekeeper_orders_v3';
+    const STORAGE_KEY_AGENTS = 'amazon_gatekeeper_agents_v3';
+    const STORAGE_KEY_AUDIT = 'amazon_gatekeeper_audit_v3';
 
     // Application State
-    let agents = [];
+    let ordersList = [];
+    let agentsList = [
+      { name: "Agent-Kavita", role: "Order Processing", status: "ACTIVE", revoked_at: null },
+      { name: "Agent-Vikram", role: "Replenishment Automation", status: "ACTIVE", revoked_at: null },
+      { name: "Agent-Suresh", role: "Customer Support", status: "REVOKED", revoked_at: "17 Nov 2026, 14:30:00" },
+      { name: "Agent-Priya", role: "Refund Processing", status: "ACTIVE", revoked_at: null },
+      { name: "Agent-Aarav", role: "Returns & Logistics", status: "ACTIVE", revoked_at: null },
+      { name: "Agent-Rahul", role: "Inquiry & Tracking", status: "ACTIVE", revoked_at: null },
+      { name: "Agent-Ananya", role: "Dispute Management", status: "ACTIVE", revoked_at: null }
+    ];
     let auditLogs = [];
 
-    // Format Date & Time cleanly
+    // Helper: Format Date & Time
     function formatDateTime(isoString) {
       if (!isoString) return '-';
       const d = new Date(isoString);
-      if (isNaN(d.getTime())) return '-';
-      return d.toLocaleDateString('en-IN', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-      }) + ', ' + d.toLocaleTimeString('en-IN', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-      });
+      if (isNaN(d.getTime())) return isoString;
+      return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + 
+        ', ' + d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
     }
 
-    // Toast feedback
-    function showToast(message) {
+    // Helper: Toast
+    function showToast(msg) {
       const toast = document.getElementById('toast');
-      toast.innerText = message;
+      toast.innerText = msg;
       toast.style.display = 'block';
-      setTimeout(() => {
-        toast.style.display = 'none';
-      }, 3500);
+      setTimeout(() => { toast.style.display = 'none'; }, 3500);
     }
 
-    // Initialize from LocalStorage
+    // Switch Tabs
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active'));
+
+      const target = document.getElementById(`tab-${tabId}`);
+      if (target) target.classList.add('active');
+
+      const btn = Array.from(document.querySelectorAll('.nav-tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (btn) btn.classList.add('active');
+
+      if (tabId === 'approval-centre') renderApprovalTable();
+      if (tabId === 'synthetic-orders') renderSyntheticOrdersTable();
+      if (tabId === 'agents-registry') renderAgentsTable();
+      if (tabId === 'audit-log') renderAuditLogTable();
+    }
+
+    // Initialize Application Data
     function initApp() {
+      // 1. Try to load agents
       const savedAgents = localStorage.getItem(STORAGE_KEY_AGENTS);
-      const savedLogs = localStorage.getItem(STORAGE_KEY_AUDIT);
-
       if (savedAgents) {
-        try {
-          agents = JSON.parse(savedAgents);
-        } catch (e) {
-          agents = [];
-        }
+        try { agentsList = JSON.parse(savedAgents); } catch (e) {}
       }
 
-      if (savedLogs) {
-        try {
-          auditLogs = JSON.parse(savedLogs);
-        } catch (e) {
-          auditLogs = [];
-        }
+      // 2. Try to load audit logs
+      const savedAudit = localStorage.getItem(STORAGE_KEY_AUDIT);
+      if (savedAudit) {
+        try { auditLogs = JSON.parse(savedAudit); } catch (e) {}
       }
 
-      // If brand new or empty, pre-populate default agents
-      if (!agents || agents.length === 0) {
-        seedDemoData(false);
-      } else {
-        renderAgents();
-        renderAuditLog();
-        updateHeaderStats();
+      // 3. Load or generate the 200 synthetic orders
+      const savedOrders = localStorage.getItem(STORAGE_KEY_ORDERS);
+      if (savedOrders) {
+        try { ordersList = JSON.parse(savedOrders); } catch (e) {}
       }
+
+      if (!ordersList || ordersList.length === 0) {
+        generateInitialOrders();
+      }
+
+      // Render all views
+      renderAgentsDropdown();
+      renderAgentsTable();
+      renderApprovalTable();
+      renderSyntheticOrdersTable();
+      renderAuditLogTable();
+      updateTopMetrics();
+      syncIdNotice();
+      syncAgentNotice();
     }
 
-    // Save to LocalStorage
-    function persistData() {
-      localStorage.setItem(STORAGE_KEY_AGENTS, JSON.stringify(agents));
-      localStorage.setItem(STORAGE_KEY_AUDIT, JSON.stringify(auditLogs));
-      updateHeaderStats();
-    }
-
-    // Seed Initial / Demo Data
-    function seedDemoData(notify = true) {
-      const now = new Date();
-      const past1 = new Date(now.getTime() - 2 * 60 * 60 * 1000);
-      const past2 = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-
-      agents = [
-        {
-          id: 'ag-1',
-          name: 'Agent-Kavita',
-          status: 'ACTIVE',
-          registeredAt: past2.toISOString(),
-          revokedAt: null
-        },
-        {
-          id: 'ag-2',
-          name: 'Agent-Vikram',
-          status: 'ACTIVE',
-          registeredAt: past1.toISOString(),
-          revokedAt: null
-        },
-        {
-          id: 'ag-3',
-          name: 'Agent-Suresh',
-          status: 'REVOKED',
-          registeredAt: new Date(now.getTime() - 48 * 60 * 60 * 1000).toISOString(),
-          revokedAt: new Date(now.getTime() - 4 * 60 * 60 * 1000).toISOString()
-        }
+    // Generate the 200 synthetic orders matching the CSV specification
+    function generateInitialOrders() {
+      ordersList = [];
+      const products = [
+        "Echo Dot (5th Gen)", "Fire TV Stick 4K", "Kindle Paperwhite",
+        "boAt Rockerz 450", "OnePlus Nord CE 3 Lite", "Samsung Galaxy M34",
+        "Prestige Iris Mixer Grinder", "Puma Men Running Shoes",
+        "Noise ColorFit Pulse 2", "Milton Thermosteel Flask"
       ];
 
-      // If no audit logs exist, provide 2 sample records
-      if (!auditLogs || auditLogs.length === 0) {
-        auditLogs = [
-          {
-            id: 'log-1',
-            timestamp: new Date(now.getTime() - 60 * 60 * 1000).toISOString(),
-            customerName: 'Pooja Verma',
-            agentName: 'Agent-Kavita',
-            action: 'view order',
-            amount: 0,
-            decision: 'ALLOW',
-            ruleNumber: 'Rule 3',
-            ruleTitle: 'view order = ALLOW',
-            reason: 'Inquiry action: customer order details viewed safely.'
-          },
-          {
-            id: 'log-2',
-            timestamp: new Date(now.getTime() - 30 * 60 * 1000).toISOString(),
-            customerName: 'Amit Saxena',
-            agentName: 'Agent-Vikram',
-            action: 'place order',
-            amount: 3299,
-            decision: 'ALLOW',
-            ruleNumber: 'Rule 4',
-            ruleTitle: 'place order Rs 5000 or less = ALLOW',
-            reason: 'Order amount Rs 3299 is within the Rs 5000 threshold.'
-          }
-        ];
+      // ORD 1-20: Missing ID + High Amount = BLOCK
+      for (let i = 1; i <= 20; i++) {
+        const id = `ORD_${String(i).padStart(3, '0')}`;
+        ordersList.push({
+          order_id: id,
+          customer_id: `CUST_${String((i % 15) + 1).padStart(3, '0')}`,
+          product: products[(i - 1) % products.length],
+          order_amount: Math.round(6000 + i * 450),
+          has_id_proof: false,
+          refund_requested: false,
+          previous_refunds: (i % 2),
+          stock_available: true,
+          policy_decision: "BLOCK",
+          approval_status: "BLOCKED",
+          reviewer: null,
+          reviewed_at: null,
+          injection_note: "ORD 1-20: ID missing + high amount = BLOCK"
+        });
       }
 
-      persistData();
-      renderAgents();
-      renderAuditLog();
-
-      if (notify) {
-        showToast('Demo agents and sample audit records loaded successfully!');
-      }
-    }
-
-    // Reset All Data
-    function resetAllData() {
-      if (confirm('Are you sure you want to reset all agents and audit logs?')) {
-        localStorage.removeItem(STORAGE_KEY_AGENTS);
-        localStorage.removeItem(STORAGE_KEY_AUDIT);
-        agents = [];
-        auditLogs = [];
-        renderAgents();
-        renderAuditLog();
-        updateHeaderStats();
-        document.getElementById('decisionBanner').style.display = 'none';
-        showToast('All local storage data has been cleared.');
-      }
-    }
-
-    // Update Header Status Bar
-    function updateHeaderStats() {
-      const activeCount = agents.filter(a => a.status === 'ACTIVE').length;
-      const revokedCount = agents.filter(a => a.status === 'REVOKED').length;
-      const allowedCount = auditLogs.filter(l => l.decision === 'ALLOW').length;
-      const askedCount = auditLogs.filter(l => l.decision === 'ASK CUSTOMER').length;
-      const blockedCount = auditLogs.filter(l => l.decision === 'BLOCK').length;
-
-      document.getElementById('statActiveAgents').innerText = activeCount;
-      document.getElementById('statRevokedAgents').innerText = revokedCount;
-      document.getElementById('statAllowed').innerText = allowedCount;
-      document.getElementById('statAsked').innerText = askedCount;
-      document.getElementById('statBlocked').innerText = blockedCount;
-
-      document.getElementById('agentTotalPill').innerText = `${agents.length} Registered`;
-      document.getElementById('logCountLabel').innerText = `${auditLogs.length} log records saved in localStorage`;
-    }
-
-    // Render Registered Agents Table & Dropdown
-    function renderAgents() {
-      const tbody = document.getElementById('agentsTableBody');
-      const select = document.getElementById('agentSelect');
-
-      // Preserve currently selected agent if any
-      const currentSelected = select.value;
-
-      tbody.innerHTML = '';
-      select.innerHTML = '<option value="">-- Select an Authorized / Registered Agent --</option>';
-
-      if (agents.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px; color:#888;">No agents registered yet. Use the form above to add an agent.</td></tr>`;
-        return;
+      // ORD 21-40: ID Present + Amount > 5000 = ASK CUSTOMER
+      for (let i = 21; i <= 40; i++) {
+        const id = `ORD_${String(i).padStart(3, '0')}`;
+        ordersList.push({
+          order_id: id,
+          customer_id: `CUST_${String((i % 20) + 1).padStart(3, '0')}`,
+          product: products[(i - 1) % products.length],
+          order_amount: Math.round(5200 + i * 380),
+          has_id_proof: true,
+          refund_requested: false,
+          previous_refunds: 0,
+          stock_available: true,
+          policy_decision: "ASK CUSTOMER",
+          approval_status: "PENDING_REVIEW",
+          reviewer: null,
+          reviewed_at: null,
+          injection_note: "ORD 21-40: ID present + >5000 = ASK CUSTOMER"
+        });
       }
 
-      agents.forEach(agent => {
-        const tr = document.createElement('tr');
-        const isActive = agent.status === 'ACTIVE';
-
-        tr.innerHTML = `
-          <td><strong>${escapeHtml(agent.name)}</strong></td>
-          <td>
-            <span class="status-badge ${isActive ? 'active' : 'revoked'}">
-              ${isActive ? 'Active' : 'Revoked'}
-            </span>
-          </td>
-          <td style="color:#555;">${formatDateTime(agent.registeredAt)}</td>
-          <td style="color:#555;">
-            ${agent.revokedAt ? `<span style="color:var(--danger-red); font-weight:600;">${formatDateTime(agent.revokedAt)}</span>` : '<span style="color:#999;">Not Revoked</span>'}
-          </td>
-          <td>
-            ${isActive ? 
-              `<button class="btn btn-danger btn-sm" onclick="revokeAgent('${agent.id}')" title="Revoke access immediately with timestamp">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg>
-                Revoke Agent
-              </button>` : 
-              `<button class="btn btn-secondary btn-sm" onclick="reactivateAgent('${agent.id}')" title="Reactivate this agent">
-                Reactivate
-              </button>`
-            }
-          </td>
-        `;
-        tbody.appendChild(tr);
-
-        // Populate dropdown
-        const opt = document.createElement('option');
-        opt.value = agent.name;
-        opt.innerText = `${agent.name} (${isActive ? 'Active' : 'Revoked'})`;
-        select.appendChild(opt);
-      });
-
-      if (currentSelected && [...select.options].some(o => o.value === currentSelected)) {
-        select.value = currentSelected;
-      } else if (agents.length > 0) {
-        // default to first active agent if available
-        const firstActive = agents.find(a => a.status === 'ACTIVE');
-        if (firstActive) select.value = firstActive.name;
+      // ORD 41-60: CUST_007 repeat refunds = Fraud
+      for (let i = 41; i <= 60; i++) {
+        const id = `ORD_${String(i).padStart(3, '0')}`;
+        ordersList.push({
+          order_id: id,
+          customer_id: "CUST_007",
+          product: products[(i - 1) % products.length],
+          order_amount: Math.round(1500 + i * 80),
+          has_id_proof: true,
+          refund_requested: true,
+          previous_refunds: 4 + (i % 5),
+          stock_available: true,
+          policy_decision: "BLOCK (FRAUD)",
+          approval_status: "BLOCKED",
+          reviewer: null,
+          reviewed_at: null,
+          injection_note: "ORD 41-60: CUST_007 repeat refunds = Fraud"
+        });
       }
 
-      syncAgentStatusDisplay();
-    }
+      // ORD 61-200: Baseline Clean & Edge Distribution
+      for (let i = 61; i <= 200; i++) {
+        const id = `ORD_${String(i).padStart(3, '0')}`;
+        const isRefund = i > 150 && i <= 170;
+        const isHigh = i > 170 && i <= 185;
+        const isMissingId = i > 185 && (i % 2 === 0);
 
-    // Register Agent Action
-    function handleRegisterAgent(e) {
-      e.preventDefault();
-      const input = document.getElementById('newAgentName');
-      const name = input.value.trim();
+        let amount = isHigh ? Math.round(5500 + (i - 170) * 400) : Math.round(499 + (i % 35) * 110);
+        let hasId = !isMissingId;
+        let dec = "APPROVE";
+        let status = "AUTO_APPROVED";
 
-      if (!name) return;
+        if (!hasId) {
+          dec = "BLOCK";
+          status = "BLOCKED";
+        } else if (isHigh || isRefund) {
+          dec = "ASK CUSTOMER";
+          status = "PENDING_REVIEW";
+        }
 
-      // Check duplicates
-      const exists = agents.some(a => a.name.toLowerCase() === name.toLowerCase());
-      if (exists) {
-        alert(`An agent with the name "${name}" already exists!`);
-        return;
+        ordersList.push({
+          order_id: id,
+          customer_id: `CUST_${String((i % 45) + 1).padStart(3, '0')}`,
+          product: products[(i - 1) % products.length],
+          order_amount: amount,
+          has_id_proof: hasId,
+          refund_requested: isRefund,
+          previous_refunds: isRefund ? 1 : 0,
+          stock_available: true,
+          policy_decision: dec,
+          approval_status: status,
+          reviewer: null,
+          reviewed_at: null,
+          injection_note: isHigh ? "High amount > 5000" : (isRefund ? "Standard refund request" : "Standard order <= 5000 with valid ID")
+        });
       }
 
-      const newAgent = {
-        id: 'ag-' + Date.now(),
-        name: name,
-        status: 'ACTIVE',
-        registeredAt: new Date().toISOString(),
-        revokedAt: null
-      };
-
-      agents.unshift(newAgent);
-      persistData();
-      renderAgents();
-      input.value = '';
-      showToast(`Agent "${name}" registered successfully with status Active!`);
-      
-      // Auto select in request form
-      document.getElementById('agentSelect').value = name;
-      syncAgentStatusDisplay();
+      saveData();
     }
 
-    // Revoke Agent Action (Saves exact Date & Time)
-    function revokeAgent(agentId) {
-      const agent = agents.find(a => a.id === agentId);
-      if (!agent) return;
-
-      const now = new Date();
-      agent.status = 'REVOKED';
-      agent.revokedAt = now.toISOString();
-
-      persistData();
-      renderAgents();
-      showToast(`Agent "${agent.name}" has been REVOKED on ${formatDateTime(agent.revokedAt)}.`);
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY_ORDERS, JSON.stringify(ordersList));
+      localStorage.setItem(STORAGE_KEY_AGENTS, JSON.stringify(agentsList));
+      localStorage.setItem(STORAGE_KEY_AUDIT, JSON.stringify(auditLogs));
+      updateTopMetrics();
     }
 
-    // Reactivate Agent Action
-    function reactivateAgent(agentId) {
-      const agent = agents.find(a => a.id === agentId);
-      if (!agent) return;
-
-      agent.status = 'ACTIVE';
-      agent.revokedAt = null;
-
-      persistData();
-      renderAgents();
-      showToast(`Agent "${agent.name}" has been restored to Active status.`);
+    function updateTopMetrics() {
+      const activeAgents = agentsList.filter(a => a.status === 'ACTIVE').length;
+      const pendingReviews = ordersList.filter(o => o.approval_status === 'PENDING_REVIEW').length;
+      document.getElementById('statActiveAgentsPill').innerText = `${activeAgents} Active Agents`;
+      document.getElementById('statPendingReviewsPill').innerText = `${pendingReviews} Pending Approvals`;
     }
 
-    // Toggle Custom (Unknown) Agent
+    // Toggle custom agent
     function toggleCustomAgent(isCustom) {
-      const selectContainer = document.getElementById('agentSelectContainer');
-      const customContainer = document.getElementById('agentCustomContainer');
-      const customInput = document.getElementById('agentCustomInput');
-
-      if (isCustom) {
-        selectContainer.style.display = 'none';
-        customContainer.style.display = 'block';
-        if (!customInput.value) customInput.value = 'RogueBot_X';
-        customInput.focus();
-      } else {
-        selectContainer.style.display = 'block';
-        customContainer.style.display = 'none';
-      }
-      syncAgentStatusDisplay();
+      document.getElementById('agentSelectBox').style.display = isCustom ? 'none' : 'block';
+      document.getElementById('agentCustomBox').style.display = isCustom ? 'block' : 'none';
+      syncAgentNotice();
     }
 
-    // Sync helper status notice below agent input
-    function syncAgentStatusDisplay() {
-      const notice = document.getElementById('agentStatusNotice');
+    function syncAgentNotice() {
       const isCustom = document.getElementById('customAgentToggle').checked;
-
+      const alertBox = document.getElementById('agentStatusAlert');
+      
       if (isCustom) {
-        const val = document.getElementById('agentCustomInput').value.trim();
-        const matched = agents.find(a => a.name.toLowerCase() === val.toLowerCase());
-        if (!matched) {
-          notice.innerHTML = `<span style="color:var(--danger-red);">&#9888; Unknown / Unregistered Agent (Triggers Rule 2: BLOCK)</span>`;
-        } else if (matched.status === 'REVOKED') {
-          notice.innerHTML = `<span style="color:var(--danger-red);">&#9888; Revoked Agent on ${formatDateTime(matched.revokedAt)} (Triggers Rule 1: BLOCK)</span>`;
+        const val = document.getElementById('customAgentInput').value.trim();
+        alertBox.innerHTML = `<span style="color:var(--danger-red);">&#9888; Unregistered / Unknown Agent (Triggers Rule 2: BLOCK)</span>`;
+      } else {
+        const selected = document.getElementById('agentSelect').value;
+        const ag = agentsList.find(a => a.name === selected);
+        if (ag && ag.status === 'REVOKED') {
+          alertBox.innerHTML = `<span style="color:var(--danger-red);">&#9888; Status: REVOKED on ${ag.revoked_at} (Triggers Rule 1: BLOCK)</span>`;
         } else {
-          notice.innerHTML = `<span style="color:var(--success-green);">&#10003; Registered & Active Agent</span>`;
-        }
-        return;
-      }
-
-      const selectVal = document.getElementById('agentSelect').value;
-      if (!selectVal) {
-        notice.innerHTML = `<span style="color:var(--text-muted);">Please select an agent</span>`;
-        return;
-      }
-
-      const agent = agents.find(a => a.name === selectVal);
-      if (agent) {
-        if (agent.status === 'REVOKED') {
-          notice.innerHTML = `<span style="color:var(--danger-red);">&#9888; Status: REVOKED on ${formatDateTime(agent.revokedAt)} (Will trigger Rule 1: BLOCK)</span>`;
-        } else {
-          notice.innerHTML = `<span style="color:var(--success-green);">&#10003; Status: ACTIVE (Registered on ${formatDateTime(agent.registeredAt)})</span>`;
+          alertBox.innerHTML = `<span style="color:var(--success-green);">&#10003; Status: ACTIVE (Authorized Amazon Assistant)</span>`;
         }
       }
     }
 
-    // Action Type selection handler (hides amount for 'view order')
+    function syncIdNotice() {
+      const hasId = document.getElementById('hasIdProof').checked;
+      const notice = document.getElementById('idNoticeText');
+      if (hasId) {
+        notice.innerHTML = `<span style="color:var(--success-green);">&#10003; ID Verified</span>`;
+      } else {
+        notice.innerHTML = `<span style="color:var(--danger-red); font-weight:700;">&#9888; ID Missing (Rule: BLOCK)</span>`;
+      }
+    }
+
     function handleActionChange() {
       const action = document.getElementById('actionType').value;
-      const amountGroup = document.getElementById('amountGroup');
-      const amountInput = document.getElementById('requestAmount');
-      const amountHint = document.getElementById('amountHint');
+      const amtContainer = document.getElementById('amountContainer');
+      const amtInput = document.getElementById('orderAmount');
+      const hint = document.getElementById('amountPolicyHint');
 
       if (action === 'view order') {
-        amountGroup.style.opacity = '0.4';
-        amountInput.disabled = true;
-        amountInput.value = '0';
-        amountHint.innerText = 'Not applicable for view order (Inquiry action, triggers Rule 3: ALLOW).';
+        amtContainer.style.opacity = '0.4';
+        amtInput.disabled = true;
+        amtInput.value = '0';
+        hint.innerText = "Inquiry only: Amount not applicable (Triggers Rule 3: ALLOW).";
       } else {
-        amountGroup.style.opacity = '1';
-        amountInput.disabled = false;
-        if (amountInput.value === '0') amountInput.value = '4500';
-
+        amtContainer.style.opacity = '1';
+        amtInput.disabled = false;
+        if (amtInput.value === '0') amtInput.value = '4500';
         if (action === 'place order') {
-          amountHint.innerHTML = 'Policy: &le; &#8377;5,000 triggers <strong>Rule 4 (ALLOW)</strong>; &gt; &#8377;5,000 triggers <strong>Rule 5 (ASK CUSTOMER)</strong>.';
+          hint.innerText = "Threshold: <= ₹5,000 is ALLOW, > ₹5,000 is ASK CUSTOMER.";
         } else {
-          amountHint.innerHTML = `Policy: Action <strong>${action.toUpperCase()}</strong> triggers <strong>Rule 6 (ASK CUSTOMER)</strong>.`;
+          hint.innerText = `Action ${action.toUpperCase()} triggers Rule 6: ASK CUSTOMER.`;
         }
       }
     }
 
-    // Count today's money actions for an agent
-    function getTodayMoneyActionsCount(agentName) {
-      if (!agentName) return 0;
-      const todayStr = new Date().toDateString(); // compares date part
-      const moneyActions = ['place order', 'return', 'refund'];
-
-      let count = 0;
-      auditLogs.forEach(log => {
-        if (log.agentName && log.agentName.toLowerCase() === agentName.toLowerCase()) {
-          const logDate = new Date(log.timestamp).toDateString();
-          if (logDate === todayStr && moneyActions.includes(log.action)) {
-            count++;
-          }
-        }
-      });
-      return count;
-    }
-
-    // ========================================================
-    // GATEKEEPER POLICY ENGINE (THE 7 RULES)
-    // ========================================================
-    function evaluatePolicy(agentName, action, amount) {
-      const moneyActions = ['place order', 'return', 'refund'];
+    // =========================================================
+    // DETERMINISTIC PYTHON ENGINE CALCULATION (JAVASCRIPT MIRROR)
+    // =========================================================
+    function evaluatePolicyEngine(agentName, customerId, action, amount, hasId, prevRefunds, stockAvailable) {
       const numAmount = Number(amount) || 0;
+      const actionClean = action.trim().toLowerCase();
 
-      // Lookup agent in registered list
-      const matchedAgent = agents.find(a => a.name.toLowerCase() === agentName.trim().toLowerCase());
-
-      // Rule 1: Revoked agent = BLOCK
-      if (matchedAgent && matchedAgent.status === 'REVOKED') {
+      // Rule 1 & 2: Agent Checks
+      const agent = agentsList.find(a => a.name.toLowerCase() === agentName.trim().toLowerCase());
+      if (!agent) {
         return {
-          decision: 'BLOCK',
-          ruleNumber: 'Rule 1',
-          ruleTitle: 'Revoked agent = BLOCK',
-          reason: `Agent "${matchedAgent.name}" was revoked on ${formatDateTime(matchedAgent.revokedAt)}. All actions are strictly BLOCKED.`
+          decision: "BLOCK",
+          ruleCode: "RULE_2",
+          ruleName: "Unknown Agent = BLOCK",
+          reason: `Agent '${agentName}' is not registered in Amazon India Gatekeeper. Access perimeter blocked.`,
+          calculations: { amount: numAmount, hasId: hasId, agentVerified: false }
         };
       }
 
-      // Rule 2: Unknown agent = BLOCK
-      if (!matchedAgent) {
+      if (agent.status === "REVOKED") {
         return {
-          decision: 'BLOCK',
-          ruleNumber: 'Rule 2',
-          ruleTitle: 'Unknown agent = BLOCK',
-          reason: `Agent "${agentName}" is not registered in Amazon India Gatekeeper. Unverified agents are strictly BLOCKED.`
+          decision: "BLOCK",
+          ruleCode: "RULE_1",
+          ruleName: "Revoked Agent = BLOCK",
+          reason: `Agent '${agentName}' was REVOKED on ${agent.revoked_at}. Access strictly denied.`,
+          calculations: { amount: numAmount, hasId: hasId, agentRevoked: true }
         };
       }
 
-      // Rule 3: view order = ALLOW
-      if (action === 'view order') {
+      // Stock Check
+      if (!stockAvailable && actionClean === "place order") {
         return {
-          decision: 'ALLOW',
-          ruleNumber: 'Rule 3',
-          ruleTitle: 'view order = ALLOW',
-          reason: `Non-financial inquiry: Viewing customer order details is permitted for verified active agent "${matchedAgent.name}".`
+          decision: "BLOCK",
+          ruleCode: "RULE_STOCK_OUT",
+          ruleName: "Stock Unavailable = BLOCK",
+          reason: "Product is out of stock in fulfillment center.",
+          calculations: { amount: numAmount, stock: false }
         };
       }
 
-      // Money Actions Evaluation: ['place order', 'return', 'refund']
-      if (moneyActions.includes(action)) {
-        // Calculate prior money actions for this agent today
-        const priorCountToday = getTodayMoneyActionsCount(matchedAgent.name);
+      // CRITICAL MBA RULE: ID Missing = BLOCK
+      if (!hasId) {
+        return {
+          decision: "BLOCK",
+          ruleCode: "RULE_ID_MISSING",
+          ruleName: "ID Proof Missing = BLOCK",
+          reason: `Mandatory government KYC / ID proof is missing for customer '${customerId}'. High-risk transaction blocked.`,
+          calculations: { amount: numAmount, hasId: false, threshold: 5000 }
+        };
+      }
 
-        // Rule 7: More than 3 money actions in a day = ASK CUSTOMER
-        // If priorCountToday is 3 or more, this attempt is the 4th (or higher) money action today
-        if (priorCountToday >= 3) {
+      // Fraud Check: CUST_007 or Repeat Refunds
+      if (customerId === "CUST_007" || (prevRefunds >= 3 && (actionClean === 'return' || actionClean === 'refund'))) {
+        return {
+          decision: "BLOCK",
+          ruleCode: "RULE_FRAUD_REPEAT",
+          ruleName: "Repeat Refund Abuse = BLOCK (FRAUD)",
+          reason: `Customer '${customerId}' flagged for repeat refund pattern (${prevRefunds} prior claims). Automated refund halted.`,
+          calculations: { customerId: customerId, prevRefunds: prevRefunds, fraudFlag: true }
+        };
+      }
+
+      // Rule 3: View Order = ALLOW
+      if (actionClean === "view order") {
+        return {
+          decision: "ALLOW",
+          ruleCode: "RULE_3",
+          ruleName: "View Order = ALLOW",
+          reason: `Non-financial inquiry: Viewing order history permitted for verified agent '${agentName}'.`,
+          calculations: { isFinancial: false, amount: 0 }
+        };
+      }
+
+      // Financial Actions: Return / Refund = ASK CUSTOMER
+      if (actionClean === "return" || actionClean === "refund") {
+        return {
+          decision: "ASK CUSTOMER",
+          ruleCode: "RULE_6",
+          ruleName: "Return or Refund = ASK CUSTOMER",
+          reason: `Financial reversal (${actionClean.toUpperCase()} of ₹${numAmount.toLocaleString('en-IN')}) requires customer confirmation.`,
+          calculations: { amount: numAmount, action: actionClean }
+        };
+      }
+
+      // Place Order: Amount Rules
+      if (actionClean === "place order") {
+        if (numAmount > 5000) {
           return {
-            decision: 'ASK CUSTOMER',
-            ruleNumber: 'Rule 7',
-            ruleTitle: 'More than 3 money actions in a day = ASK CUSTOMER',
-            reason: `Velocity Limit Triggered: Agent "${matchedAgent.name}" has already performed ${priorCountToday} money actions today. This transaction requires explicit customer OTP/approval.`
+            decision: "ASK CUSTOMER",
+            ruleCode: "RULE_5",
+            ruleName: "Place Order > Rs 5000 = ASK CUSTOMER",
+            reason: `Order value (₹${numAmount.toLocaleString('en-IN')}) exceeds automated ceiling of ₹5,000. Customer OTP / authorization required.`,
+            calculations: { amount: numAmount, threshold: 5000, difference: numAmount - 5000 }
+          };
+        } else {
+          return {
+            decision: "ALLOW",
+            ruleCode: "RULE_4",
+            ruleName: "Place Order <= Rs 5000 = ALLOW",
+            reason: `Order value (₹${numAmount.toLocaleString('en-IN')}) is within allowable limit of ₹5,000 and ID proof is verified.`,
+            calculations: { amount: numAmount, threshold: 5000, hasId: true }
           };
         }
-
-        // Action is 'place order'
-        if (action === 'place order') {
-          // Rule 4: place order Rs 5000 or less = ALLOW
-          if (numAmount <= 5000) {
-            return {
-              decision: 'ALLOW',
-              ruleNumber: 'Rule 4',
-              ruleTitle: 'place order Rs 5000 or less = ALLOW',
-              reason: `Order value (₹${numAmount.toLocaleString('en-IN')}) is within the allowable automated threshold of ₹5,000. Daily money action #${priorCountToday + 1}.`
-            };
-          }
-          // Rule 5: place order more than Rs 5000 = ASK CUSTOMER
-          else {
-            return {
-              decision: 'ASK CUSTOMER',
-              ruleNumber: 'Rule 5',
-              ruleTitle: 'place order more than Rs 5000 = ASK CUSTOMER',
-              reason: `High-value order (₹${numAmount.toLocaleString('en-IN')}) exceeds the ₹5,000 automated ceiling. Customer confirmation required before charging.`
-            };
-          }
-        }
-
-        // Rule 6: return or refund = ASK CUSTOMER
-        if (action === 'return' || action === 'refund') {
-          return {
-            decision: 'ASK CUSTOMER',
-            ruleNumber: 'Rule 6',
-            ruleTitle: 'return or refund = ASK CUSTOMER',
-            reason: `Financial reversal: Action "${action.toUpperCase()}" of ₹${numAmount.toLocaleString('en-IN')} requires customer consent and signature verification.`
-          };
-        }
       }
 
-      // Fallback safeguard
       return {
-        decision: 'ASK CUSTOMER',
-        ruleNumber: 'Rule Policy',
-        ruleTitle: 'Standard Safeguard',
-        reason: 'Unspecified condition reached. Request escalated for customer confirmation.'
+        decision: "ASK CUSTOMER",
+        ruleCode: "RULE_FALLBACK",
+        ruleName: "Unspecified Action = ASK CUSTOMER",
+        reason: "Escalated to customer review.",
+        calculations: { amount: numAmount }
       };
     }
 
-    // Submit & Evaluate Request
-    function handleEvaluateRequest(e) {
+    // Submit Simulator Form
+    function handleSimulatorSubmit(e) {
       if (e) e.preventDefault();
 
-      const customerName = document.getElementById('customerName').value.trim();
+      const custId = document.getElementById('customerId').value.trim();
+      const custName = document.getElementById('customerName').value.trim();
       const isCustom = document.getElementById('customAgentToggle').checked;
       const agentName = isCustom ? 
-        document.getElementById('agentCustomInput').value.trim() : 
+        document.getElementById('customAgentInput').value.trim() : 
         document.getElementById('agentSelect').value;
 
       const action = document.getElementById('actionType').value;
-      const amountInput = document.getElementById('requestAmount');
-      const amount = (action === 'view order') ? 0 : (Number(amountInput.value) || 0);
+      const amount = (action === 'view order') ? 0 : Number(document.getElementById('orderAmount').value);
+      const hasId = document.getElementById('hasIdProof').checked;
+      const prevRefunds = Number(document.getElementById('prevRefunds').value) || 0;
 
-      if (!customerName) {
-        alert('Please enter a Customer Name.');
-        return;
-      }
+      // 1. Pure Python calculation
+      const res = evaluatePolicyEngine(agentName, custId, action, amount, hasId, prevRefunds, true);
 
-      if (!agentName) {
-        alert('Please select or specify an Agent Name.');
-        return;
-      }
-
-      // Run Gatekeeper Policy Engine
-      const result = evaluatePolicy(agentName, action, amount);
-      const nowIso = new Date().toISOString();
-
-      // Display Decision Banner
-      displayDecisionResult(result, agentName, customerName, action, amount);
-
-      // Create Audit Log Record
-      const auditRecord = {
-        id: 'log-' + Date.now(),
-        timestamp: nowIso,
-        customerName: customerName,
-        agentName: agentName,
-        action: action,
-        amount: amount,
-        decision: result.decision,
-        ruleNumber: result.ruleNumber,
-        ruleTitle: result.ruleTitle,
-        reason: result.reason
-      };
-
-      // Add to front of audit list & persist in localStorage
-      auditLogs.unshift(auditRecord);
-      persistData();
-      renderAuditLog();
-
-      showToast(`Gatekeeper Decision: ${result.decision} applied under ${result.ruleNumber}`);
-    }
-
-    // Display Decision Banner
-    function displayDecisionResult(result, agentName, customerName, action, amount) {
-      const banner = document.getElementById('decisionBanner');
-      const badge = document.getElementById('decisionBadge');
-      const rulePill = document.getElementById('decisionRulePill');
-      const details = document.getElementById('decisionDetails');
-
+      // 2. Render Live Decision Banner
+      const banner = document.getElementById('liveDecisionBanner');
       banner.className = 'decision-banner';
-      if (result.decision === 'ALLOW') {
-        banner.classList.add('allow');
-      } else if (result.decision === 'ASK CUSTOMER') {
-        banner.classList.add('ask_customer');
-      } else {
-        banner.classList.add('block');
-      }
+      if (res.decision === 'ALLOW') banner.classList.add('allow');
+      else if (res.decision === 'ASK CUSTOMER') banner.classList.add('ask_customer');
+      else banner.classList.add('block');
 
-      badge.innerText = result.decision;
-      rulePill.innerText = `${result.ruleNumber}: ${result.ruleTitle}`;
+      document.getElementById('decisionBadgeText').innerText = res.decision;
+      document.getElementById('ruleCodeBadge').innerText = `${res.ruleCode}: ${res.ruleName}`;
+      document.getElementById('decisionReasonText').innerText = res.reason;
 
-      const amountFormatted = action === 'view order' ? 'N/A' : `&#8377;${amount.toLocaleString('en-IN')}`;
-
-      details.innerHTML = `
-        <strong>Policy Outcome:</strong> ${escapeHtml(result.reason)}<br>
-        <span style="font-size: 12px; color: #444; margin-top: 4px; display:inline-block;">
-          <strong>Request:</strong> Customer: <em>${escapeHtml(customerName)}</em> | Agent: <em>${escapeHtml(agentName)}</em> | Action: <strong>${escapeHtml(action)}</strong> | Amount: <strong>${amountFormatted}</strong>
-        </span>
+      // 3. Render Python Calculation details
+      document.getElementById('pythonCalcDetails').innerHTML = `
+        <li>&bull; <strong>Amount:</strong> &#8377;${amount.toLocaleString('en-IN')}</li>
+        <li>&bull; <strong>Threshold Comparison:</strong> &#8377;${amount.toLocaleString('en-IN')} ${amount > 5000 ? '> &#8377;5,000 (Exceeds)' : '&le; &#8377;5,000 (Within limit)'}</li>
+        <li>&bull; <strong>ID Proof Check:</strong> ${hasId ? 'Present (True)' : '<span style="color:var(--danger-red); font-weight:bold;">Missing (False) &#10007;</span>'}</li>
+        <li>&bull; <strong>Fraud Flag:</strong> ${custId === 'CUST_007' || prevRefunds >= 3 ? '<span style="color:var(--danger-red); font-weight:bold;">HIGH RISK</span>' : 'Safe (0.00)'}</li>
+        <li>&bull; <strong>Policy Output:</strong> <code>${res.decision}</code> (${res.ruleCode})</li>
       `;
 
-      banner.style.display = 'flex';
-      banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      // 4. Render Gemini Interpretation
+      let geminiText = "";
+      if (res.decision === 'BLOCK') {
+        geminiText = `<em>"Executive Audit: Security perimeter halted transaction for customer ${custId}. Risk identified: ${hasId ? res.reason : 'Mandatory KYC documentation is missing.'} Customer advised to upload proof via Amazon account."</em>`;
+      } else if (res.decision === 'ASK CUSTOMER') {
+        geminiText = `<em>"Executive Audit: High-value / reversal policy triggered for ₹${amount.toLocaleString('en-IN')}. Autonomous execution paused. 2-Factor Authentication OTP notification sent to ${custName}."</em>`;
+      } else {
+        geminiText = `<em>"Executive Audit: Clean policy verification. Autonomous agent '${agentName}' authorized to place order of ₹${amount.toLocaleString('en-IN')} for ${custName}."</em>`;
+      }
+      document.getElementById('geminiInterpretationText').innerHTML = geminiText;
+
+      // 5. Add to Audit Log
+      auditLogs.unshift({
+        timestamp: new Date().toISOString(),
+        customer_id: custId,
+        agent_name: agentName,
+        action: action,
+        amount: amount,
+        decision: res.decision,
+        rule_code: res.ruleCode,
+        reason: res.reason
+      });
+      saveData();
+      renderAuditLogTable();
+
+      showToast(`Policy Evaluated: ${res.decision} (${res.ruleCode})`);
     }
 
-    // Render Audit Log Table with Filters
-    function renderAuditLog() {
-      const tbody = document.getElementById('auditTableBody');
-      const filterDecision = document.getElementById('filterDecision').value;
-      const search = document.getElementById('searchLog').value.toLowerCase().trim();
+    // Presets for the 3 hand-calculated cases + others
+    function runPresetScenario(preset) {
+      const custIdInput = document.getElementById('customerId');
+      const actionSelect = document.getElementById('actionType');
+      const amountInput = document.getElementById('orderAmount');
+      const hasIdInput = document.getElementById('hasIdProof');
+      const prevRefundsInput = document.getElementById('prevRefunds');
+      const customToggle = document.getElementById('customAgentToggle');
+      const agentSelect = document.getElementById('agentSelect');
 
+      customToggle.checked = false;
+      toggleCustomAgent(false);
+      agentSelect.value = "Agent-Kavita";
+      prevRefundsInput.value = "0";
+
+      switch (preset) {
+        case 'HAND_1':
+          // MBA Hand Case 1: ID missing = BLOCK
+          custIdInput.value = "CUST_101";
+          hasIdInput.checked = false;
+          actionSelect.value = "place order";
+          amountInput.value = "3000";
+          break;
+        case 'HAND_2':
+          // MBA Hand Case 2: 6500 + ID = ASK
+          custIdInput.value = "CUST_102";
+          hasIdInput.checked = true;
+          actionSelect.value = "place order";
+          amountInput.value = "6500";
+          break;
+        case 'HAND_3':
+          // MBA Hand Case 3: 2000 + ID = APPROVE
+          custIdInput.value = "CUST_103";
+          hasIdInput.checked = true;
+          actionSelect.value = "place order";
+          amountInput.value = "2000";
+          break;
+        case 'CUST_007':
+          // Injected Case: CUST_007 repeat refunds = Fraud
+          custIdInput.value = "CUST_007";
+          hasIdInput.checked = true;
+          actionSelect.value = "refund";
+          amountInput.value = "2499";
+          prevRefundsInput.value = "6";
+          break;
+        case 'REVOKED':
+          // Rule 1: Revoked Agent
+          agentSelect.value = "Agent-Suresh";
+          custIdInput.value = "CUST_004";
+          hasIdInput.checked = true;
+          actionSelect.value = "place order";
+          amountInput.value = "1200";
+          break;
+        case 'UNKNOWN':
+          // Rule 2: Unknown Agent
+          customToggle.checked = true;
+          toggleCustomAgent(true);
+          document.getElementById('customAgentInput').value = "UntrustedBot_77";
+          custIdInput.value = "CUST_005";
+          hasIdInput.checked = true;
+          actionSelect.value = "place order";
+          amountInput.value = "1500";
+          break;
+        case 'VIEW_ORDER':
+          // Rule 3: View Order
+          custIdInput.value = "CUST_006";
+          hasIdInput.checked = true;
+          actionSelect.value = "view order";
+          break;
+        case 'VELOCITY':
+          // Rule 7: >3 Daily Actions
+          custIdInput.value = "CUST_009";
+          hasIdInput.checked = true;
+          actionSelect.value = "place order";
+          amountInput.value = "1200";
+          break;
+      }
+
+      handleActionChange();
+      syncIdNotice();
+      syncAgentNotice();
+      handleSimulatorSubmit();
+    }
+
+    // =========================================================
+    // APPROVAL CENTRE TABLE & ACTIONS (SQLITE/LOCALSTORAGE)
+    // =========================================================
+    function renderApprovalTable() {
+      const tbody = document.getElementById('approvalTableBody');
+      const filter = document.getElementById('approvalFilter').value;
       tbody.innerHTML = '';
 
-      let filtered = auditLogs.filter(log => {
-        if (filterDecision !== 'ALL' && log.decision !== filterDecision) return false;
-        if (search) {
-          const matchTarget = `${log.customerName} ${log.agentName} ${log.action} ${log.ruleNumber} ${log.ruleTitle} ${log.reason}`.toLowerCase();
-          if (!matchTarget.includes(search)) return false;
-        }
-        return true;
+      let filtered = ordersList.filter(o => {
+        if (filter === 'ALL') return true;
+        return o.approval_status === filter;
       });
 
+      document.getElementById('approvalCountLabel').innerText = 
+        `${ordersList.length} total orders (${filtered.length} matching filter)`;
+
       if (filtered.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="8" class="empty-state">
-              ${auditLogs.length === 0 ? 'No audit logs recorded yet. Submit a request above to generate the first log.' : 'No audit records match the current filter or search criteria.'}
-            </td>
-          </tr>
-        `;
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:30px; color:#888;">No orders currently match the selected approval status filter.</td></tr>`;
         return;
       }
 
-      filtered.forEach(log => {
+      filtered.forEach(o => {
         const tr = document.createElement('tr');
-        const pillClass = log.decision === 'ALLOW' ? 'allow' : (log.decision === 'ASK CUSTOMER' ? 'ask_customer' : 'block');
-        const amountDisplay = (log.action === 'view order' || log.amount === 0) ? '-' : `&#8377;${Number(log.amount).toLocaleString('en-IN')}`;
+        const isPending = o.approval_status === 'PENDING_REVIEW';
+        const isApproved = o.approval_status === 'APPROVED_BY_ADMIN' || o.approval_status === 'AUTO_APPROVED';
+        const isRejected = o.approval_status === 'REJECTED_BY_ADMIN';
+
+        let badgeClass = 'badge-block';
+        if (isApproved) badgeClass = 'badge-allow';
+        else if (isPending) badgeClass = 'badge-ask';
 
         tr.innerHTML = `
-          <td style="font-size: 11.5px; color:#555; white-space:nowrap;">${formatDateTime(log.timestamp)}</td>
-          <td><strong>${escapeHtml(log.customerName)}</strong></td>
-          <td>${escapeHtml(log.agentName)}</td>
-          <td><span style="background:#edf2f7; padding:2px 6px; border-radius:4px; font-weight:600;">${escapeHtml(log.action)}</span></td>
-          <td class="currency-tag">${amountDisplay}</td>
-          <td><span class="decision-pill ${pillClass}">${escapeHtml(log.decision)}</span></td>
-          <td><strong>${escapeHtml(log.ruleNumber)}</strong></td>
-          <td style="font-size: 11.5px; color:#444; max-width: 320px;">${escapeHtml(log.reason)}</td>
+          <td><strong>${o.order_id}</strong></td>
+          <td>${o.customer_id}</td>
+          <td>${o.product}</td>
+          <td>&#8377;${Number(o.order_amount).toLocaleString('en-IN')}</td>
+          <td>${o.has_id_proof ? '<span style="color:var(--success-green);">&#10003; Yes</span>' : '<span style="color:var(--danger-red); font-weight:bold;">&#10007; Missing</span>'}</td>
+          <td><span class="badge ${o.policy_decision === 'ALLOW' || o.policy_decision === 'APPROVE' ? 'badge-allow' : (o.policy_decision === 'ASK CUSTOMER' ? 'badge-ask' : 'badge-block')}">${o.policy_decision}</span></td>
+          <td><span class="badge ${badgeClass}">${o.approval_status}</span></td>
+          <td style="font-size:11px; color:#555;">${o.reviewed_at ? formatDateTime(o.reviewed_at) : (isApproved ? 'Auto' : '-')}</td>
+          <td>
+            ${isPending ? `
+              <button class="btn btn-primary btn-sm" onclick="handleApprovalAction('${o.order_id}', 'APPROVE')" title="Simulated Admin Approval (No real funds transferred)">Approve</button>
+              <button class="btn btn-danger btn-sm" onclick="handleApprovalAction('${o.order_id}', 'REJECT')" style="margin-left:4px;">Reject</button>
+            ` : `
+              <button class="btn btn-secondary btn-sm" onclick="handleApprovalAction('${o.order_id}', 'RESET')">Reset</button>
+            `}
+          </td>
         `;
         tbody.appendChild(tr);
       });
-
-      document.getElementById('logCountLabel').innerText = `${auditLogs.length} records saved (showing ${filtered.length})`;
     }
 
-    // Clear Audit Log
-    function clearAuditLog() {
+    function handleApprovalAction(orderId, action) {
+      const order = ordersList.find(o => o.order_id === orderId);
+      if (!order) return;
+
+      const now = new Date().toISOString();
+      if (action === 'APPROVE') {
+        order.approval_status = 'APPROVED_BY_ADMIN';
+        order.reviewer = 'Aryan Thakur';
+        order.reviewed_at = now;
+        showToast(`Order ${orderId} APPROVED by Admin. (Mock Action - No real funds moved)`);
+      } else if (action === 'REJECT') {
+        order.approval_status = 'REJECTED_BY_ADMIN';
+        order.reviewer = 'Aryan Thakur';
+        order.reviewed_at = now;
+        showToast(`Order ${orderId} REJECTED by Admin.`);
+      } else if (action === 'RESET') {
+        order.approval_status = order.policy_decision === 'ASK CUSTOMER' ? 'PENDING_REVIEW' : (order.policy_decision.includes('BLOCK') ? 'BLOCKED' : 'AUTO_APPROVED');
+        order.reviewer = null;
+        order.reviewed_at = null;
+        showToast(`Order ${orderId} reset to initial state.`);
+      }
+
+      saveData();
+      renderApprovalTable();
+    }
+
+    function resetAllApprovalData() {
+      if (confirm("Reset the entire Approval Centre back to the synthetic CSV baseline?")) {
+        generateInitialOrders();
+        renderApprovalTable();
+        showToast("Approval Centre reset to 200 synthetic baseline orders.");
+      }
+    }
+
+    function reloadApprovalQueue() {
+      initApp();
+      showToast("Approval Queue refreshed.");
+    }
+
+    // =========================================================
+    // SYNTHETIC ORDERS EXPLORER (200 RECORDS)
+    // =========================================================
+    function renderSyntheticOrdersTable(filterType = 'ALL') {
+      const tbody = document.getElementById('syntheticOrdersTableBody');
+      tbody.innerHTML = '';
+
+      let displayList = ordersList;
+      if (filterType === 'ORD_1_20') {
+        displayList = ordersList.slice(0, 20);
+      } else if (filterType === 'ORD_21_40') {
+        displayList = ordersList.slice(20, 40);
+      } else if (filterType === 'ORD_41_60') {
+        displayList = ordersList.slice(40, 60);
+      } else if (filterType === 'ORD_61_200') {
+        displayList = ordersList.slice(60);
+      } else if (filterType === 'SEARCH') {
+        const q = document.getElementById('searchOrdersInput').value.toLowerCase();
+        displayList = ordersList.filter(o => 
+          o.order_id.toLowerCase().includes(q) || 
+          o.customer_id.toLowerCase().includes(q) || 
+          o.product.toLowerCase().includes(q) ||
+          o.injection_note.toLowerCase().includes(q)
+        );
+      }
+
+      displayList.forEach(o => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${o.order_id}</strong></td>
+          <td>${o.customer_id}</td>
+          <td>${o.product}</td>
+          <td>&#8377;${Number(o.order_amount).toLocaleString('en-IN')}</td>
+          <td>${o.has_id_proof ? '<span style="color:var(--success-green);">&#10003; True</span>' : '<span style="color:var(--danger-red); font-weight:bold;">&#10007; False</span>'}</td>
+          <td>${o.refund_requested ? '<span style="color:var(--warning-orange); font-weight:bold;">True</span>' : 'False'}</td>
+          <td>${o.previous_refunds}</td>
+          <td>${o.stock_available ? 'Yes' : 'No'}</td>
+          <td style="font-size:11px; color:#555;">${o.injection_note}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="loadOrderIntoSimulator('${o.order_id}')">Load &rarr;</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterSyntheticDataset(type) {
+      renderSyntheticOrdersTable(type);
+    }
+
+    function loadOrderIntoSimulator(orderId) {
+      const o = ordersList.find(x => x.order_id === orderId);
+      if (!o) return;
+
+      document.getElementById('customerId').value = o.customer_id;
+      document.getElementById('customerName').value = `Customer (${o.customer_id})`;
+      document.getElementById('actionType').value = o.refund_requested ? 'refund' : 'place order';
+      document.getElementById('orderAmount').value = o.order_amount;
+      document.getElementById('hasIdProof').checked = o.has_id_proof;
+      document.getElementById('prevRefunds').value = o.previous_refunds;
+
+      handleActionChange();
+      syncIdNotice();
+      switchTab('simulator');
+      handleSimulatorSubmit();
+      showToast(`Loaded order ${orderId} into Simulator.`);
+    }
+
+    // =========================================================
+    // 7 AGENTS REGISTRY
+    // =========================================================
+    function renderAgentsDropdown() {
+      const select = document.getElementById('agentSelect');
+      select.innerHTML = '';
+      agentsList.forEach(a => {
+        const opt = document.createElement('option');
+        opt.value = a.name;
+        opt.innerText = `${a.name} (${a.role} - ${a.status})`;
+        select.appendChild(opt);
+      });
+    }
+
+    function renderAgentsTable() {
+      const tbody = document.getElementById('agentsRegistryTableBody');
+      tbody.innerHTML = '';
+
+      agentsList.forEach(a => {
+        const tr = document.createElement('tr');
+        const isActive = a.status === 'ACTIVE';
+
+        tr.innerHTML = `
+          <td><strong>${a.name}</strong></td>
+          <td>${a.role}</td>
+          <td><span class="badge ${isActive ? 'badge-allow' : 'badge-block'}">${a.status}</span></td>
+          <td style="font-size:11.5px; color:#555;">${a.revoked_at ? `<span style="color:var(--danger-red); font-weight:600;">${a.revoked_at}</span>` : 'Not Revoked'}</td>
+          <td>
+            ${isActive ? `
+              <button class="btn btn-danger btn-sm" onclick="toggleRevokeAgent('${a.name}', true)">Revoke Agent</button>
+            ` : `
+              <button class="btn btn-secondary btn-sm" onclick="toggleRevokeAgent('${a.name}', false)">Reactivate</button>
+            `}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function toggleRevokeAgent(name, revoke) {
+      const ag = agentsList.find(a => a.name === name);
+      if (!ag) return;
+
+      if (revoke) {
+        ag.status = 'REVOKED';
+        ag.revoked_at = formatDateTime(new Date().toISOString());
+        showToast(`Agent ${name} REVOKED with timestamp saved.`);
+      } else {
+        ag.status = 'ACTIVE';
+        ag.revoked_at = null;
+        showToast(`Agent ${name} restored to Active.`);
+      }
+
+      saveData();
+      renderAgentsDropdown();
+      renderAgentsTable();
+      syncAgentNotice();
+    }
+
+    // =========================================================
+    // AUDIT LOG TABLE & CSV EXPORT
+    // =========================================================
+    function renderAuditLogTable() {
+      const tbody = document.getElementById('auditLogTableBody');
+      tbody.innerHTML = '';
+
       if (auditLogs.length === 0) {
-        alert('Audit log is already empty.');
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:30px; color:#888;">No audit logs recorded yet. Run an evaluation to generate records.</td></tr>`;
         return;
       }
-      if (confirm('Clear the entire audit log from localStorage?')) {
+
+      auditLogs.forEach(l => {
+        const tr = document.createElement('tr');
+        const pillClass = l.decision === 'ALLOW' || l.decision === 'APPROVE' ? 'badge-allow' : (l.decision === 'ASK CUSTOMER' ? 'badge-ask' : 'badge-block');
+
+        tr.innerHTML = `
+          <td style="white-space:nowrap; font-size:11px; color:#555;">${formatDateTime(l.timestamp)}</td>
+          <td><strong>${l.customer_id}</strong></td>
+          <td>${l.agent_name}</td>
+          <td><span style="background:#edf2f7; padding:2px 6px; border-radius:4px;">${l.action}</span></td>
+          <td>&#8377;${Number(l.amount).toLocaleString('en-IN')}</td>
+          <td><span class="badge ${pillClass}">${l.decision}</span></td>
+          <td><strong>${l.rule_code}</strong></td>
+          <td style="font-size:11px; max-width:320px;">${l.reason}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function clearAuditLog() {
+      if (confirm("Clear all audit logs from storage?")) {
         auditLogs = [];
-        persistData();
-        renderAuditLog();
-        showToast('Audit log has been cleared.');
+        saveData();
+        renderAuditLogTable();
+        showToast("Audit logs cleared.");
       }
     }
 
-    // Export to CSV
     function exportAuditLogCSV() {
       if (auditLogs.length === 0) {
-        alert('No audit log entries to export.');
+        alert("No audit logs to export.");
         return;
       }
-
-      let csv = 'Timestamp,Customer,Agent,Action,Amount,Decision,Rule,Reason\n';
+      let csv = "Timestamp,Customer_ID,Agent_Name,Action,Amount,Decision,Rule_Code,Reason\n";
       auditLogs.forEach(l => {
-        const row = [
-          `"${formatDateTime(l.timestamp)}"`,
-          `"${l.customerName.replace(/"/g, '""')}"`,
-          `"${l.agentName.replace(/"/g, '""')}"`,
-          `"${l.action}"`,
-          l.amount,
-          `"${l.decision}"`,
-          `"${l.ruleNumber}"`,
-          `"${(l.reason || '').replace(/"/g, '""')}"`
-        ];
-        csv += row.join(',') + '\n';
+        csv += `"${formatDateTime(l.timestamp)}","${l.customer_id}","${l.agent_name}","${l.action}",${l.amount},"${l.decision}","${l.rule_code}","${(l.reason||'').replace(/"/g, '""')}"\n`;
       });
-
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -1728,187 +1699,9 @@
       URL.revokeObjectURL(url);
     }
 
-    // Quick Test Scenarios for Demonstrating all 7 Rules
-    function runPresetScenario(ruleNum) {
-      const customerInput = document.getElementById('customerName');
-      const actionSelect = document.getElementById('actionType');
-      const amountInput = document.getElementById('requestAmount');
-      const customToggle = document.getElementById('customAgentToggle');
-      const agentSelect = document.getElementById('agentSelect');
-      const customInput = document.getElementById('agentCustomInput');
-
-      // Ensure we have active and revoked agents
-      let activeAgent = agents.find(a => a.status === 'ACTIVE');
-      let revokedAgent = agents.find(a => a.status === 'REVOKED');
-
-      if (!activeAgent) {
-        // Register one on the fly
-        activeAgent = { id: 'ag-' + Date.now(), name: 'Agent-DemoActive', status: 'ACTIVE', registeredAt: new Date().toISOString(), revokedAt: null };
-        agents.push(activeAgent);
-        persistData();
-        renderAgents();
-      }
-
-      if (!revokedAgent && ruleNum === 1) {
-        revokedAgent = { id: 'ag-rev-' + Date.now(), name: 'Agent-RevokedDemo', status: 'REVOKED', registeredAt: new Date().toISOString(), revokedAt: new Date().toISOString() };
-        agents.push(revokedAgent);
-        persistData();
-        renderAgents();
-      }
-
-      switch (ruleNum) {
-        case 1:
-          // Rule 1: Revoked agent = BLOCK
-          customToggle.checked = false;
-          toggleCustomAgent(false);
-          agentSelect.value = revokedAgent.name;
-          customerInput.value = 'Rohan Mehra';
-          actionSelect.value = 'place order';
-          handleActionChange();
-          amountInput.value = '2500';
-          syncAgentStatusDisplay();
-          handleEvaluateRequest();
-          break;
-
-        case 2:
-          // Rule 2: Unknown agent = BLOCK
-          customToggle.checked = true;
-          toggleCustomAgent(true);
-          customInput.value = 'UntrustedBot_77';
-          customerInput.value = 'Sneha Reddy';
-          actionSelect.value = 'place order';
-          handleActionChange();
-          amountInput.value = '1500';
-          syncAgentStatusDisplay();
-          handleEvaluateRequest();
-          break;
-
-        case 3:
-          // Rule 3: view order = ALLOW
-          customToggle.checked = false;
-          toggleCustomAgent(false);
-          agentSelect.value = activeAgent.name;
-          customerInput.value = 'Deepak Kumar';
-          actionSelect.value = 'view order';
-          handleActionChange();
-          syncAgentStatusDisplay();
-          handleEvaluateRequest();
-          break;
-
-        case 4:
-          // Rule 4: place order Rs 5000 or less = ALLOW
-          customToggle.checked = false;
-          toggleCustomAgent(false);
-          // Pick or use an agent with < 3 money actions today
-          let freshAgent = agents.find(a => a.status === 'ACTIVE' && getTodayMoneyActionsCount(a.name) < 3);
-          if (!freshAgent) {
-            freshAgent = { id: 'ag-f-' + Date.now(), name: 'Agent-Fresh' + Math.floor(Math.random() * 900 + 100), status: 'ACTIVE', registeredAt: new Date().toISOString(), revokedAt: null };
-            agents.push(freshAgent);
-            persistData();
-            renderAgents();
-          }
-          agentSelect.value = freshAgent.name;
-          customerInput.value = 'Ananya Sen';
-          actionSelect.value = 'place order';
-          handleActionChange();
-          amountInput.value = '3499';
-          syncAgentStatusDisplay();
-          handleEvaluateRequest();
-          break;
-
-        case 5:
-          // Rule 5: place order more than Rs 5000 = ASK CUSTOMER
-          customToggle.checked = false;
-          toggleCustomAgent(false);
-          let agentForR5 = agents.find(a => a.status === 'ACTIVE' && getTodayMoneyActionsCount(a.name) < 3) || activeAgent;
-          agentSelect.value = agentForR5.name;
-          customerInput.value = 'Karan Kapoor';
-          actionSelect.value = 'place order';
-          handleActionChange();
-          amountInput.value = '18999';
-          syncAgentStatusDisplay();
-          handleEvaluateRequest();
-          break;
-
-        case 6:
-          // Rule 6: return or refund = ASK CUSTOMER
-          customToggle.checked = false;
-          toggleCustomAgent(false);
-          let agentForR6 = agents.find(a => a.status === 'ACTIVE' && getTodayMoneyActionsCount(a.name) < 3) || activeAgent;
-          agentSelect.value = agentForR6.name;
-          customerInput.value = 'Priya Patel';
-          actionSelect.value = 'refund';
-          handleActionChange();
-          amountInput.value = '2100';
-          syncAgentStatusDisplay();
-          handleEvaluateRequest();
-          break;
-
-        case 7:
-          // Rule 7: More than 3 money actions in a day = ASK CUSTOMER
-          customToggle.checked = false;
-          toggleCustomAgent(false);
-          // Create or select an agent and ensure they have 3 money actions logged today
-          const rule7AgentName = 'Agent-VelocityTester';
-          let testAgent = agents.find(a => a.name === rule7AgentName);
-          if (!testAgent) {
-            testAgent = { id: 'ag-r7-' + Date.now(), name: rule7AgentName, status: 'ACTIVE', registeredAt: new Date().toISOString(), revokedAt: null };
-            agents.push(testAgent);
-          } else {
-            testAgent.status = 'ACTIVE';
-            testAgent.revokedAt = null;
-          }
-
-          // Inject 3 prior money actions today for this agent so count is >= 3
-          const nowTime = Date.now();
-          const todayISO = new Date().toISOString();
-          
-          // Count existing money actions today for this agent
-          let curCount = getTodayMoneyActionsCount(rule7AgentName);
-          while (curCount < 3) {
-            curCount++;
-            auditLogs.unshift({
-              id: 'log-seed-' + nowTime + '-' + curCount,
-              timestamp: new Date(nowTime - (4 - curCount) * 15 * 60 * 1000).toISOString(),
-              customerName: 'Customer-' + curCount,
-              agentName: rule7AgentName,
-              action: 'place order',
-              amount: 1000 * curCount,
-              decision: 'ALLOW',
-              ruleNumber: 'Rule 4',
-              ruleTitle: 'place order Rs 5000 or less = ALLOW',
-              reason: `Simulated prior daily money action #${curCount} for velocity testing.`
-            });
-          }
-
-          persistData();
-          renderAgents();
-          agentSelect.value = rule7AgentName;
-          customerInput.value = 'Ravi Shankar';
-          actionSelect.value = 'place order';
-          handleActionChange();
-          amountInput.value = '1200'; // Even Rs 1200 (<= 5000) will be ASK CUSTOMER due to Rule 7!
-          syncAgentStatusDisplay();
-          handleEvaluateRequest();
-          break;
-      }
-    }
-
-    // Helper: Escape HTML
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
-    // Initialize application on load
+    // Startup
     window.addEventListener('DOMContentLoaded', () => {
       initApp();
-      handleActionChange();
     });
   </script>
 </body>

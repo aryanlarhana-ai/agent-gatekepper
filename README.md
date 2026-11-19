@@ -89,13 +89,13 @@ Open `http://localhost:8501`.
 
 ## Publish on GitHub Pages
 
-The browser demo is live at:
+The GitHub Pages version of the dashboard is live at:
 
 https://aryanlarhana-ai.github.io/agent-gatekepper/
 
-The GitHub Actions workflow deploys the static `index.html` after every push to `main`. To update it, edit or upload `index.html` to this repository and commit the change to `main`; the live URL stays the same. Check the **Actions** tab for deployment status.
+The GitHub Actions workflow deploys `github_pages.html` and the synthetic CSV after every push to `main`. To update the live interface, edit `github_pages.html`; to update the sample dataset, edit the CSV. Commit and push to `main`; the URL stays the same. Check the **Actions** tab for deployment status.
 
-GitHub Pages only serves static files. It cannot run `app.py`, the Python agents, or the SQLite backend. The full Streamlit dashboard needs a Python-capable host.
+This static dashboard mirrors the Streamlit sections using browser JavaScript. GitHub Pages cannot run `app.py`, Python agents, Gemini API calls, or SQLite. Upload analysis is in-browser and approval state is saved in browser localStorage. The Python Streamlit dashboard and its backend still require a Python-capable host.
 
 Copy `.env.example` to `.env` if Gemini narratives are required. The application runs without a key.
 

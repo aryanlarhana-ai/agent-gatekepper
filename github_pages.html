@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Amazon India Agent Gatekeeper</title>
+  <style>
+    :root {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: #17212f;
+      background: #f7f9fb;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; }
+    .banner {
+      background: #a52a0a; color: white; text-align: center;
+      padding: 10px 16px; font-size: 13px; font-weight: 700;
+    }
+    .notice {
+      background: #fff4e5; color: #613b06; border-bottom: 1px solid #f3d9ae;
+      padding: 9px 22px; font-size: 12px;
+    }
+    .shell { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: calc(100vh - 74px); }
+    aside { background: #f0f3f6; border-right: 1px solid #e1e6eb; padding: 22px 14px; }
+    .brand { margin: 0 8px 26px; }
+    .brand h1 { font-size: 19px; margin: 0 0 6px; }
+    .brand p { color: #647184; font-size: 12px; margin: 0; line-height: 1.5; }
+    .nav-title { font-size: 12px; color: #687587; font-weight: 700; margin: 0 8px 8px; }
+    .nav { display: grid; gap: 5px; }
+    .nav button {
+      border: 0; border-radius: 7px; background: transparent; text-align: left;
+      padding: 10px 11px; color: #354254; cursor: pointer; font-size: 14px;
+    }
+    .nav button:hover { background: #e4e9ef; }
+    .nav button.active { background: #dcecf2; color: #00677a; font-weight: 700; }
+    main { padding: 30px clamp(18px, 4vw, 56px); min-width: 0; max-width: 1500px; width: 100%; }
+    .page { display: none; }
+    .page.active { display: block; }
+    h2 { font-size: 25px; margin: 0 0 7px; }
+    .subheading { color: #687587; margin: 0 0 24px; font-size: 14px; }
+    .student { color: #6b7280; font-size: 13px; margin: 0 0 28px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(130px,1fr)); gap: 14px; margin: 18px 0 26px; }
+    .metric, .card {
+      background: white; border: 1px solid #e3e8ed; border-radius: 9px;
+      box-shadow: 0 1px 3px #1522380a;
+    }
+    .metric { padding: 18px; }
+    .metric span { display: block; color: #657185; font-size: 13px; margin-bottom: 8px; }
+    .metric strong { display: block; font-size: clamp(20px, 2.4vw, 28px); font-weight: 500; overflow-wrap: anywhere; }
+    .card { padding: 20px; margin: 0 0 18px; }
+    .card h3 { font-size: 16px; margin: 0 0 15px; }
+    .chart-wrap { height: 245px; position: relative; }
+    canvas { width: 100%; height: 100%; }
+    .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 18px; }
+    button, select, input[type="file"] { font: inherit; }
+    .action {
+      border: 0; border-radius: 6px; padding: 9px 13px; cursor: pointer;
+      background: #007185; color: white; font-weight: 650;
+    }
+    .action:hover { background: #005e6d; }
+    .action.secondary { color: #263445; background: #edf1f5; border: 1px solid #d6dde5; }
+    .action.danger { background: #a52a0a; }
+    .action.small { padding: 6px 9px; font-size: 12px; }
+    .field { display: grid; gap: 6px; max-width: 520px; }
+    .field label { color: #4a5768; font-size: 13px; font-weight: 650; }
+    .field input, .field select, .toolbar select {
+      background: white; border: 1px solid #cbd4dd; border-radius: 6px; padding: 9px;
+      color: #17212f;
+    }
+    .status { padding: 10px 12px; border-radius: 6px; margin: 12px 0; font-size: 13px; }
+    .status.error { background: #fff0ef; color: #a1261a; }
+    .status.success { background: #e8f6ef; color: #146444; }
+    .status.info { background: #edf6fa; color: #15586a; }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; font-size: 13px; }
+    th, td { padding: 10px 9px; border-bottom: 1px solid #e7ebef; text-align: left; vertical-align: top; }
+    th { color: #576476; background: #f8fafb; font-size: 12px; white-space: nowrap; }
+    .pill { display: inline-block; border-radius: 20px; padding: 4px 8px; font-size: 11px; font-weight: 700; background: #edf1f5; }
+    .pill.success { color: #176345; background: #e5f4ec; }
+    .pill.warn { color: #875000; background: #fff1d2; }
+    .pill.danger { color: #a1261a; background: #ffebe8; }
+    .list { margin: 0; padding-left: 20px; }
+    .list li { margin: 9px 0; line-height: 1.45; }
+    .agent-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap: 12px; }
+    .agent-card { border: 1px solid #e3e8ed; border-radius: 8px; padding: 14px; background: #fff; }
+    .agent-card strong { display: block; margin-bottom: 7px; }
+    .agent-card p { color: #647184; font-size: 13px; margin: 5px 0; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .muted { color: #647184; font-size: 13px; }
+    footer { color: #687587; font-size: 12px; padding: 18px 4px; }
+    @media (max-width: 820px) {
+      .shell { grid-template-columns: 1fr; }
+      aside { border-right: 0; border-bottom: 1px solid #e1e6eb; padding: 15px; }
+      .brand { margin-bottom: 14px; }
+      .nav { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      main { padding: 24px 16px; }
+      .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 520px) {
+      .nav { grid-template-columns: 1fr; }
+      .metrics, .two-col { grid-template-columns: 1fr; }
+      .banner { font-size: 11px; }
+    }
+    @media print {
+      aside, .banner, .notice, .toolbar, .no-print, footer { display: none !important; }
+      .shell { display: block; }
+      main { padding: 0; }
+      .page { display: none !important; }
+      #page-report { display: block !important; }
+      .card, .metric { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">SYNTHETIC DEMONSTRATION DATA — Academic simulation only. No real payments or refunds.</div>
+  <div class="notice">GitHub Pages browser version: analysis runs in JavaScript and approval changes stay in this browser. Python, Gemini API, and SQLite are not connected here.</div>
+  <div class="shell">
+    <aside>
+      <div class="brand">
+        <h1>Amazon India Agent Gatekeeper</h1>
+        <p>Student: Aryan Thakur<br>Enrolment: PGD202566017</p>
+      </div>
+      <div class="nav-title">Navigation</div>
+      <nav class="nav" aria-label="Dashboard navigation">
+        <button class="active" data-page="overview">Executive Overview</button>
+        <button data-page="upload">Upload Data</button>
+        <button data-page="activity">Agent Activity Centre</button>
+        <button data-page="specialists">Specialist Findings</button>
+        <button data-page="report">Executive Decision Report</button>
+        <button data-page="approvals">Approval Centre</button>
+      </nav>
+    </aside>
+    <main>
+      <div id="global-message" aria-live="polite"></div>
+      <section id="page-overview" class="page active">
+        <h2>Executive Overview</h2>
+        <p class="subheading">Retail order-risk analysis from synthetic demonstration data.</p>
+        <div class="student">Amazon India | Seven specialist agents | deterministic browser analysis</div>
+        <div id="overview-metrics" class="metrics"></div>
+        <div class="card">
+          <h3>Orders by risk segment</h3>
+          <div class="chart-wrap"><canvas id="risk-chart" aria-label="Orders by risk segment"></canvas></div>
+        </div>
+        <div class="card">
+          <h3>Dataset preview</h3>
+          <div class="table-wrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>ID verified</th><th>Decision</th></tr></thead><tbody id="preview-body"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="page-upload" class="page">
+        <h2>Upload Data</h2>
+        <p class="subheading">Upload an order CSV to run the browser-based analysis. This does not change the repository dataset.</p>
+        <div class="card">
+          <div class="field">
+            <label for="csv-file">Choose CSV file</label>
+            <input id="csv-file" type="file" accept=".csv,text/csv">
+          </div>
+          <div class="toolbar" style="margin-top:16px">
+            <button id="analyze-upload" class="action">Run analysis</button>
+            <button id="restore-sample" class="action secondary">Restore sample dataset</button>
+          </div>
+          <div id="upload-message" aria-live="polite"></div>
+          <p class="muted">Required columns: order_id, customer_id, product, order_amount, has_id_proof, refund_requested, previous_refunds, stock_available.</p>
+        </div>
+        <div id="upload-summary"></div>
+      </section>
+
+      <section id="page-activity" class="page">
+        <h2>Agent Activity Centre</h2>
+        <p class="subheading">Specialist outputs from the latest browser analysis run.</p>
+        <div id="activity-grid" class="agent-grid"></div>
+      </section>
+
+      <section id="page-specialists" class="page">
+        <h2>Specialist Findings</h2>
+        <p class="subheading">Choose an agent to inspect its calculations and recommendations.</p>
+        <div class="toolbar"><label for="specialist-select">Agent</label><select id="specialist-select"></select></div>
+        <div id="specialist-result"></div>
+      </section>
+
+      <section id="page-report" class="page">
+        <h2>Executive Decision Report</h2>
+        <p class="subheading">Ranked findings and management actions; all values are synthetic.</p>
+        <div class="toolbar no-print">
+          <button id="download-report" class="action">Download CSV report</button>
+          <button id="print-report" class="action secondary">Print / Save as PDF</button>
+        </div>
+        <div id="recommendations"></div>
+        <div class="two-col">
+          <div class="card"><h3>Conflicts resolved</h3><div id="conflicts"></div></div>
+          <div class="card"><h3>Assumptions</h3><div id="assumptions"></div></div>
+        </div>
+      </section>
+
+      <section id="page-approvals" class="page">
+        <h2>Approval Centre</h2>
+        <p class="subheading">Simulated human review queue. Decisions are stored in this browser only.</p>
+        <div class="toolbar">
+          <label for="approval-filter">Show</label>
+          <select id="approval-filter">
+            <option value="PENDING_REVIEW">Pending review</option>
+            <option value="ALL">All orders</option>
+            <option value="APPROVED_BY_ADMIN">Approved</option>
+            <option value="REJECTED_BY_ADMIN">Rejected</option>
+          </select>
+          <button id="reset-approvals" class="action secondary">Reset approvals</button>
+        </div>
+        <div id="approval-count" class="muted"></div>
+        <div class="card table-wrap">
+          <table>
+            <thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>Policy</th><th>Status</th><th class="no-print">Action</th></tr></thead>
+            <tbody id="approval-body"></tbody>
+          </table>
+        </div>
+      </section>
+      <footer>Academic demo by Aryan Thakur | PGD202566017 | Amazon India | Browser-only static deployment</footer>
+    </main>
+  </div>
+
+  <script>
+    "use strict";
+    const REQUIRED = ["order_id", "customer_id", "product", "order_amount", "has_id_proof",
+      "refund_requested", "previous_refunds", "stock_available"];
+    const APPROVALS_KEY = "agent-gatekeeper-pages-approvals-v1";
+    const SPECIALISTS = ["Data Quality", "Order Risk", "Revenue", "Fraud", "Inventory", "Finance", "Executive Decision"];
+    const SPECIALIST_SUMMARY = {
+      "Data Quality": "Validates columns, numeric amounts, duplicates, and missing values.",
+      "Order Risk": "Counts missing-ID, high-value, and repeat-refund order risks.",
+      "Revenue": "Calculates total and average order value.",
+      "Fraud": "Flags CUST_007 and refund attempts with at least three prior refunds.",
+      "Inventory": "Identifies orders where stock is unavailable.",
+      "Finance": "Estimates value exposed by high amounts or missing ID.",
+      "Executive Decision": "Ranks cross-functional recommendations and records trade-offs."
+    };
+    let rows = [];
+    let lastRun = null;
+    let uploadRows = null;
+
+    function escapeHtml(value) {
+      return String(value == null ? "" : value).replace(/[&<>"']/g, ch =>
+        ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+    }
+    function isTrue(value) {
+      return value === true || ["true", "1", "yes", "y"].includes(String(value).trim().toLowerCase());
+    }
+    function money(value) {
+      return "Rs. " + Number(value || 0).toLocaleString("en-IN", {maximumFractionDigits: 2});
+    }
+    function parseCsv(text) {
+      const records = [];
+      let record = [], field = "", quoted = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (quoted) {
+          if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+          else if (c === '"') quoted = false;
+          else field += c;
+        } else if (c === '"') quoted = true;
+        else if (c === ",") { record.push(field); field = ""; }
+        else if (c === "\n") { record.push(field); records.push(record); record = []; field = ""; }
+        else if (c !== "\r") field += c;
+      }
+      if (field.length || record.length) { record.push(field); records.push(record); }
+      const cleanRecords = records.filter(r => r.some(v => String(v).trim()));
+      const headerIndex = cleanRecords.findIndex(r => !String(r[0]).trim().startsWith("#"));
+      if (headerIndex < 0) throw new Error("CSV does not contain a header row.");
+      const headers = cleanRecords[headerIndex].map(h => h.trim());
+      return cleanRecords.slice(headerIndex + 1).map(values => {
+        const row = {};
+        headers.forEach((h, i) => row[h] = (values[i] || "").trim());
+        return row;
+      });
+    }
+    function readLocalApprovals() {
+      try {
+        return JSON.parse(localStorage.getItem(APPROVALS_KEY) || "{}");
+      } catch (error) {
+        throw new Error("Browser approval data could not be read: " + error.message);
+      }
+    }
+    function saveLocalApprovals(value) {
+      try {
+        localStorage.setItem(APPROVALS_KEY, JSON.stringify(value));
+      } catch (error) {
+        showMessage("Browser could not save approval changes: " + error.message, "error");
+        throw error;
+      }
+    }
+    function showMessage(text, kind) {
+      document.getElementById("global-message").innerHTML =
+        `<div class="status ${kind || "info"}">${escapeHtml(text)}</div>`;
+    }
+    function statusFor(row, approvals) {
+      return approvals[row.order_id] ||
+        (String(row.expected_decision || "").includes("BLOCK") ? "BLOCKED" :
+          row.expected_decision === "ASK CUSTOMER" ? "PENDING_REVIEW" : "AUTO_APPROVED");
+    }
+    function normalizeRows(raw) {
+      const missing = REQUIRED.filter(key => !raw.length || !(key in raw[0]));
+      if (missing.length) throw new Error("Missing required columns: " + missing.join(", "));
+      const valid = [];
+      const invalid = [];
+      raw.forEach((row, i) => {
+        const amount = Number(row.order_amount);
+        const refunds = Number(row.previous_refunds);
+        if (!row.order_id || !row.customer_id || !Number.isFinite(amount) ||
+            !Number.isInteger(refunds) || refunds < 0) {
+          invalid.push(i + 2);
+          return;
+        }
+        valid.push({
+          ...row,
+          order_amount: amount,
+          previous_refunds: refunds,
+          has_id_proof: isTrue(row.has_id_proof),
+          refund_requested: isTrue(row.refund_requested),
+          stock_available: isTrue(row.stock_available)
+        });
+      });
+      if (!valid.length) throw new Error("No usable rows. Check order/customer IDs and numeric fields.");
+      return {valid, invalid};
+    }
+    function analyze(data) {
+      const started = performance.now();
+      const missingId = data.filter(r => !r.has_id_proof).length;
+      const highValue = data.filter(r => r.order_amount > 5000).length;
+      const fraudRows = data.filter(r => r.customer_id === "CUST_007" ||
+        (r.previous_refunds >= 3 && r.refund_requested));
+      const outOfStock = data.filter(r => !r.stock_available).length;
+      const total = data.reduce((sum, r) => sum + r.order_amount, 0);
+      const exposed = data.filter(r => r.order_amount > 5000 || !r.has_id_proof)
+        .reduce((sum, r) => sum + r.order_amount, 0);
+      const recommendations = [];
+      if (missingId) recommendations.push({priority:"Critical", title:"Block missing-ID orders",
+        description:`${missingId} orders lack verified ID.`, impact:"Reduced unauthorized execution"});
+      if (fraudRows.length) recommendations.push({priority:"High", title:"Review repeat-refund activity",
+        description:`${fraudRows.length} orders match the synthetic fraud rules.`, impact:"Lower refund abuse"});
+      if (outOfStock) recommendations.push({priority:"High", title:"Stop out-of-stock fulfilment",
+        description:`${outOfStock} orders reference unavailable stock.`, impact:"Fewer cancellations"});
+      if (exposed) recommendations.push({priority:"Medium", title:"Apply step-up approval",
+        description:`Gross exposed order value is ${money(exposed)}.`, impact:"Controlled high-value exposure"});
+      const specialists = {
+        "Data Quality": {rows:data.length, duplicate_rows_removed:0, invalid_rows:0, status:"success"},
+        "Order Risk": {missing_id_orders:missingId, high_value_orders:highValue, repeat_refund_orders:fraudRows.length},
+        "Revenue": {total_order_value:total, average_order_value:data.length ? total / data.length : 0},
+        "Fraud": {suspected_fraud_orders:fraudRows.length, order_ids:fraudRows.slice(0, 20).map(r=>r.order_id)},
+        "Inventory": {out_of_stock_orders:outOfStock, order_ids:data.filter(r=>!r.stock_available).slice(0,20).map(r=>r.order_id)},
+        "Finance": {gross_risk_exposure:exposed},
+        "Executive Decision": {recommendations, conflicts: outOfStock ?
+          ["Finance recommends controlled exposure; operations wants faster fulfilment."] : [],
+          assumptions:["Rs. 5,000 order ceiling","Three prior refunds trigger review","All records are synthetic"]}
+      };
+      return {specialists, duration:((performance.now()-started)/1000).toFixed(4)};
+    }
+    function riskSegment(row) {
+      if (!row.has_id_proof) return "Missing ID";
+      if (row.order_amount > 5000) return "High value";
+      if (!row.stock_available) return "Out of stock";
+      return "Standard";
+    }
+    function renderMetrics() {
+      const total = rows.reduce((sum,r)=>sum+r.order_amount,0);
+      const risk = lastRun.specialists["Order Risk"];
+      const fraud = lastRun.specialists.Fraud;
+      document.getElementById("overview-metrics").innerHTML = [
+        ["Rows analysed", rows.length],
+        ["Total order value", money(total)],
+        ["Missing-ID orders", risk.missing_id_orders],
+        ["Suspected fraud", fraud.suspected_fraud_orders]
+      ].map(([label,value])=>`<div class="metric"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join("");
+      drawChart();
+      document.getElementById("preview-body").innerHTML = rows.slice(0,8).map(row =>
+        `<tr><td>${escapeHtml(row.order_id)}</td><td>${escapeHtml(row.customer_id)}</td>
+        <td>${money(row.order_amount)}</td><td>${row.has_id_proof ? "Yes" : "No"}</td>
+        <td>${escapeHtml(row.expected_decision || (row.order_amount > 5000 ? "ASK CUSTOMER" : "Review rules"))}</td></tr>`
+      ).join("");
+    }
+    function drawChart() {
+      const canvas = document.getElementById("risk-chart");
+      if (!canvas || !canvas.offsetWidth) return;
+      const ratio = window.devicePixelRatio || 1;
+      const width = canvas.clientWidth, height = canvas.clientHeight;
+      canvas.width = width * ratio; canvas.height = height * ratio;
+      const ctx = canvas.getContext("2d");
+      ctx.scale(ratio, ratio);
+      ctx.clearRect(0,0,width,height);
+      const categories = [
+        ["Missing ID", "#d94b42"], ["High value", "#f0a52b"],
+        ["Out of stock", "#8c7ae6"], ["Standard", "#268e71"]
+      ];
+      const counts = categories.map(([name])=>rows.filter(r=>riskSegment(r)===name).length);
+      const max = Math.max(1,...counts);
+      const left = 120, right = 18, top = 14, rowHeight = 48;
+      ctx.font = "12px Segoe UI, Arial";
+      categories.forEach(([name,color], i) => {
+        const y = top + i * rowHeight;
+        ctx.fillStyle = "#526174"; ctx.textAlign = "right";
+        ctx.fillText(name, left - 12, y + 18);
+        ctx.fillStyle = "#edf1f4";
+        ctx.fillRect(left,y,width-left-right,22);
+        ctx.fillStyle = color;
+        const barWidth = (width-left-right) * counts[i] / max;
+        ctx.fillRect(left,y,barWidth,22);
+        ctx.fillStyle = "#243143"; ctx.textAlign = "left";
+        ctx.fillText(String(counts[i]), Math.min(left + barWidth + 7, width - 18), y + 17);
+      });
+    }
+    function renderAgents() {
+      const specs = lastRun.specialists;
+      document.getElementById("activity-grid").innerHTML = SPECIALISTS.map(name => {
+        const values = specs[name];
+        return `<article class="agent-card"><strong>${escapeHtml(name)} <span class="pill success">success</span></strong>
+          <p>${escapeHtml(SPECIALIST_SUMMARY[name])}</p>
+          <p>Completed in ${lastRun.duration}s</p>
+          <details><summary>View key results</summary><pre>${escapeHtml(JSON.stringify(values,null,2))}</pre></details>
+          </article>`;
+      }).join("");
+      const select = document.getElementById("specialist-select");
+      select.innerHTML = SPECIALISTS.map(name=>`<option>${escapeHtml(name)}</option>`).join("");
+      renderSpecialist();
+    }
+    function renderSpecialist() {
+      const name = document.getElementById("specialist-select").value || SPECIALISTS[0];
+      document.getElementById("specialist-result").innerHTML =
+        `<div class="card"><h3>${escapeHtml(name)}</h3><p>${escapeHtml(SPECIALIST_SUMMARY[name])}</p>
+        <pre>${escapeHtml(JSON.stringify(lastRun.specialists[name],null,2))}</pre></div>`;
+    }
+    function renderReport() {
+      const exec = lastRun.specialists["Executive Decision"];
+      document.getElementById("recommendations").innerHTML = exec.recommendations.length ?
+        exec.recommendations.map((r,i)=>`<div class="card"><h3>${i+1}. ${escapeHtml(r.title)}
+          <span class="pill ${r.priority==="Critical"?"danger":"warn"}">${escapeHtml(r.priority)}</span></h3>
+          <p>${escapeHtml(r.description)}</p><p class="muted">Expected impact: ${escapeHtml(r.impact)}</p></div>`).join("") :
+        `<div class="status success">No policy risks found in this dataset.</div>`;
+      document.getElementById("conflicts").innerHTML = exec.conflicts.length ?
+        `<ul class="list">${exec.conflicts.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>` :
+        `<p class="muted">No material disagreement detected.</p>`;
+      document.getElementById("assumptions").innerHTML =
+        `<ul class="list">${exec.assumptions.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>`;
+    }
+    function renderApprovals() {
+      const filter = document.getElementById("approval-filter").value;
+      let approvals;
+      try { approvals = readLocalApprovals(); }
+      catch (error) { showMessage(error.message,"error"); return; }
+      const eligible = rows.filter(r=>r.expected_decision === "ASK CUSTOMER" ||
+        (!r.expected_decision && (r.order_amount > 5000 || r.refund_requested)));
+      const filtered = eligible.filter(r=>filter === "ALL" || statusFor(r,approvals) === filter);
+      document.getElementById("approval-count").textContent =
+        `${filtered.length} shown / ${eligible.length} orders requiring review.`;
+      document.getElementById("approval-body").innerHTML = filtered.length ? filtered.map(row => {
+        const status = statusFor(row,approvals);
+        const buttons = status === "PENDING_REVIEW" ?
+          `<button class="action small" data-order="${escapeHtml(row.order_id)}" data-action="APPROVED_BY_ADMIN">Approve</button>
+           <button class="action small danger" data-order="${escapeHtml(row.order_id)}" data-action="REJECTED_BY_ADMIN">Reject</button>` : "—";
+        return `<tr><td>${escapeHtml(row.order_id)}</td><td>${escapeHtml(row.customer_id)}</td>
+          <td>${money(row.order_amount)}</td><td>${escapeHtml(row.expected_decision || "ASK CUSTOMER")}</td>
+          <td><span class="pill ${status.includes("REJECT")||status==="BLOCKED"?"danger":status.includes("PENDING")?"warn":"success"}">${escapeHtml(status)}</span></td>
+          <td class="no-print">${buttons}</td></tr>`;
+      }).join("") : `<tr><td colspan="6">No orders match this filter.</td></tr>`;
+    }
+    function renderAll() {
+      lastRun = analyze(rows);
+      renderMetrics();
+      renderAgents();
+      renderReport();
+      renderApprovals();
+    }
+    function downloadReport() {
+      const header = ["Agent","Finding","Value"];
+      const lines = [header];
+      Object.entries(lastRun.specialists).forEach(([agent, result]) => {
+        Object.entries(result).forEach(([key,value]) => {
+          if (Array.isArray(value) || typeof value === "object") value = JSON.stringify(value);
+          lines.push([agent,key,String(value)]);
+        });
+      });
+      const csv = lines.map(row=>row.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\r\n");
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+      link.download = "agent-gatekeeper-report.csv";
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+    async function loadSample() {
+      const response = await fetch("./data/synthetic_amazon_orders.csv");
+      if (!response.ok) throw new Error(`Could not load sample CSV (${response.status}).`);
+      const parsed = normalizeRows(parseCsv(await response.text()));
+      rows = parsed.valid;
+      renderAll();
+      showMessage(`Loaded ${rows.length} synthetic orders.${parsed.invalid.length ? ` Skipped ${parsed.invalid.length} invalid rows.` : ""}`,"success");
+    }
+    function showPage(name) {
+      document.querySelectorAll(".page").forEach(page=>page.classList.toggle("active",page.id===`page-${name}`));
+      document.querySelectorAll(".nav button").forEach(button=>button.classList.toggle("active",button.dataset.page===name));
+      if (name === "approvals") renderApprovals();
+      if (name === "specialists") renderSpecialist();
+      if (name === "overview") drawChart();
+    }
+    document.querySelector(".nav").addEventListener("click",event=>{
+      const button = event.target.closest("button[data-page]");
+      if (button) showPage(button.dataset.page);
+    });
+    document.getElementById("specialist-select").addEventListener("change",renderSpecialist);
+    document.getElementById("approval-filter").addEventListener("change",renderApprovals);
+    document.getElementById("approval-body").addEventListener("click",event=>{
+      const button = event.target.closest("button[data-order]");
+      if (!button) return;
+      try {
+        const approvals = readLocalApprovals();
+        approvals[button.dataset.order] = button.dataset.action;
+        saveLocalApprovals(approvals);
+        renderApprovals();
+        showMessage(`${button.dataset.order}: ${button.dataset.action.replaceAll("_"," ")} (saved in this browser).`,"success");
+      } catch (error) { showMessage(error.message,"error"); }
+    });
+    document.getElementById("reset-approvals").addEventListener("click",()=>{
+      if (!confirm("Reset all simulated approval decisions in this browser?")) return;
+      try { localStorage.removeItem(APPROVALS_KEY); renderApprovals(); showMessage("Browser approval decisions reset.","success"); }
+      catch (error) { showMessage("Could not reset browser approvals: " + error.message,"error"); }
+    });
+    document.getElementById("analyze-upload").addEventListener("click",()=>{
+      if (!uploadRows) { showMessage("Choose a CSV file first.","error"); return; }
+      rows = uploadRows;
+      renderAll();
+      showPage("overview");
+      showMessage(`Analysis completed for ${rows.length} uploaded rows.`,`success`);
+    });
+    document.getElementById("csv-file").addEventListener("change",async event=>{
+      const file = event.target.files && event.target.files[0];
+      uploadRows = null;
+      if (!file) return;
+      try {
+        const parsed = normalizeRows(parseCsv(await file.text()));
+        uploadRows = parsed.valid;
+        document.getElementById("upload-message").innerHTML =
+          `<div class="status ${parsed.invalid.length ? "info" : "success"}">Validated ${parsed.valid.length} rows; skipped ${parsed.invalid.length} invalid rows.</div>`;
+      } catch (error) {
+        document.getElementById("upload-message").innerHTML = `<div class="status error">${escapeHtml(error.message)}</div>`;
+      }
+    });
+    document.getElementById("restore-sample").addEventListener("click",async()=>{
+      try { await loadSample(); document.getElementById("upload-message").innerHTML=""; showPage("overview"); }
+      catch (error) { showMessage(error.message,"error"); }
+    });
+    document.getElementById("download-report").addEventListener("click",downloadReport);
+    document.getElementById("print-report").addEventListener("click",()=>window.print());
+    window.addEventListener("resize",drawChart);
+    loadSample().catch(error=>{
+      showMessage(error.message + " Open this app through its GitHub Pages URL, not as a file on disk.","error");
+    });
+  </script>
+</body>
+</html>

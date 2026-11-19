@@ -27,7 +27,9 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir site
-          cp index.html site/index.html
+          cp github_pages.html site/index.html
+          mkdir -p site/data
+          cp data/synthetic_amazon_orders.csv site/data/synthetic_amazon_orders.csv
           touch site/.nojekyll
 
       - name: Configure GitHub Pages

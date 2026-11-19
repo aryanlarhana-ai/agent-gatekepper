@@ -1,0 +1,8 @@
+"""Documented assumptions for the MBA Agent Gatekeeper demo."""
+
+AMOUNT_CEILING_Rs = 5000.0
+FRAUD_REFUND_THRESHOLD = 3
+DAILY_MONEY_ACTION_LIMIT = 3
+SIMULATION_MODE = True
+NEVER_DO_REAL_PAYMENT_OR_REFUND = True
+
